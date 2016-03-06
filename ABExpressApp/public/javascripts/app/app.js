@@ -1,0 +1,1 @@
+﻿var APP = angular.module('APP', ['matchmedia-ng', 'ngProgress']);

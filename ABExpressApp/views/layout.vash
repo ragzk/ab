@@ -1,0 +1,265 @@
+﻿
+<!DOCTYPE html>
+<html lang="en" ng-app="APP">
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<!-- Latest compiled and minified CSS -->
+		<link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+		<link rel="shortcut icon" href="../public/images/favicon.png">
+		<link href="http://cdnjs.cloudflare.com/ajax/libs/select2/3.4.8/select2.css" rel="stylesheet" />
+		<link href="http://cdnjs.cloudflare.com/ajax/libs/select2/3.4.8/select2-bootstrap.css" />
+		<link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
+		<title>@model.title</title>
+		<link rel="stylesheet" href="stylesheets/custom.min.css" type="text/css" media="screen" charset="utf-8">
+		<link href="../bower_components/slick-carousel/slick/slick.css" rel="stylesheet" />
+		<link href="../bower_components/slick-carousel/slick/slick-theme.css" rel="stylesheet" />
+	</head>
+	<body>		
+		<div id="main-container" class="container" ng-controller="mainController">
+			<div id="header-container">
+				<div ng-include src="'Header.html'"></div>
+			</div>
+			<div id="body-container">
+				@html.block('content')
+			</div>
+			<footer>
+				<div>
+					<div ng-include src="'Footer.html'"></div>
+				</div>
+			</footer>
+		</div>
+	</body>
+    <!-- templates -->
+    <!-- Header start-->
+    <script type="text/ng-template" id="Header.html">
+        <div>
+            <div>
+                <div ng-show="true" ng-include src="'Menu.html'"></div>
+
+            </div>
+            <div ng-show="false">
+                <div class="pull-right">
+                    <a href="http://abproperties.com.au/">
+                        <img class="" src="/public/images/ablogo.png" />
+                    </a>
+                </div>
+                <div>
+                    <span style="font-size:45px">AB Properties</span>
+                </div>
+                <div>
+                    Real estate property sales, rental and management <span class="sep">·</span> Northmead, New South Wales
+                </div>
+            </div>
+        </div>
+    </script>
+    <!-- Header end-->
+    <!-- menu start-->
+    <script type="text/ng-template" id="Menu.html">
+        <div>
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="#"><img src="/public/images/ablogo.png" class="logo" /></a>
+                    </div>
+
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav">
+                            <li class="active"><a href="#">Home<span class="sr-only">(current)</span></a></li>
+                            <li><a href="#">Properties</a></li>
+                            <li><a href="#">Agents</a></li>
+                            <li><a href="#">Testimonials</a></li>
+                            <li><a href="#">Contact</a></li>
+                            <!--<li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">Action</a></li>
+                                    <li><a href="#">Another action</a></li>
+                                    <li><a href="#">Something else here</a></li>
+                                    <li role="separator" class="divider"></li>
+                                    <li><a href="#">Separated link</a></li>
+                                    <li role="separator" class="divider"></li>
+                                    <li><a href="#">One more separated link</a></li>
+                                </ul>
+                            </li>-->
+                        </ul>
+                    </div><!-- /.navbar-collapse -->
+                </div><!-- /.container-fluid -->
+            </nav>
+        </div>
+    </script>
+    <!-- menu end-->
+    <!--content-->
+    <script type="text/ng-template" id="Content.html">
+        <div class="wrapper">
+            <div class="text">
+                <div><h1>AB Property Consultants</h1> 
+                AB is a revolution in real estate focused on customer service whether you are a tenant, property owner or landlord via innovative technology . AB offers a fresh perspective and a level of energy rarely seen with a genuine interest in meeting new people and achieving best possible outcome for his clients. </div>
+            </div>
+            <!-- https://codepen.io/dudleystorey/pen/ehKpi-->
+            <div style="display:inline-block" class="imageSlider" >
+                <div id="slider">
+                    <figure>
+                        <img src="http://demosthenes.info/assets/images/austin-fireworks.jpg" alt="">
+                        <img src="http://demosthenes.info/assets/images/taj-mahal.jpg" alt="">
+                        <img src="http://demosthenes.info/assets/images/ibiza.jpg" alt="">
+                        <img src="http://demosthenes.info/assets/images/ankor-wat.jpg" alt="">
+                        <img src="http://demosthenes.info/assets/images/austin-fireworks.jpg" alt="">
+                    </figure>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div id="office-contact-details" class="vcard">
+                <div class="fn org">
+                    <h3>AB property Consultants</h3>
+                </div>
+                <span class="glyphicon glyphicon-earphone" aria-hidden="true"></span><a href="tel:0402 961 515" class="telephone">0402 961 515</a><i class="icon-phone"></i> 
+            </div>
+        </div>
+    </script>
+    <!--Footer-->
+	<script type="text/ng-template" id="Footer.html">
+        <div>
+            <div class="siteinfo">
+                <p class="officename">Ray White Ermington</p>
+
+
+                <div class="address">Shop 3, 39 Bartlett Street <br>Ermington, NSW 2115, Australia                </div>
+
+
+                <div class="contacts">
+                    <i class="icon-phone-sign icon-fixed-width"></i><a href="tel:(02) 9898 1822" style="color:#333333">(02) 9898 1822</a> &nbsp;&nbsp;
+
+                    <i class="icon-print icon-fixed-width"></i>(02) 9898 0900                                            <div class="office-email"><i class="icon-envelope-alt"></i> <a href="mailto:adam.stephens@raywhite.com ">adam.stephens@raywhite.com</a></div>
+                </div>
+
+
+                <div class="thesocials">
+                    <a rel="publisher" href="https://plus.google.com/102057235710714898320" class="thegooglesplus"><i class="icon-google-plus-sign icon-large"></i> Google+</a>                        <a href="http://www.facebook.com/rwermington" class="thefacebook"><i class="icon-facebook-sign icon-large"></i> Facebook</a>
+                </div>
+
+            </div>
+
+
+
+            <nav>
+                <div class="menu-primary-container">
+                    <ul id="menu-primary-1" class="footer_nav primary">
+                        <li class="buy menu-item menu-item-type-post_type menu-item-object-buy has-submenu menu-item-3">
+                            <a href="http://rwermington.com.au/buy/property/">Buy</a>
+                            <ul class="sub-menu">
+                                <li class="menu-item-17"><a href="http://rwermington.com.au/buy/residential/">Residential</a></li>
+                                <li class="menu-item-18"><a href="http://rwermington.com.au/buy/open-for-inspection/">Open For Inspection</a></li>
+                                <li class="menu-item-19"><a href="http://rwermington.com.au/buy/auctions/">Auctions</a></li>
+                                <li class="menu-item-45"><a href="http://rwermington.com.au/buy/buying-tips/">Buying Tips</a></li>
+                                <li class="menu-item-48"><a href="http://rwermington.com.au/buy/international-buyer/">International Buyer</a></li>
+                            </ul>
+                        </li>
+                        <li class="rent menu-item menu-item-type-post_type menu-item-object-rent has-submenu menu-item-5">
+                            <a href="http://rwermington.com.au/rent/property/">Rent</a>
+                            <ul class="sub-menu">
+                                <li class="menu-item-20"><a href="http://rwermington.com.au/rent/residential/">Residential</a></li>
+                                <li class="menu-item-21"><a href="http://rwermington.com.au/rent/open-for-inspection/">Open For Inspection</a></li>
+                                <li class="menu-item-293"><a href="http://rwermington.com.au/rent/maintenance-request/">Maintenance Request</a></li>
+                                <li class="menu-item-77"><a href="http://rwermington.com.au/rent/rental-application/">Rental Application</a></li>
+                            </ul>
+                        </li>
+                        <li class="menu-item menu-item-type-post_type menu-item-object-sell has-submenu menu-item-275">
+                            <a href="http://rwermington.com.au/sell/property/">Sell</a>
+                            <ul class="sub-menu">
+                                <li class="menu-item-56"><a href="http://rwermington.com.au/sell/why-choose-ray-white-ermington/">Why choose RW Ermington?</a></li>
+                                <li class="menu-item-74"><a href="http://rwermington.com.au/sell/size-does-matter/">The Difference is in our detail</a></li>
+                                <li class="menu-item-22"><a href="http://rwermington.com.au/sell/recent-sales/">Recent Sales</a></li>
+                                <li class="menu-item-102"><a href="http://rwermington.com.au/sell/special-projects/">Project Marketing</a></li>
+                                <li class="menu-item-8"><a href="http://rwermington.com.au/sell/property-appraisal/">Property Appraisal</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+
+            <div class="clearfix"></div>
+
+
+            <div class="sitesummary">
+                © <a href="http://rwermington.com.au/">Ray White Ermington</a>. Based in Ermington our office lists real estate and property for sale, rent or lease in and around the suburbs of  <a href="/real-estate/carlingford/">Carlingford</a>, <a href="/real-estate/dundas/">Dundas</a>, <a href="/real-estate/ermington/">Ermington</a>, <a href="/real-estate/north-parramatta/">North Parramatta</a>, <a href="/real-estate/parramatta/">Parramatta</a>, <a href="/real-estate/rydalmere/">Rydalmere</a>, <a href="/real-estate/surry-hills/">Surry Hills</a>, <a href="/real-estate/telopea/">Telopea</a>.
+            </div>
+
+
+            <div class="utilitymenu">
+                <div class="menu-footer-right-container">
+                    <ul id="menu-footer-right" class="footer_nav secondary networkbar">
+                        <li><a rel="nofollow" target="_blank" href="http://www.raywhite.com/website-terms-of-use/">Terms of Use</a></li>
+                        <li><a rel="nofollow" target="_blank" href="http://www.raywhite.com/franchisee-privacy-policy/">Privacy</a></li>
+                        <li><a rel="nofollow" target="_blank" href="http://www.raywhite.com/legal-information/">Legal</a></li>
+                        <li><a rel="nofollow" target="_blank" href="http://rwermington.com.au/partners/">Partners</a></li>
+                        <li><a rel="nofollow" target="_blank" href="http://rwermington.com.au/site-map/">Site Map</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </script>
+    <!-- Search -->
+    <script type="text/ng-template" id="Search.html">
+        <div>
+            <select select2 class="select2-flat">
+                <option ng-repeat="type in search.types">{{type}}</option>
+            </select>
+            <input type="text" class="input-text" placeholder="Area, suburb or postcode" />
+            <select select2 class="select2-flat">
+                <option ng-repeat="type in search.propertyTypes">{{type}}</option>
+            </select>
+        </div>
+
+        <!--<div class="btn-group">
+            <button type="button" class="btn btn-default dropdown-toggle sharp" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="caret"></span>
+                <span class="sr-only">Toggle Dropdown</span>
+            </button>
+            <ul class="dropdown-menu" show-selected>
+                <li ng-repeat="type in search.types"><a href="#" id="action-1">{{type}}</a></li>
+            </ul>
+        </div>
+        <input type="text" class="input-text" placeholder="Area, suburb or postcode" />
+        <div class="btn-group">
+            <button type="button" class="btn btn-default dropdown-toggle sharp" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="caret"></span>
+                <span class="sr-only">Toggle Dropdown</span>
+            </button>
+            <ul class="dropdown-menu" show-selected>
+                <li ng-repeat="type in search.propertyTypes"><a href="#" id="action-1">{{type}}</a></li>
+            </ul>
+        </div>-->
+        <!--<a href="" class="btn b*tn-primary sharp">Search</a>-->
+    </script>
+<script src="../bower_components/jquery/dist/jquery.js"></script>
+<script src="../bower_components/lodash/lodash.js"></script>
+<script src="../bower_components/bootstrap/dist/js/bootstrap.js"></script>
+<script src="../bower_components/angular/angular.js"></script>
+<script src="../bower_components/postal.js/lib/postal.js"></script>
+<script src="../bower_components/ngprogress/build/ngprogress.js"></script>
+<script src="../bower_components/matchMedia/matchMedia.js"></script>
+<script src="../bower_components/matchMedia-ng/matchMedia-ng.js"></script>
+<script src="../bower_components/slick-carousel/slick/slick.min.js"></script>
+<script src="../public/javascripts/app/app.js"></script>
+<script src="../public/javascripts/custom/postalAngularWrapper.js"></script>
+<script src="../public/javascripts/app/controllers/mainController.js"></script>
+<script src="../public/javascripts/app/controllers/SearchController.js"></script>
+<script src="../public/javascripts/app/directives/showSelected.js"></script>
+<script src="../public/javascripts/custom/slider.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/select2/3.4.8/select2.min.js"></script>
+
+</html>
+
+
+
+

@@ -1,0 +1,2 @@
+E:\ab\nodejsBoot\ABExpressApp\ABExpressApp\obj\Debug\ABExpressApp.njsprojResolveAssemblyReference.cache
+E:\ab\nodejsBoot\ABExpressApp\ABExpressApp\bin\Microsoft.NodejsTools.WebRole.dll
