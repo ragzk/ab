@@ -1,0 +1,6 @@
+{
+  "ambientDependencies": {
+    "moment": "registry:dt/moment#2.8.0+20150810140021",
+    "node": "registry:dt/node#4.0.0+20160311162451"
+  }
+}

@@ -35,6 +35,11 @@
         featureProperty: boolean;
         geocode: IGeocode;
         allowances: IAllowances;
+        address: IAddress;
+        isRental: boolean;
+        priceView: string;
+        bond: number;
+
     }
     
     interface IImg {
@@ -46,8 +51,8 @@
     }
 
     interface IGeocode {
-        Latitude: string;
-        Longitude: string;
+        latitude: number;
+        longitude: number;
     }
 
     interface IObject {
@@ -93,10 +98,11 @@
         street: string;
         suburb: IKeyValue;
         state: string;
-        postalcode: string;
+        postcode: string;
     }
 
     interface IKeyValue {
+        _: string;
         display: string;
         text: string;
     }

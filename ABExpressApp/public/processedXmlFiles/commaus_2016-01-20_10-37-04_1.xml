@@ -1,0 +1,104 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE propertyList SYSTEM "http://reaxml.realestate.com.au/propertyList.dtd">
+<propertyList date="2016-01-20-10:37:04" username="commaust" password="commaust">
+<rental modTime="2016-01-20-09:37" status="current">
+<agentID>27140</agentID>
+<clientID>abprocon</clientID>
+<uniqueID>8943666</uniqueID>
+<authority value="exclusive" />
+
+
+<listingAgent id="1">
+<name>Atul Bhanushali</name>
+<agentid>402290</agentid>
+<telephone type="mobile">0402 961 515</telephone>
+<telephone type="BH">02 8677 1794</telephone>
+<email>ab@abproperties.com.au</email>
+</listingAgent>
+
+<dateAvailable>2016-01-23-00:00</dateAvailable>
+<rent display="yes" period="week">550</rent>
+<priceView></priceView>
+
+
+
+<address display="yes">
+<streetNumber>66</streetNumber>
+<street>Lamonerie Street</street>
+<suburb display="yes">TOONGABBIE</suburb>
+<state>NSW</state>
+<postcode>2146</postcode>
+</address>
+<category name="House"/>
+<headline><![CDATA[FAMILY HOME ON APPROX 800 SQM]]></headline>
+<description><![CDATA[Occupy an enviable, neat 4 bedroom size north facing residence offering you lot features with a cottage feeling in a quiet yet convenient location in one of the best street at the Parramatta council side of Toongabbie in an 800 sqm area.  
+Max 2 min to a primary school, 5 min to a child care, 7- 10 min to Toongabbie station/ shops plus a fantastic neighbourhood a bonus.
+3 good size bedrooms all with big built-in wardrobes plus a family retreat room.
+ 	-Separate Spacious Lounge, separate dining area, separate Kitchen and separate laundry area.
+ 	-Modern Kitchen with Gas cooking, Dishwasher  and plenty of storage
+ 	-Generous floor area showcase stunning Timber flooring with amble sky lights to fill the natural light thorough out the house and nice floor      level new curtains. 
+ 	-Internal laundry with costly front loading washing machine and double draw dishwasher. 
+ 	-Separate bath/shower and toilet. 
+ 	-35 SQM Deck covered with Pergola at the back overlooking 500 sqm well maintained backyard with costly fruit plants, herbs and ornamental plants. 
+ 	-At least 3 car spaces within the property besides the off street parking.
+        -Air conditioning and security alarm.
+ 
+Don't hesitate or it will be gone. Please ring your Exclusive agents Atul Bhanushali on 0402961515 or Tanmay Goswami on 0447270063]]></description>
+<features>
+<bedrooms>3</bedrooms>
+<bathrooms>1</bathrooms>
+<garages>3</garages>
+<carports>0</carports>
+<airConditioning>1</airConditioning>
+<alarmSystem>1</alarmSystem>
+<pool>0</pool>
+<otherFeatures>Built-In Wardrobes,Garden</otherFeatures>
+</features>
+<holiday value="no" />
+<inspectionTimes>
+<inspection>23-Jan-2016 02:15PM to 02:30PM</inspection>
+</inspectionTimes>
+<images>
+<img id="m" modTime="2015-12-08-10:58" url="http://mydesktop.aunz.s3-website-ap-southeast-2.amazonaws.com/abprocon/photos/1449543187-32160-DSCN4268.JPG"/>
+<img id="a" modTime="2015-12-08-10:58" url="http://mydesktop.aunz.s3-website-ap-southeast-2.amazonaws.com/abprocon/photos/1449542740-31002-DSCN4247.JPG"/>
+<img id="b" modTime="2015-12-08-10:58" url="http://mydesktop.aunz.s3-website-ap-southeast-2.amazonaws.com/abprocon/photos/1449542835-30842-DSCN4250.JPG"/>
+<img id="c" modTime="2015-12-08-10:58" url="http://mydesktop.aunz.s3-website-ap-southeast-2.amazonaws.com/abprocon/photos/1449542956-31802-DSCN4254.JPG"/>
+<img id="d" modTime="2015-12-08-10:58" url="http://mydesktop.aunz.s3-website-ap-southeast-2.amazonaws.com/abprocon/photos/1449543032-31706-DSCN4256.JPG"/>
+<img id="e" modTime="2015-12-08-10:58" url="http://mydesktop.aunz.s3-website-ap-southeast-2.amazonaws.com/abprocon/photos/1449543110-32556-DSCN4265.JPG"/>
+<img id="f" />
+<img id="g" />
+<img id="h" />
+<img id="i" />
+<img id="j" />
+<img id="k" />
+<img id="l" />
+<img id="n" />
+<img id="o" />
+<img id="p" />
+<img id="q" />
+<img id="r" />
+<img id="s" />
+<img id="t" />
+<img id="u" />
+<img id="v" />
+<img id="w" />
+<img id="x" />
+<img id="y" />
+<img id="z" />
+</images>
+<objects>
+<floorplan id="1" />
+</objects>
+
+<FeatureProperty>0</FeatureProperty>
+<Geocode>
+<GoogleKey><![CDATA[]]></GoogleKey>
+<Latitude><![CDATA[-33.791296]]></Latitude>
+<Longitude><![CDATA[150.954311]]></Longitude>
+</Geocode>
+
+<allowances><furnished>0</furnished>
+</allowances>
+</rental>
+</propertyList>
+   

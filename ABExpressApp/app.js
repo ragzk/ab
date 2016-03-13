@@ -9,8 +9,7 @@ var request = require('request');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
-
-
+var _ = require('lodash');
 
 var app = express();
 
@@ -43,20 +42,21 @@ app.use(function (req, res, next) {
 /*start chokidar*/
 var chokidar = require('chokidar');
 
-var watcher = chokidar.watch('file', {
+var watcher = chokidar.watch('./public/xmlfiles/', {
     ignored: /[\/\\]\./,
     persistent: true
 });
 
 
+watcher
+  .on('add', function (filePath) 
+      {
+        //console.log(event, path.extname(filePath));
+        if (path.extname(filePath) == ".xml") {
+            addFileCheck(filePath);
+        }
 
-watcher = chokidar.watch('.', { ignored: /[\/\\]\./ }).on('all', function (event, filePath)  {
-    console.log(event, path.extname(filePath));
-if (path.extname(filePath) == ".xml") {
-        addFileCheck(filePath);
-}}
-);
-
+});
 
 var addFileCheck = function (xmlPath) {
     var fs = require('fs'),
@@ -67,33 +67,36 @@ var addFileCheck = function (xmlPath) {
     fs.readFile(xmlPath, function (err, data) {
         parser.parseString(data, function (err, result) {
             if (result && result.propertyList) {
-                processProperty(result.propertyList, fs, request, path);
+                var propertyList = toCamelCase(result.propertyList);
+                processProperty(propertyList, fs, request, path);
+                var fileName = path.basename(xmlPath)
+                fs.renameSync(xmlPath, "./public/processedXmlFiles/" + fileName);
+                //fs.createReadStream(xmlPath).pipe(fs.createWriteStream("./public/processedXmlFiles/" + fileName));
+         //       fs.createReadStream(xmlPath).pipe(fs.createWriteStream("./pubic/processedXmlFiles"));
             }
         });
     });
 }
 
-
-
-var processProperty = function (propertyJSON, fs, request, path) {
+var processProperty = function (propertyJSON, fs, request, path) {  
     var processRentalJSONModule = require('./processRentalJSONModule.js');
-    processRentalJSONModule.processRentalJSONInstance(propertyJSON, fs, request, path);
+    processRentalJSONModule.init(propertyJSON, fs, request, path);
 }   
 
-watcher
-    .on('add', function (filePath) {
-    if (path.extname(filePath) == "xml") {
-        addFileCheck(filePath);
-    }});
 
-
-//var watchedPaths = watcher.getWatched();
-//console.log(watchedPaths);
+//watcher
+//    .on('add', function (filePath) {
+//    if (path.extname(filePath) == "xml") {
+//        addFileCheck(filePath);
+//    }});
 
 /*end chokidar*/
 
 
-// error handlers
+/* start db orm */
+//var db = require('./dbConnection/dbConnection.js');
+
+/* end db orm */
 
 // development error handler
 // will print stacktrace
@@ -119,3 +122,17 @@ app.use(function (err, req, res, next) {
 
 
 module.exports = app;
+
+
+function toCamelCase(obj) {
+    return _.transform(obj, function (result, val, key) {
+        if (_.isObject(val)) {
+            val = toCamelCase(val);
+        }
+        result[camelize(key)] = val;
+    });
+}
+
+function camelize(key) {
+    return _.isString(key) && (key.substring(0, 1).toLowerCase() + key.substring(1)) || key;
+}

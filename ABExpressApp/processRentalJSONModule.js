@@ -1,35 +1,52 @@
 /// <reference path="rentalInterface.d.ts" />
+/// <reference path="repository/propertyRepo.ts" />
 //module processRentalJSONModule {
+//declare function require(name: string);
+var propertyReport = require("./repository/propertyRepo");
 var processRentalJSON = (function () {
     function processRentalJSON() {
     }
-    processRentalJSON.prototype.process = function (data, fs, request, path) {
-        console.log(data);
-        this.addImages(data, fs, request, path);
+    processRentalJSON.prototype.process = function () {
+        console.log(this.data);
+        // add pipe or make it chain
+        this.addImages(); // add images to folder
+        //this.copyXmlFileToProcessedFiles(); // copy files to processed location
+        this.addInformationToDB();
     };
-    processRentalJSON.prototype.addImages = function (data, fs, request, path) {
-        if (data.rental && data.rental.images && data.rental.images.img) {
-            for (var image in data.rental.images.img) {
-                var img = data.rental.images.img[image];
-                this.readAndWriteImage(img.url, "./public/images/" + path.basename(img.url), fs, request, path);
+    processRentalJSON.prototype.addInformationToDB = function () {
+        var repo = new propertyReport.propertyRepo();
+        var property = repo.saveProperty(this.data.rental);
+    };
+    processRentalJSON.prototype.copyXmlFileToProcessedFiles = function () {
+        this.fs.createReadStream(this.path).pipe(this.fs.createWriteStream(this.path));
+    };
+    processRentalJSON.prototype.addImages = function () {
+        if (this.data.rental && this.data.rental.images && this.data.rental.images.img) {
+            for (var image in this.data.rental.images.img) {
+                var img = this.data.rental.images.img[image];
+                this.readAndWriteImage(img.url, "./public/images/" + this.path.basename(img.url));
             }
         }
     };
-    processRentalJSON.prototype.readAndWriteImage = function (srcPath, savPath, fs, request, path) {
+    processRentalJSON.prototype.readAndWriteImage = function (srcPath, savPath) {
         if (srcPath) {
             var options = {
                 url: srcPath,
                 port: 80,
                 method: 'GET'
             };
-            request.get(options).pipe(fs.createWriteStream(savPath));
+            this.request.get(options).pipe(this.fs.createWriteStream(savPath));
         }
     };
     return processRentalJSON;
 })();
-exports.processRentalJSONInstance = function (data, fs, request, path) {
+exports.init = function (data, fs, request, path) {
     var p = new processRentalJSON();
-    p.process(data, fs, request, path);
+    p.data = data;
+    p.fs = fs;
+    p.request = request;
+    p.path = path;
+    p.process();
     console.log(data);
 };
 //} 

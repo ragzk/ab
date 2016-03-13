@@ -1,0 +1,104 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE propertyList SYSTEM "http://reaxml.realestate.com.au/propertyList.dtd">
+<propertyList date="2016-01-20-16:37:05" username="commaust" password="commaust">
+<rental modTime="2016-01-20-16:31" status="current">
+<agentID>27140</agentID>
+<clientID>abprocon</clientID>
+<uniqueID>9219198</uniqueID>
+<authority value="exclusive" />
+
+
+<listingAgent id="1">
+<name>Atul Bhanushali</name>
+<agentid>402290</agentid>
+<telephone type="mobile">0402 961 515</telephone>
+<telephone type="BH">02 8677 1794</telephone>
+<email>ab@abproperties.com.au</email>
+</listingAgent>
+
+<dateAvailable>2016-01-19-00:00</dateAvailable>
+<rent display="yes" period="week">480</rent>
+<priceView></priceView>
+<bond>1920</bond>
+
+
+
+<address display="yes">
+<streetNumber>93/32-34</streetNumber>
+<street>Mons Road</street>
+<suburb display="yes">WESTMEAD</suburb>
+<state>NSW</state>
+<postcode>2145</postcode>
+</address>
+<category name="House"/>
+<headline><![CDATA[LOCATION LOCATION LOCATION]]></headline>
+<description><![CDATA[This well presented, spacious, 2 bedroom apartment is exceptionally positioned in an ultra-convenient security complex within the medical hub of Westmead. Just a short walk away from train stations, t-way, popular schools and shops, this property is an opportunity not to be missed.Located on level 5
+
+Property features include:
+* Two bedrooms with built in wardrobes  
+* Modern Stylish bathroom
+* Modern kitchen with gas cooking and stone bench tops 
+* Fully ducted air conditioning
+* Open plan oversized living room leading out to sunny balcony
+* Secure complex with lift access and under basement carpark
+* $480 PER WEEK NEGOTIABLE
+
+Please contact your exclusive agent Atul Bhanushali on 0402961515 before its leased]]></description>
+<features>
+<bedrooms>2</bedrooms>
+<bathrooms>1</bathrooms>
+<garages>1</garages>
+<carports>0</carports>
+<airConditioning>1</airConditioning>
+<pool>0</pool>
+<alarmSystem>0</alarmSystem>
+<otherFeatures>Built-In Wardrobes,Close to Schools,Close to Shops,Close to Transport,Terrace/Balcony</otherFeatures>
+</features>
+<holiday value="no" />
+<inspectionTimes>
+<inspection>23-Jan-2016 02:45PM to 03:00PM</inspection>
+</inspectionTimes>
+<images>
+<img id="m" modTime="2016-01-20-16:31" url="http://mydesktop.aunz.s3-website-ap-southeast-2.amazonaws.com/abprocon/photos/1453204578-9300-PHOTO1.jpg"/>
+<img id="a" modTime="2016-01-20-16:31" url="http://mydesktop.aunz.s3-website-ap-southeast-2.amazonaws.com/abprocon/photos/1453204282-13792-PHOTO3.jpg"/>
+<img id="b" modTime="2016-01-20-16:31" url="http://mydesktop.aunz.s3-website-ap-southeast-2.amazonaws.com/abprocon/photos/1453204279-9286-PHOTO2.jpg"/>
+<img id="c" />
+<img id="d" />
+<img id="e" />
+<img id="f" />
+<img id="g" />
+<img id="h" />
+<img id="i" />
+<img id="j" />
+<img id="k" />
+<img id="l" />
+<img id="n" />
+<img id="o" />
+<img id="p" />
+<img id="q" />
+<img id="r" />
+<img id="s" />
+<img id="t" />
+<img id="u" />
+<img id="v" />
+<img id="w" />
+<img id="x" />
+<img id="y" />
+<img id="z" />
+</images>
+<objects>
+<floorplan id="1" />
+</objects>
+
+<FeatureProperty>0</FeatureProperty>
+<Geocode>
+<GoogleKey><![CDATA[]]></GoogleKey>
+<Latitude><![CDATA[-33.801138]]></Latitude>
+<Longitude><![CDATA[150.982112]]></Longitude>
+</Geocode>
+
+<allowances><furnished>0</furnished>
+</allowances>
+</rental>
+</propertyList>
+   
