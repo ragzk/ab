@@ -9,22 +9,28 @@ var processRentalJSON = (function () {
     processRentalJSON.prototype.process = function () {
         console.log(this.data);
         // add pipe or make it chain
-        this.addImages(); // add images to folder
-        //this.copyXmlFileToProcessedFiles(); // copy files to processed location
         this.addInformationToDB();
+        this.addImages(); // add images to folder
+        this.copyXmlFileToProcessedFiles(); // copy files to processed location
     };
     processRentalJSON.prototype.addInformationToDB = function () {
         var repo = new propertyReport.propertyRepo();
-        var property = repo.saveProperty(this.data.rental);
+        repo.saveProperty(this.data.rental);
     };
     processRentalJSON.prototype.copyXmlFileToProcessedFiles = function () {
-        this.fs.createReadStream(this.path).pipe(this.fs.createWriteStream(this.path));
+        //this.fs.createReadStream(this.path).pipe(this.fs.createWriteStream(this.path));
+        var fileName = this.path.basename(this.xmlPath);
+        this.fs.renameSync(this.xmlPath, "./public/processedXmlFiles/" + fileName);
     };
     processRentalJSON.prototype.addImages = function () {
         if (this.data.rental && this.data.rental.images && this.data.rental.images.img) {
             for (var image in this.data.rental.images.img) {
                 var img = this.data.rental.images.img[image];
-                this.readAndWriteImage(img.url, "./public/images/" + this.path.basename(img.url));
+                var dirName = "./public/images/" + this.data.rental.uniqueID;
+                if (!this.fs.existsSync(dirName)) {
+                    this.fs.mkdirSync(dirName);
+                }
+                this.readAndWriteImage(img.url, dirName + "/" + this.path.basename(img.url));
             }
         }
     };
@@ -40,12 +46,13 @@ var processRentalJSON = (function () {
     };
     return processRentalJSON;
 })();
-exports.init = function (data, fs, request, path) {
+exports.init = function (data, fs, request, path, xmlPath) {
     var p = new processRentalJSON();
     p.data = data;
     p.fs = fs;
     p.request = request;
     p.path = path;
+    p.xmlPath = xmlPath;
     p.process();
     console.log(data);
 };

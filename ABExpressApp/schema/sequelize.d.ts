@@ -2252,6 +2252,8 @@ declare module sequelize
          */
         success(onSuccess:(t:T) => void):PromiseT<T>;
 
+
+        then(onSuccess: (t: T) => void): PromiseT<T>;
         /**
          * Alias for success(handler). Listen for success events.
          */

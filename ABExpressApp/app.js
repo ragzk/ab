@@ -68,9 +68,9 @@ var addFileCheck = function (xmlPath) {
         parser.parseString(data, function (err, result) {
             if (result && result.propertyList) {
                 var propertyList = toCamelCase(result.propertyList);
-                processProperty(propertyList, fs, request, path);
+                processProperty(propertyList, fs, request, path, xmlPath);
                 var fileName = path.basename(xmlPath)
-                fs.renameSync(xmlPath, "./public/processedXmlFiles/" + fileName);
+                //fs.renameSync(xmlPath, "./public/processedXmlFiles/" + fileName);
                 //fs.createReadStream(xmlPath).pipe(fs.createWriteStream("./public/processedXmlFiles/" + fileName));
          //       fs.createReadStream(xmlPath).pipe(fs.createWriteStream("./pubic/processedXmlFiles"));
             }
@@ -78,9 +78,9 @@ var addFileCheck = function (xmlPath) {
     });
 }
 
-var processProperty = function (propertyJSON, fs, request, path) {  
+var processProperty = function (propertyJSON, fs, request, path, xmlPath) {  
     var processRentalJSONModule = require('./processRentalJSONModule.js');
-    processRentalJSONModule.init(propertyJSON, fs, request, path);
+    processRentalJSONModule.init(propertyJSON, fs, request, path, xmlPath);
 }   
 
 

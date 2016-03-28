@@ -28,39 +28,57 @@
 			  </div>
 			</div>
 		</div>
-		<div>
-			<div id="slides" class="slider new-properties" data-slick='{"slidesToShow": 1, "slidesToScroll": 1, "fade": 1}'>
-				<img class="sliderImg" src="../public/images/properties/prop1.jpg">
-				<img class="sliderImg" src="../public/images/properties/prop2.jpg">
-				<img class="sliderImg" src="../public/images/properties/prop3.jpg">
-				<img class="sliderImg" src="../public/images/properties/prop4.jpg">
-				<img class="sliderImg" src="../public/images/properties/prop5.jpg">
-			</div>
-			<div>
-				<h1>AB Properties</h1>
+		<div class="sliderParent">
+			<div class="rightSideContent">
+				<div id="slides" class="slider new-properties" data-slick='{"slidesToShow": 1, "slidesToScroll": 1, "fade": 1}'>
+					<img class="sliderImg" src="../public/images/properties/prop1.jpg">
+					<img class="sliderImg" src="../public/images/properties/prop2.jpg">
+					<img class="sliderImg" src="../public/images/properties/prop3.jpg">
+					<img class="sliderImg" src="../public/images/properties/prop4.jpg">
+					<img class="sliderImg" src="../public/images/properties/prop5.jpg">
+				</div>
 				<div>
-					1] We give our best service to our clients with positive outcomes, which we have been doing so far.
+					<div class="rightSideWrittenContent">
+						<h1>AB Properties</h1>
+						<div>
+							<ul class="contentPoints">
+							<li>We give our best service to our clients with positive outcomes, which we have been doing so far.</li>
  
-					2] We believe in our ability to get the best price to our clients with our qualitative marketing strategies.
+							<li>We believe in our ability to get the best price to our clients with our qualitative marketing strategies.</li>
  
-					3] We have a really good exposure on different websites like domain.com and real estate.com
+							<li>We have a really good exposure on different websites like domain.com and real estate.com</li>
  
-					4] We are flexible and are available 7 days a week even on public holidays to get the best to our clients - the positive outcomes.
+							<li>We are flexible and are available 7 days a week even on public holidays to get the best to our clients - the positive outcomes.</li>
  
-					5] We do have exposure in social media networking like face book, twitter, etc which is a key success and an ultimate goal to market the property and sell faster. 
+							<li>We do have exposure in social media networking like face book, twitter, etc which is a key success and an ultimate goal to market the property and sell faster. </li>
   
-					6] We do free marketing campaign in various events, different organizations and actively participate to service different clients.
+							<li>We do free marketing campaign in various events, different organizations and actively participate to service different clients.</li>
  
-					7] We believe in effective communication and best customer service by serving all our clients with wise advice via email, phones whichever suits the best.
+							<li>We believe in effective communication and best customer service by serving all our clients with wise advice via email, phones whichever suits the best.</li>
  
-					8] We appreciate all inquiries, feedback by all our clients and people and reply them within a short time.
+							<li>We appreciate all inquiries, feedback by all our clients and people and reply them within a short time.</li>
  
+							<li>We believe in action and implementing the best tactics and strategies to make sell quicker and are actively available at own your business hours and happy to guide you at your door step. </li>
 
-					9] We believe in action and implementing the best tactics and strategies to make sell quicker and are actively available at own your business hours and happy to guide you at your door step. 
-
-					10] We have a large database with a qualified buyers and potential investors which makes us unique.
+							<li>We have a large database with a qualified buyers and potential investors which makes us unique.</li>
+							</ul>
+						</div>
+					</div>
+					<div class= "rightSideSliderParent">
+						<div class="rightSideSliderContent">
+						<h1>Don't miss these properties</h1>
+						<div id="slides" class="slider sold-properties" data-slick='{"slidesToShow": 1, "slidesToScroll": 1, "fade": 1}'>
+							<img class="sliderImg" src="../public/images/properties/prop1.jpg">
+							<img class="sliderImg" src="../public/images/properties/prop2.jpg">
+							<img class="sliderImg" src="../public/images/properties/prop3.jpg">
+							<img class="sliderImg" src="../public/images/properties/prop4.jpg">
+							<img class="sliderImg" src="../public/images/properties/prop5.jpg">
+						</div>
+						</div>
+					</div>
 				</div>
 			</div>
+
 		</div>
 		
     })
