@@ -1,9 +1,11 @@
-﻿/// <reference path="../dbConfig.ts" />
+﻿/// <reference path="../enums.ts" />
+/// <reference path="../dbConfig.ts" />
 /// <reference path="../rentalInterface.d.ts" />
 
 import types = require('../schema/sequelize-types');
 import models = require('../schema/sequelize-models');
 import dbConfig = require('../dbConfig');
+//import rentalDefinitions = require('rentalDefinitions');
 
 export class propertyAddressRepo {
     _dbConfig: dbConfig.dbConfig;

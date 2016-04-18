@@ -28,7 +28,12 @@ function initialize(database, username, password, options) {
         'priceView': Sequelize.STRING,
         'bond': Sequelize.DECIMAL,
         'uniqueId': Sequelize.INTEGER,
-        'headline': Sequelize.STRING
+        'headline': Sequelize.STRING,
+        'isSold': Sequelize.INTEGER,
+        'soldPrice': Sequelize.STRING,
+        'soldDate': Sequelize.STRING,
+        'modifiedTime': Sequelize.STRING,
+        'Status': Sequelize.STRING
     }, {
         timestamps: false,
         classMethods: {
@@ -77,6 +82,21 @@ function initialize(database, username, password, options) {
                     }
                     if (property['headline'] !== undefined) {
                         where['headline'] = property['headline'];
+                    }
+                    if (property['isSold'] !== undefined) {
+                        where['isSold'] = property['isSold'];
+                    }
+                    if (property['soldPrice'] !== undefined) {
+                        where['soldPrice'] = property['soldPrice'];
+                    }
+                    if (property['soldDate'] !== undefined) {
+                        where['soldDate'] = property['soldDate'];
+                    }
+                    if (property['modifiedTime'] !== undefined) {
+                        where['modifiedTime'] = property['modifiedTime'];
+                    }
+                    if (property['Status'] !== undefined) {
+                        where['Status'] = property['Status'];
                     }
                 }
                 else {

@@ -31,11 +31,14 @@
 		<div class="sliderParent">
 			<div class="rightSideContent">
 				<div id="slides" class="slider new-properties" data-slick='{"slidesToShow": 1, "slidesToScroll": 1, "fade": 1}'>
-					<img class="sliderImg" src="../public/images/properties/prop1.jpg">
+					@model.soldProp.forEach(function(item){
+						<img class="sliderImg" src="@item">
+					})									
+					<!-- <img class="sliderImg" src="../public/images/properties/prop1.jpg">
 					<img class="sliderImg" src="../public/images/properties/prop2.jpg">
 					<img class="sliderImg" src="../public/images/properties/prop3.jpg">
 					<img class="sliderImg" src="../public/images/properties/prop4.jpg">
-					<img class="sliderImg" src="../public/images/properties/prop5.jpg">
+					<img class="sliderImg" src="../public/images/properties/prop5.jpg"> -->
 				</div>
 				<div>
 					<div class="rightSideWrittenContent">
@@ -66,13 +69,18 @@
 					</div>
 					<div class= "rightSideSliderParent">
 						<div class="rightSideSliderContent">
-						<h1>Don't miss these properties</h1>
+						<h3>Don't miss these properties</h3>
 						<div id="slides" class="slider sold-properties" data-slick='{"slidesToShow": 1, "slidesToScroll": 1, "fade": 1}'>
-							<img class="sliderImg" src="../public/images/properties/prop1.jpg">
+						@model.unSoldProp.forEach(function(item){
+							<img class="sliderImg" src="@item">
+						})									
+							
+							
+							<!--<img class="sliderImg" src="../public/images/properties/prop1.jpg">
 							<img class="sliderImg" src="../public/images/properties/prop2.jpg">
 							<img class="sliderImg" src="../public/images/properties/prop3.jpg">
 							<img class="sliderImg" src="../public/images/properties/prop4.jpg">
-							<img class="sliderImg" src="../public/images/properties/prop5.jpg">
+							<img class="sliderImg" src="../public/images/properties/prop5.jpg">-->
 						</div>
 						</div>
 					</div>

@@ -1,19 +1,12 @@
-﻿declare module a {
-    export enum CategoryEnum {
-        House,
-        Unit,
-        Townhouse
-    }
-
-
-}
-
+﻿/// <reference path="enums.ts" />
 
     interface IPropertyList {
         date: Date;
         username: string;
         password: string;
         rental: IRental;
+        residential: IRental;
+        land: IRental;
     }
 
     interface IRental {
@@ -37,14 +30,24 @@
         allowances: IAllowances;
         address: IAddress;
         isRental: boolean;
+        isSold: boolean;
         priceView: string;
         bond: number;
-
+        soldDetails: ISoldDetails;
+        modTime: string;
+        status: string;
+        fileName: string; //debuging purpose
     }
-    
+
     interface IImg {
         img: Array<IImage>;
-    }    
+    }
+
+
+    interface ISoldDetails {
+        price: IKeyValue;
+        date: string;
+    }
 
     interface IAllowances {
         furnished: boolean
@@ -88,7 +91,7 @@
     }
 
     interface ICategory {
-        name: a.CategoryEnum;
+        name: string;
     }
 
 
@@ -127,4 +130,6 @@
         type: string;
         text: string;
     }
+
+//}
 

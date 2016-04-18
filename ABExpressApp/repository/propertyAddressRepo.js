@@ -1,7 +1,9 @@
+/// <reference path="../enums.ts" />
 /// <reference path="../dbConfig.ts" />
 /// <reference path="../rentalInterface.d.ts" />
 var models = require('../schema/sequelize-models');
 var dbConfig = require('../dbConfig');
+//import rentalDefinitions = require('rentalDefinitions');
 var propertyAddressRepo = (function () {
     function propertyAddressRepo() {
         this._dbConfig = new dbConfig.dbConfig();

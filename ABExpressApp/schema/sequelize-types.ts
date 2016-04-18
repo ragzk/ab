@@ -43,6 +43,11 @@ export interface propertyPojo
     bond?:number;
     uniqueId?:number;
     headline?:string;
+    isSold?:boolean;
+    soldPrice?:string;
+    soldDate?:string;
+    modifiedTime?:string;
+    Status?:string;
 }
 
 export interface propertyInstance extends sequelize.Instance<propertyInstance, propertyPojo>, propertyPojo { }
@@ -82,6 +87,11 @@ export function assertValidproperty(pojo:propertyPojo, allowUndefined?:boolean):
             case 'bond': assertValidFieldType('property', 'bond', pojo, 'number'); break;
             case 'uniqueId': assertValidFieldType('property', 'uniqueId', pojo, 'number'); break;
             case 'headline': assertValidFieldType('property', 'headline', pojo, 'string'); break;
+            case 'isSold': assertValidFieldType('property', 'isSold', pojo, 'boolean'); break;
+            case 'soldPrice': assertValidFieldType('property', 'soldPrice', pojo, 'string'); break;
+            case 'soldDate': assertValidFieldType('property', 'soldDate', pojo, 'string'); break;
+            case 'modifiedTime': assertValidFieldType('property', 'modifiedTime', pojo, 'string'); break;
+            case 'Status': assertValidFieldType('property', 'Status', pojo, 'string'); break;
             default:
                 throw new Error('Invalid property provided. Field \'' + fieldNames[i] + '\' is not supported.')
         }

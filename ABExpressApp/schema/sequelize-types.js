@@ -64,6 +64,21 @@ function assertValidproperty(pojo, allowUndefined) {
             case 'headline':
                 assertValidFieldType('property', 'headline', pojo, 'string');
                 break;
+            case 'isSold':
+                assertValidFieldType('property', 'isSold', pojo, 'boolean');
+                break;
+            case 'soldPrice':
+                assertValidFieldType('property', 'soldPrice', pojo, 'string');
+                break;
+            case 'soldDate':
+                assertValidFieldType('property', 'soldDate', pojo, 'string');
+                break;
+            case 'modifiedTime':
+                assertValidFieldType('property', 'modifiedTime', pojo, 'string');
+                break;
+            case 'Status':
+                assertValidFieldType('property', 'Status', pojo, 'string');
+                break;
             default:
                 throw new Error('Invalid property provided. Field \'' + fieldNames[i] + '\' is not supported.');
         }

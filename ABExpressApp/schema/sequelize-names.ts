@@ -43,6 +43,11 @@ export class propertyFields {
     bond:string = 'bond';
     uniqueId:string = 'uniqueId';
     headline:string = 'headline';
+    isSold:string = 'isSold';
+    soldPrice:string = 'soldPrice';
+    soldDate:string = 'soldDate';
+    modifiedTime:string = 'modifiedTime';
+    Status:string = 'Status';
 }
 export var propertyFields:propertyFields = new propertyFields();
 

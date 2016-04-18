@@ -2,14 +2,11 @@
 
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('property', {
-    id: {
+    propertyId: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
       primaryKey: true,
-      references: {
-        model: '',
-        key: ''
-      }
+      autoIncrement: true
     },
     name: {
       type: DataTypes.STRING,
@@ -19,16 +16,12 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: true
     },
-    locationId: {
-      type: DataTypes.INTEGER(11),
-      allowNull: true
-    },
     dateAvailable: {
       type: DataTypes.DATE,
       allowNull: true
     },
     rent: {
-      type: DataTypes.DECIMAL,
+      type: DataTypes.INTEGER(11),
       allowNull: true
     },
     category: {
@@ -43,8 +36,28 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.DECIMAL,
       allowNull: true
     },
-    Longitude: {
+    longitude: {
       type: DataTypes.DECIMAL,
+      allowNull: true
+    },
+    type: {
+      type: DataTypes.BOOLEAN,
+      allowNull: true
+    },
+    priceView: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    bond: {
+      type: DataTypes.DECIMAL,
+      allowNull: true
+    },
+    uniqueId: {
+      type: DataTypes.INTEGER(11),
+      allowNull: true
+    },
+    headline: {
+      type: DataTypes.STRING,
       allowNull: true
     }
   }, {

@@ -81,6 +81,7 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="dbConfig.ts" />
+    <TypeScriptCompile Include="enums.ts" />
     <TypeScriptCompile Include="processRentalJSONModule.ts" />
     <TypeScriptCompile Include="rentalInterface.d.ts" />
     <TypeScriptCompile Include="repository\propertyAddressRepo.ts" />
