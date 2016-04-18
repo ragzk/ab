@@ -18,6 +18,10 @@ fs.readdir(sliderUnSoldDir , function (err, files) {
 
 
 /* GET home page. */
+router.get('/getUnSoldProperties', function (req, res) {
+    return ["sdfdsf", "sdfsdfsdf"];
+});
+
 router.get('/', function (req, res) {
     res.render('index', {
         title: 'Express',
@@ -27,7 +31,6 @@ router.get('/', function (req, res) {
     });
     
 });
-
 
 
 module.exports = router;

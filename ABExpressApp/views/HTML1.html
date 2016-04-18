@@ -6,12 +6,37 @@
     <title></title>
     <link href="../bower_components/slick-carousel/slick/slick.css" rel="stylesheet" />
     <link href="../bower_components/slick-carousel/slick/slick-theme.css" rel="stylesheet" />
-
+    <link href="../bower_components/bxslider-4/dist/jquery.bxslider.min.css" rel="stylesheet" />
 </head>
 <body>
+    <div class="slider3">
+        <div class="slide"><img src="http://placehold.it/500x150&text=FooBar1"></div>
+        <div class="slide"><img src="http://placehold.it/500x150&text=FooBar2"></div>
+        <div class="slide"><img src="http://placehold.it/500x150&text=FooBar3"></div>
+        <div class="slide"><img src="http://placehold.it/500x150&text=FooBar4"></div>
+        <div class="slide"><img src="http://placehold.it/500x150&text=FooBar5"></div>
+        <div class="slide"><img src="http://placehold.it/500x150&text=FooBar6"></div>
+        <div class="slide"><img src="http://placehold.it/500x150&text=FooBar7"></div>
+        <div class="slide"><img src="http://placehold.it/500x150&text=FooBar8"></div>
+        <div class="slide"><img src="http://placehold.it/500x150&text=FooBar9"></div>
+        <div class="slide"><img src="http://placehold.it/500x150&text=FooBar10"></div>
+    </div>
+
     <script src="../bower_components/slick-carousel/slick/slick.min.js"></script>
     <script src="../public/javascripts/custom/slider.js"></script>
+    <script src="../bower_components/bxslider-4/dist/jquery.bxslider.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('.slider3').bxSlider({
+                slideWidth: 5000,
+                minSlides: 2,
+                maxSlides: 4,
+                slideMargin: 10
+            });
+        });
+    </script>
     
-    
+
 </body>
 </html>

@@ -423,19 +423,19 @@ div#slider {
 //    width:600px;
     width:calc(100% - 310px);
     float:right;
-    border: solid 1px black;
 }
 
 .rightSideWrittenContent
 {
-    width: 40%;
+    width: 50%;
     display: inline-block;
     float:left;
 }
 
 
 .rightSideSliderParent {
-    //float: right;
+    float: right;
+    width:50%;
     .rightSideSliderContent
     {
         //display: inline-block;

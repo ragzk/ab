@@ -4,41 +4,12 @@
 
     @html.block('content', function(model){
             
-		<div class="sidebar">
-			<div id="MainMenu" class="sideMenu">
-			  <div class="list-group panel">
-				<a href="#demo3" class="list-group-item strong" data-toggle="collapse" data-parent="#MainMenu">Buy<i class="fa fa-caret-down"></i></a>
-				<div class="collapse" id="demo3">
-				  <a href="#SubMenu1" class="list-group-item strong" data-toggle="collapse" data-parent="#SubMenu1">Residential<i class="fa fa-caret-down"></i></a>
-				  <a href="#SubMenu1" class="list-group-item strong" data-toggle="collapse" data-parent="#SubMenu1">Open For Inspection<i class="fa fa-caret-down"></i></a>
-				  <a href="#SubMenu1" class="list-group-item strong" data-toggle="collapse" data-parent="#SubMenu1">Auctions<i class="fa fa-caret-down"></i></a>
-				</div>
-				<a href="#demo4" class="list-group-item strong" data-toggle="collapse" data-parent="#MainMenu">Rent<i class="fa fa-caret-down"></i></a>
-				<div class="collapse" id="demo4">
-				  <a href="#SubSubMenu4" class="list-group-item strong" data-toggle="collapse" data-parent="#SubSubMenu4">Residential<i class="fa fa-caret-down"></i></a>
-				  <a href="#SubSubMenu4" class="list-group-item strong" data-toggle="collapse" data-parent="#SubSubMenu4">Open For Inspection<i class="fa fa-caret-down"></i></a>
-				  <a href="#SubSubMenu4" class="list-group-item strong" data-toggle="collapse" data-parent="#SubSubMenu4">Rental Application<i class="fa fa-caret-down"></i></a>
-				</div>
-				<a href="#demo5" class="list-group-item strong" data-toggle="collapse" data-parent="#MainMenu">Sell<i class="fa fa-caret-down"></i></a>
-				<div class="collapse" id="demo5">
-				  <a href="#SubSubMenu5" class="list-group-item strong" data-toggle="collapse" data-parent="#SubSubMenu5">Residential<i class="fa fa-caret-down"></i></a>
-				  <a href="#SubSubMenu5" class="list-group-item strong" data-toggle="collapse" data-parent="#SubSubMenu5">Open For Inspection<i class="fa fa-caret-down"></i></a>
-				  <a href="#SubSubMenu5" class="list-group-item strong" data-toggle="collapse" data-parent="#SubSubMenu5">Rental Application<i class="fa fa-caret-down"></i></a>
-				</div>
-			  </div>
-			</div>
-		</div>
 		<div class="sliderParent">
 			<div class="rightSideContent">
-				<div id="slides" class="slider new-properties" data-slick='{"slidesToShow": 1, "slidesToScroll": 1, "fade": 1}'>
-					@model.soldProp.forEach(function(item){
-						<img class="sliderImg" src="@item">
-					})									
-					<!-- <img class="sliderImg" src="../public/images/properties/prop1.jpg">
-					<img class="sliderImg" src="../public/images/properties/prop2.jpg">
-					<img class="sliderImg" src="../public/images/properties/prop3.jpg">
-					<img class="sliderImg" src="../public/images/properties/prop4.jpg">
-					<img class="sliderImg" src="../public/images/properties/prop5.jpg"> -->
+				<div>
+					<div>
+						<bx-slider url="api/getSoldProperties" />							
+					</div>
 				</div>
 				<div>
 					<div class="rightSideWrittenContent">
@@ -54,33 +25,14 @@
 							<li>We are flexible and are available 7 days a week even on public holidays to get the best to our clients - the positive outcomes.</li>
  
 							<li>We do have exposure in social media networking like face book, twitter, etc which is a key success and an ultimate goal to market the property and sell faster. </li>
-  
-							<li>We do free marketing campaign in various events, different organizations and actively participate to service different clients.</li>
- 
-							<li>We believe in effective communication and best customer service by serving all our clients with wise advice via email, phones whichever suits the best.</li>
- 
-							<li>We appreciate all inquiries, feedback by all our clients and people and reply them within a short time.</li>
- 
-							<li>We believe in action and implementing the best tactics and strategies to make sell quicker and are actively available at own your business hours and happy to guide you at your door step. </li>
-
-							<li>We have a large database with a qualified buyers and potential investors which makes us unique.</li>
 							</ul>
 						</div>
 					</div>
 					<div class= "rightSideSliderParent">
-						<div class="rightSideSliderContent">
+						<div class="rightSideSliderContent1">
 						<h3>Don't miss these properties</h3>
-						<div id="slides" class="slider sold-properties" data-slick='{"slidesToShow": 1, "slidesToScroll": 1, "fade": 1}'>
-						@model.unSoldProp.forEach(function(item){
-							<img class="sliderImg" src="@item">
-						})									
-							
-							
-							<!--<img class="sliderImg" src="../public/images/properties/prop1.jpg">
-							<img class="sliderImg" src="../public/images/properties/prop2.jpg">
-							<img class="sliderImg" src="../public/images/properties/prop3.jpg">
-							<img class="sliderImg" src="../public/images/properties/prop4.jpg">
-							<img class="sliderImg" src="../public/images/properties/prop5.jpg">-->
+						<div>
+							<bx-slider url="api/getUnSoldProperties" />							
 						</div>
 						</div>
 					</div>
@@ -89,6 +41,7 @@
 
 		</div>
 		
+		    
     })
 	
 })

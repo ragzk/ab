@@ -37,9 +37,12 @@
     <Compile Include="public\javascripts\app\app.js" />
     <Compile Include="public\javascripts\app\controllers\mainController.js" />
     <Compile Include="public\javascripts\app\controllers\searchController.js" />
+    <Compile Include="public\javascripts\app\directives\bxSlider.js" />
     <Compile Include="public\javascripts\app\directives\showSelected.js" />
     <Compile Include="public\javascripts\custom\postalAngularWrapper.js" />
     <Compile Include="public\javascripts\custom\slider.js" />
+    <Compile Include="routes\api.js" />
+    <Compile Include="routes\residential.js" />
     <Compile Include="routes\index.js" />
     <Compile Include="routes\users.js" />
     <Compile Include="bin\www" />
@@ -66,6 +69,7 @@
     <Folder Include="public\processedXmlFiles\" />
     <Folder Include="public\sfdf\" />
     <Folder Include="repository\" />
+    <Folder Include="routes\buy\" />
     <Folder Include="schema\" />
     <Folder Include="public\" />
     <Folder Include="public\images\" />
