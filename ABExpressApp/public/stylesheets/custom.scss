@@ -1,4 +1,5 @@
-﻿body {
+﻿
+body {
 font-family: "Lato","Open Sans",sans-serif;
 }
 
@@ -65,7 +66,54 @@ ul.dropdown-menu a{
 //ul.dropdown-menu a:hover{ 
 //	background-color:#F8F005;
 //}
+.propertydetailscontainer { 
+    width: auto;
+    overflow: hidden;
+    .property-details {
+        width: 100%;
+        float: left;
+        border-bottom:dotted 1px black;
 
+        .property-sub-details {
+            width:70%;
+            margin: 10px;
+            float:left;
+            .property-image {
+                float:left;
+                margin: 10px;
+                width:120px;
+            }
+            .property-description {
+                padding-left: 5px;
+                overflow: hidden;
+            }        
+        }
+        .property-features {
+            word-wrap:break-word;
+            margin: 10px;
+            overflow:hidden;
+            width: 25%;
+            .inspection {
+
+            }
+        }
+
+    }
+
+}
+
+.ellipsis
+{
+    text-overflow: ellipsis;
+}
+
+.thumbnail-image {
+    width:120px
+}
+
+.bath-icon {
+    width:14px;
+}
 
 /* home page logo */
 .logo {
@@ -464,6 +512,10 @@ div#slider {
 
 
  /* start footer*/
+ footer {
+     clear:both;
+
+ }
 
  footer .siteinfo {
     float: left;

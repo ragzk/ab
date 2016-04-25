@@ -10,6 +10,7 @@
     }
 
     interface IRental {
+        propertyId: number;
         agentID: number;
         clientID: string;
         uniqueID: number;
@@ -36,6 +37,7 @@
         soldDetails: ISoldDetails;
         modTime: string;
         status: string;
+        imageUrl: string;
         fileName: string; //debuging purpose
     }
 
@@ -80,13 +82,13 @@
     }
 
     interface IFeatures {
-        bedrooms: string;
-        bathrooms: string;
-        garages: string;
-        carports: string;
-        airConditioning: string;
-        alarmSystem: string;
-        pool: string;
+        bedrooms: number;
+        bathrooms: number;
+        garages: number;
+        carports: number;
+        airConditioning: boolean;
+        alarmSystem: boolean;
+        pool: boolean;
         otherFeatures: string;
     }
 
@@ -101,7 +103,7 @@
         street: string;
         suburb: IKeyValue;
         state: string;
-        postcode: string;
+        postcode: number;
     }
 
     interface IKeyValue {

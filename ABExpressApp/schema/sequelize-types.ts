@@ -47,7 +47,11 @@ export interface propertyPojo
     soldPrice?:string;
     soldDate?:string;
     modifiedTime?:string;
-    Status?:string;
+    status?:string;
+    imageUrl?:string;
+    propertyaddress?:propertyaddressPojo[];
+    propertydescription?:propertydescriptionPojo[];
+    propertyfeature?:propertyfeaturePojo[];
 }
 
 export interface propertyInstance extends sequelize.Instance<propertyInstance, propertyPojo>, propertyPojo { }
@@ -91,7 +95,11 @@ export function assertValidproperty(pojo:propertyPojo, allowUndefined?:boolean):
             case 'soldPrice': assertValidFieldType('property', 'soldPrice', pojo, 'string'); break;
             case 'soldDate': assertValidFieldType('property', 'soldDate', pojo, 'string'); break;
             case 'modifiedTime': assertValidFieldType('property', 'modifiedTime', pojo, 'string'); break;
-            case 'Status': assertValidFieldType('property', 'Status', pojo, 'string'); break;
+            case 'status': assertValidFieldType('property', 'status', pojo, 'string'); break;
+            case 'imageUrl': assertValidFieldType('property', 'imageUrl', pojo, 'string'); break;
+            case 'propertyaddress': assertValidFieldType('property', 'propertyaddress', pojo, 'propertyaddressPojo[]'); break;
+            case 'propertydescription': assertValidFieldType('property', 'propertydescription', pojo, 'propertydescriptionPojo[]'); break;
+            case 'propertyfeature': assertValidFieldType('property', 'propertyfeature', pojo, 'propertyfeaturePojo[]'); break;
             default:
                 throw new Error('Invalid property provided. Field \'' + fieldNames[i] + '\' is not supported.')
         }
@@ -114,11 +122,13 @@ asserters['property'] = assertValidproperty;
 
 export interface propertyaddressPojo
 {
-    id?:number;
-    name?:string;
-    identifier?:string;
-    postcode?:string;
     propertyId?:PropertyId;
+    streetNumber?:string;
+    street?:string;
+    suburb?:string;
+    state?:string;
+    postcode?:number;
+    property?:propertyPojo;
 }
 
 export interface propertyaddressInstance extends sequelize.Instance<propertyaddressInstance, propertyaddressPojo>, propertyaddressPojo { }
@@ -144,17 +154,72 @@ export function assertValidpropertyaddress(pojo:propertyaddressPojo, allowUndefi
     var i:number = fieldNames.length;
     while(i-- > 0) {
         switch(fieldNames[i]) {
-            case 'id': assertValidFieldType('propertyaddress', 'id', pojo, 'number'); break;
-            case 'name': assertValidFieldType('propertyaddress', 'name', pojo, 'string'); break;
-            case 'identifier': assertValidFieldType('propertyaddress', 'identifier', pojo, 'string'); break;
-            case 'postcode': assertValidFieldType('propertyaddress', 'postcode', pojo, 'string'); break;
             case 'propertyId': assertValidFieldType('propertyaddress', 'propertyId', pojo, 'number'); break;
+            case 'streetNumber': assertValidFieldType('propertyaddress', 'streetNumber', pojo, 'string'); break;
+            case 'street': assertValidFieldType('propertyaddress', 'street', pojo, 'string'); break;
+            case 'suburb': assertValidFieldType('propertyaddress', 'suburb', pojo, 'string'); break;
+            case 'state': assertValidFieldType('propertyaddress', 'state', pojo, 'string'); break;
+            case 'postcode': assertValidFieldType('propertyaddress', 'postcode', pojo, 'number'); break;
+            case 'property': assertValidFieldType('propertyaddress', 'property', pojo, 'propertyPojo'); break;
             default:
                 throw new Error('Invalid propertyaddress provided. Field \'' + fieldNames[i] + '\' is not supported.')
         }
     }
 }
 asserters['propertyaddress'] = assertValidpropertyaddress;
+
+
+
+
+
+//////////////////////////////////////////////////////////////////////////////
+//
+//
+//               propertydescription
+//
+//
+//////////////////////////////////////////////////////////////////////////////
+
+
+export interface propertydescriptionPojo
+{
+    propertyId?:PropertyId;
+    propertydescription?:string;
+    property?:propertyPojo;
+}
+
+export interface propertydescriptionInstance extends sequelize.Instance<propertydescriptionInstance, propertydescriptionPojo>, propertydescriptionPojo { }
+
+export interface propertydescriptionModel extends sequelize.Model<propertydescriptionInstance, propertydescriptionPojo> {
+    getpropertydescription(propertyId:PropertyId):sequelize.PromiseT<propertydescriptionInstance>;
+    getpropertydescription(propertydescription:propertydescriptionPojo):sequelize.PromiseT<propertydescriptionInstance>;
+}
+
+export function assertValidpropertydescription(pojo:propertydescriptionPojo, allowUndefined?:boolean):void {
+
+    if (pojo === undefined || pojo === null) {
+        if (allowUndefined) {
+            return;
+        }
+        throw new Error('Invalid propertydescription provided. It is \'' + (typeof pojo) + '\'.');
+    }
+    var fieldNames:string[] = Object.keys(pojo);
+    if (fieldNames.length === 0) {
+        throw new Error('Invalid propertydescription provided. It is an empty object.');
+    }
+
+    var i:number = fieldNames.length;
+    while(i-- > 0) {
+        switch(fieldNames[i]) {
+            case 'propertyId': assertValidFieldType('propertydescription', 'propertyId', pojo, 'number'); break;
+            case 'propertydescription': assertValidFieldType('propertydescription', 'propertydescription', pojo, 'string'); break;
+            case 'property': assertValidFieldType('propertydescription', 'property', pojo, 'propertyPojo'); break;
+            default:
+                throw new Error('Invalid propertydescription provided. Field \'' + fieldNames[i] + '\' is not supported.')
+        }
+    }
+}
+asserters['propertydescription'] = assertValidpropertydescription;
 
 
 
@@ -171,17 +236,17 @@ asserters['propertyaddress'] = assertValidpropertyaddress;
 
 export interface propertyfeaturePojo
 {
-    id?:number;
     propertyId?:PropertyId;
-    bedroom?:boolean;
-    bathroom?:boolean;
-    garages?:boolean;
-    carports?:boolean;
-    airConditioning?:Buffer;
-    alarmSystem?:Buffer;
-    pool?:Buffer;
+    bedroom?:number;
+    bathroom?:number;
+    garages?:number;
+    carports?:number;
+    airConditioning?:boolean;
+    alarmSystem?:boolean;
+    pool?:boolean;
     otherFeatures?:string;
     propertyfeaturecol?:string;
+    property?:propertyPojo;
 }
 
 export interface propertyfeatureInstance extends sequelize.Instance<propertyfeatureInstance, propertyfeaturePojo>, propertyfeaturePojo { }
@@ -207,17 +272,17 @@ export function assertValidpropertyfeature(pojo:propertyfeaturePojo, allowUndefi
     var i:number = fieldNames.length;
     while(i-- > 0) {
         switch(fieldNames[i]) {
-            case 'id': assertValidFieldType('propertyfeature', 'id', pojo, 'number'); break;
             case 'propertyId': assertValidFieldType('propertyfeature', 'propertyId', pojo, 'number'); break;
-            case 'bedroom': assertValidFieldType('propertyfeature', 'bedroom', pojo, 'boolean'); break;
-            case 'bathroom': assertValidFieldType('propertyfeature', 'bathroom', pojo, 'boolean'); break;
-            case 'garages': assertValidFieldType('propertyfeature', 'garages', pojo, 'boolean'); break;
-            case 'carports': assertValidFieldType('propertyfeature', 'carports', pojo, 'boolean'); break;
-            case 'airConditioning': assertValidFieldType('propertyfeature', 'airConditioning', pojo, 'Buffer'); break;
-            case 'alarmSystem': assertValidFieldType('propertyfeature', 'alarmSystem', pojo, 'Buffer'); break;
-            case 'pool': assertValidFieldType('propertyfeature', 'pool', pojo, 'Buffer'); break;
+            case 'bedroom': assertValidFieldType('propertyfeature', 'bedroom', pojo, 'number'); break;
+            case 'bathroom': assertValidFieldType('propertyfeature', 'bathroom', pojo, 'number'); break;
+            case 'garages': assertValidFieldType('propertyfeature', 'garages', pojo, 'number'); break;
+            case 'carports': assertValidFieldType('propertyfeature', 'carports', pojo, 'number'); break;
+            case 'airConditioning': assertValidFieldType('propertyfeature', 'airConditioning', pojo, 'boolean'); break;
+            case 'alarmSystem': assertValidFieldType('propertyfeature', 'alarmSystem', pojo, 'boolean'); break;
+            case 'pool': assertValidFieldType('propertyfeature', 'pool', pojo, 'boolean'); break;
             case 'otherFeatures': assertValidFieldType('propertyfeature', 'otherFeatures', pojo, 'string'); break;
             case 'propertyfeaturecol': assertValidFieldType('propertyfeature', 'propertyfeaturecol', pojo, 'string'); break;
+            case 'property': assertValidFieldType('propertyfeature', 'property', pojo, 'propertyPojo'); break;
             default:
                 throw new Error('Invalid propertyfeature provided. Field \'' + fieldNames[i] + '\' is not supported.')
         }

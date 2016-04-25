@@ -76,8 +76,20 @@ function assertValidproperty(pojo, allowUndefined) {
             case 'modifiedTime':
                 assertValidFieldType('property', 'modifiedTime', pojo, 'string');
                 break;
-            case 'Status':
-                assertValidFieldType('property', 'Status', pojo, 'string');
+            case 'status':
+                assertValidFieldType('property', 'status', pojo, 'string');
+                break;
+            case 'imageUrl':
+                assertValidFieldType('property', 'imageUrl', pojo, 'string');
+                break;
+            case 'propertyaddress':
+                assertValidFieldType('property', 'propertyaddress', pojo, 'propertyaddressPojo[]');
+                break;
+            case 'propertydescription':
+                assertValidFieldType('property', 'propertydescription', pojo, 'propertydescriptionPojo[]');
+                break;
+            case 'propertyfeature':
+                assertValidFieldType('property', 'propertyfeature', pojo, 'propertyfeaturePojo[]');
                 break;
             default:
                 throw new Error('Invalid property provided. Field \'' + fieldNames[i] + '\' is not supported.');
@@ -100,20 +112,26 @@ function assertValidpropertyaddress(pojo, allowUndefined) {
     var i = fieldNames.length;
     while (i-- > 0) {
         switch (fieldNames[i]) {
-            case 'id':
-                assertValidFieldType('propertyaddress', 'id', pojo, 'number');
-                break;
-            case 'name':
-                assertValidFieldType('propertyaddress', 'name', pojo, 'string');
-                break;
-            case 'identifier':
-                assertValidFieldType('propertyaddress', 'identifier', pojo, 'string');
-                break;
-            case 'postcode':
-                assertValidFieldType('propertyaddress', 'postcode', pojo, 'string');
-                break;
             case 'propertyId':
                 assertValidFieldType('propertyaddress', 'propertyId', pojo, 'number');
+                break;
+            case 'streetNumber':
+                assertValidFieldType('propertyaddress', 'streetNumber', pojo, 'string');
+                break;
+            case 'street':
+                assertValidFieldType('propertyaddress', 'street', pojo, 'string');
+                break;
+            case 'suburb':
+                assertValidFieldType('propertyaddress', 'suburb', pojo, 'string');
+                break;
+            case 'state':
+                assertValidFieldType('propertyaddress', 'state', pojo, 'string');
+                break;
+            case 'postcode':
+                assertValidFieldType('propertyaddress', 'postcode', pojo, 'number');
+                break;
+            case 'property':
+                assertValidFieldType('propertyaddress', 'property', pojo, 'propertyPojo');
                 break;
             default:
                 throw new Error('Invalid propertyaddress provided. Field \'' + fieldNames[i] + '\' is not supported.');
@@ -122,6 +140,36 @@ function assertValidpropertyaddress(pojo, allowUndefined) {
 }
 exports.assertValidpropertyaddress = assertValidpropertyaddress;
 asserters['propertyaddress'] = assertValidpropertyaddress;
+function assertValidpropertydescription(pojo, allowUndefined) {
+    if (pojo === undefined || pojo === null) {
+        if (allowUndefined) {
+            return;
+        }
+        throw new Error('Invalid propertydescription provided. It is \'' + (typeof pojo) + '\'.');
+    }
+    var fieldNames = Object.keys(pojo);
+    if (fieldNames.length === 0) {
+        throw new Error('Invalid propertydescription provided. It is an empty object.');
+    }
+    var i = fieldNames.length;
+    while (i-- > 0) {
+        switch (fieldNames[i]) {
+            case 'propertyId':
+                assertValidFieldType('propertydescription', 'propertyId', pojo, 'number');
+                break;
+            case 'propertydescription':
+                assertValidFieldType('propertydescription', 'propertydescription', pojo, 'string');
+                break;
+            case 'property':
+                assertValidFieldType('propertydescription', 'property', pojo, 'propertyPojo');
+                break;
+            default:
+                throw new Error('Invalid propertydescription provided. Field \'' + fieldNames[i] + '\' is not supported.');
+        }
+    }
+}
+exports.assertValidpropertydescription = assertValidpropertydescription;
+asserters['propertydescription'] = assertValidpropertydescription;
 function assertValidpropertyfeature(pojo, allowUndefined) {
     if (pojo === undefined || pojo === null) {
         if (allowUndefined) {
@@ -136,38 +184,38 @@ function assertValidpropertyfeature(pojo, allowUndefined) {
     var i = fieldNames.length;
     while (i-- > 0) {
         switch (fieldNames[i]) {
-            case 'id':
-                assertValidFieldType('propertyfeature', 'id', pojo, 'number');
-                break;
             case 'propertyId':
                 assertValidFieldType('propertyfeature', 'propertyId', pojo, 'number');
                 break;
             case 'bedroom':
-                assertValidFieldType('propertyfeature', 'bedroom', pojo, 'boolean');
+                assertValidFieldType('propertyfeature', 'bedroom', pojo, 'number');
                 break;
             case 'bathroom':
-                assertValidFieldType('propertyfeature', 'bathroom', pojo, 'boolean');
+                assertValidFieldType('propertyfeature', 'bathroom', pojo, 'number');
                 break;
             case 'garages':
-                assertValidFieldType('propertyfeature', 'garages', pojo, 'boolean');
+                assertValidFieldType('propertyfeature', 'garages', pojo, 'number');
                 break;
             case 'carports':
-                assertValidFieldType('propertyfeature', 'carports', pojo, 'boolean');
+                assertValidFieldType('propertyfeature', 'carports', pojo, 'number');
                 break;
             case 'airConditioning':
-                assertValidFieldType('propertyfeature', 'airConditioning', pojo, 'Buffer');
+                assertValidFieldType('propertyfeature', 'airConditioning', pojo, 'boolean');
                 break;
             case 'alarmSystem':
-                assertValidFieldType('propertyfeature', 'alarmSystem', pojo, 'Buffer');
+                assertValidFieldType('propertyfeature', 'alarmSystem', pojo, 'boolean');
                 break;
             case 'pool':
-                assertValidFieldType('propertyfeature', 'pool', pojo, 'Buffer');
+                assertValidFieldType('propertyfeature', 'pool', pojo, 'boolean');
                 break;
             case 'otherFeatures':
                 assertValidFieldType('propertyfeature', 'otherFeatures', pojo, 'string');
                 break;
             case 'propertyfeaturecol':
                 assertValidFieldType('propertyfeature', 'propertyfeaturecol', pojo, 'string');
+                break;
+            case 'property':
+                assertValidFieldType('propertyfeature', 'property', pojo, 'propertyPojo');
                 break;
             default:
                 throw new Error('Invalid propertyfeature provided. Field \'' + fieldNames[i] + '\' is not supported.');

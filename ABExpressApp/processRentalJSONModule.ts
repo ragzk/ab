@@ -6,6 +6,9 @@
 
 //declare function require(name: string);
 import propertyReport = require("./repository/propertyRepo");
+import propertyAddressReport = require("./repository/propertyAddressRepo");
+import propertyFeatureReport = require("./repository/propertyFeatureRepo");
+import propertyDescriptionReport = require("./repository/propertyDescriptionRepo");
 import types = require('./schema/sequelize-types');
 //import rentalDefinitions = require('rentalDefinitions');
 //import enumTypes = require('enumTypes');
@@ -51,34 +54,38 @@ class processRentalJSON {
         var func = function (that) {
             if (Object.prototype.toString.call(obj) === '[object Array]') {
                 for (var o in obj) {
-                    that.addInformationToDB(that, obj[o]).then(
-                        that.addImages(that, obj[o]));
-                    //.then(                 // add images to folder
-                    //this.copyXmlFileToProcessedFiles());    // copy files to processed location
+                    //that.addInformationToDB(that, obj[o]).then(
+                    //    that.addImages(that, obj[o]));
+
+                    that.addImagesAndDB(obj[0]);
                 }
-                //this.copyXmlFileToProcessedFiles(obj)
             }
             else {
-                that.addInformationToDB(that, obj).then(
-                    that.addImages(that, obj));    // copy files to processed location
+                that.addImagesAndDB(obj);
+                //that.addInformationToDB(that, obj).then(
+                //    that.addImages(that, obj));    // copy files to processed location
             }
         }
         return Promise.nfcall(func, this);
-        //return new Promise(function (resolve, reject) {
-        //    if (func()) {
-        //        resolve("This is true"); // State will be fulfilled
-        //    } else {
-        //        reject("This is false"); // State will be rejected
-        //    }
-        //})
+    }
+    private addImagesAndDB(obj) {
+        this.addImages(this, obj).then(this.addInformationToDB(this, obj));
     }
     public addInformationToDB(that: processRentalJSON, obj: IRental) {
         var func = function () {
             var repo = new propertyReport.propertyRepo();
+            var addressRepo = new propertyAddressReport.propertyAddressRepo();
+            var featureRepo = new propertyFeatureReport.propertyFeatureRepo();
+            var descriptionRepo = new propertyDescriptionReport.propertyDescriptionRepo();
             var fileName = that.path.basename(that.xmlPath);
             obj.fileName = fileName;
-
-            repo.saveProperty(obj);
+            repo.saveProperty(obj).then(function () {
+                addressRepo.savePropertyAddress(obj).then(function () {
+                    featureRepo.savePropertyFeature(obj).then(function () {
+                        descriptionRepo.savePropertyDescription(obj);
+                    });
+                })
+            });
         }
         return Promise.nfcall(func);
     }
@@ -137,14 +144,16 @@ class processRentalJSON {
                                         // Do something
                                         try {
                                             download(img.url, fileNameWithPath, func2);
+                                            obj.imageUrl = fileNameWithPath;
                                         }
                                         catch (ex) {
                                             console.log('Download image url ' + img.url + ' filename ' + obj.fileName);
                                             console.log(ex.message);
                                         }
                                     }
+                                    
                                 });
-                                
+                                obj.imageUrl = fileNameWithPath.replace('./', "/");
                                 return func2(img);
                             }
                             return func2(img);

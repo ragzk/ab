@@ -10,8 +10,9 @@
 		<link href="http://cdnjs.cloudflare.com/ajax/libs/select2/3.4.8/select2.css" rel="stylesheet" />
 		<link href="http://cdnjs.cloudflare.com/ajax/libs/select2/3.4.8/select2-bootstrap.css" />
 		<link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
+		<link rel="stylesheet" href="../stylesheets/fontawesome.css" type="text/css" media="screen" charset="utf-8">
 		<title>@model.title</title>
-		<link rel="stylesheet" href="stylesheets/custom.min.css" type="text/css" media="screen" charset="utf-8">
+		<link rel="stylesheet" href="../stylesheets/custom.min.css" type="text/css" media="screen" charset="utf-8">
 		<link href="../bower_components/slick-carousel/slick/slick.css" rel="stylesheet" />
 		<link href="../bower_components/slick-carousel/slick/slick-theme.css" rel="stylesheet" />
 		<link href="../bower_components/bxslider-4/dist/jquery.bxslider.min.css" rel="stylesheet" />
@@ -213,9 +214,12 @@
 <script src="../public/javascripts/custom/postalAngularWrapper.js"></script>
 <script src="../public/javascripts/app/controllers/mainController.js"></script>
 <script src="../public/javascripts/app/controllers/SearchController.js"></script>
+<script src="../public/javascripts/app/controllers/buyController.js"></script>
+<script src="../public/javascripts/app/directives/shortPropertyDetails.js"></script>
 <script src="../public/javascripts/app/directives/showSelected.js"></script>
 <script src="../public/javascripts/app/directives/bxslider.js"></script>
 <script src="../public/javascripts/custom/slider.js"></script>
+<script src="../public/javascripts/custom/cut.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/select2/3.4.8/select2.min.js"></script>
 
 </html>

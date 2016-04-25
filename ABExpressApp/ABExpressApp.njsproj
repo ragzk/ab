@@ -35,14 +35,17 @@
   <ItemGroup>
     <Compile Include="app.js" />
     <Compile Include="public\javascripts\app\app.js" />
+    <Compile Include="public\javascripts\app\controllers\buyController.js" />
     <Compile Include="public\javascripts\app\controllers\mainController.js" />
     <Compile Include="public\javascripts\app\controllers\searchController.js" />
     <Compile Include="public\javascripts\app\directives\bxSlider.js" />
+    <Compile Include="public\javascripts\app\directives\shortPropertyDetails.js" />
     <Compile Include="public\javascripts\app\directives\showSelected.js" />
+    <Compile Include="public\javascripts\custom\cut.js" />
     <Compile Include="public\javascripts\custom\postalAngularWrapper.js" />
     <Compile Include="public\javascripts\custom\slider.js" />
     <Compile Include="routes\api.js" />
-    <Compile Include="routes\residential.js" />
+    <Compile Include="routes\buy.js" />
     <Compile Include="routes\index.js" />
     <Compile Include="routes\users.js" />
     <Compile Include="bin\www" />
@@ -53,8 +56,11 @@
     <Content Include="public\images\properties\prop4.jpg" />
     <Content Include="public\images\properties\prop5.jpg" />
     <Content Include="public\stylesheets\custom.scss" />
+    <Content Include="public\stylesheets\fontawesome.css" />
     <Content Include="public\stylesheets\style.styl" />
+    <Content Include="public\templates\shortPropertyDetails.html" />
     <Content Include="README.md" />
+    <Content Include="views\buy.vash" />
     <Content Include="views\error.vash" />
     <Content Include="views\HTML1.html" />
     <Content Include="views\index.jade" />
@@ -66,10 +72,11 @@
   <ItemGroup>
     <Folder Include="bin\" />
     <Folder Include="dbConnection\" />
+    <Folder Include="public\fonts\" />
+    <Folder Include="public\templates\" />
     <Folder Include="public\processedXmlFiles\" />
     <Folder Include="public\sfdf\" />
     <Folder Include="repository\" />
-    <Folder Include="routes\buy\" />
     <Folder Include="schema\" />
     <Folder Include="public\" />
     <Folder Include="public\images\" />
@@ -89,6 +96,8 @@
     <TypeScriptCompile Include="processRentalJSONModule.ts" />
     <TypeScriptCompile Include="rentalInterface.d.ts" />
     <TypeScriptCompile Include="repository\propertyAddressRepo.ts" />
+    <TypeScriptCompile Include="repository\propertyDescriptionRepo.ts" />
+    <TypeScriptCompile Include="repository\propertyFeatureRepo.ts" />
     <TypeScriptCompile Include="repository\propertyRepo.ts" />
   </ItemGroup>
   <!-- Do not delete the following Import Project.  While this appears to do nothing it is a marker for setting TypeScript properties before our import that depends on them. -->

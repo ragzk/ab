@@ -2,8 +2,7 @@
 
     @html.block('content', function(model){
             
-        <h2>@error.stack</h2>
-
+        <h2>@JSON.stringify(model)</h2>
 
     })
 

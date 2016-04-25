@@ -9,17 +9,41 @@ var propertyAddressRepo = (function () {
         this._dbConfig = new dbConfig.dbConfig();
         models.initialize(this._dbConfig.database, this._dbConfig.user, this._dbConfig.password, { define: { freezeTableName: true } });
     }
-    propertyAddressRepo.prototype.getLocation = function (id) {
+    propertyAddressRepo.prototype.getPropertyAddress = function (id) {
         var findOptions = {};
-        findOptions.where = { id: id };
-        return models.propertyaddress.findAll(findOptions);
+        findOptions.where = { propertyId: id };
+        var r = models.propertyaddress.find({ where: { propertyId: id } });
+        return r;
     };
-    propertyAddressRepo.prototype.saveLocation = function (rentalObj) {
-        var loc = models.propertyaddress.build({
-            identifier: rentalObj.address.suburb.display,
-            name: rentalObj.address.suburb.text,
-            postcode: rentalObj.address.postcode,
-        });
+    propertyAddressRepo.prototype.savePropertyAddress = function (rentalObj) {
+        try {
+            return this.getPropertyAddress(rentalObj.propertyId).then(function (e) {
+                var address = e;
+                if (address) {
+                    address.propertyId.PropertyId = rentalObj.propertyId;
+                    address.streetNumber = rentalObj.address.streetNumber;
+                    address.street = rentalObj.address.street;
+                    address.suburb = rentalObj.address.suburb._;
+                    address.state = rentalObj.address.state;
+                    address.postcode = rentalObj.address.postcode;
+                }
+                else {
+                    address = models.propertyaddress.build({
+                        propertyId: rentalObj.propertyId,
+                        streetNumber: rentalObj.address.streetNumber,
+                        street: rentalObj.address.street,
+                        suburb: rentalObj.address.suburb._,
+                        state: rentalObj.address.state,
+                        postcode: rentalObj.address.postcode,
+                    });
+                }
+                address.save();
+                this._instance = address;
+            });
+        }
+        catch (ex) {
+            throw ex;
+        }
     };
     return propertyAddressRepo;
 })();

@@ -20,6 +20,7 @@ export var SEQUELIZE:sequelize.Sequelize;
 
 export var property:types.propertyModel;
 export var propertyaddress:types.propertyaddressModel;
+export var propertydescription:types.propertydescriptionModel;
 export var propertyfeature:types.propertyfeatureModel;
 
 
@@ -51,7 +52,8 @@ export function initialize(database:string, username:string, password:string, op
         'soldPrice':Sequelize.STRING,
         'soldDate':Sequelize.STRING,
         'modifiedTime':Sequelize.STRING,
-        'Status':Sequelize.STRING
+        'status':Sequelize.STRING,
+        'imageUrl':Sequelize.STRING
         },
         {
             timestamps: false,
@@ -78,7 +80,8 @@ export function initialize(database:string, username:string, password:string, op
                         if (property['soldPrice'] !== undefined) { where['soldPrice'] = property['soldPrice']}
                         if (property['soldDate'] !== undefined) { where['soldDate'] = property['soldDate']}
                         if (property['modifiedTime'] !== undefined) { where['modifiedTime'] = property['modifiedTime']}
-                        if (property['Status'] !== undefined) { where['Status'] = property['Status']}
+                        if (property['status'] !== undefined) { where['status'] = property['status']}
+                        if (property['imageUrl'] !== undefined) { where['imageUrl'] = property['imageUrl']}
                     } else {
                         where['propertyId'] = id;
                     }
@@ -88,11 +91,12 @@ export function initialize(database:string, username:string, password:string, op
         });
     
     propertyaddress = <types.propertyaddressModel> SEQUELIZE.define<types.propertyaddressInstance, types.propertyaddressPojo>('propertyaddress', {
-        'id':{type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true},
-        'name':Sequelize.STRING,
-        'identifier':Sequelize.STRING,
-        'postcode':Sequelize.STRING,
-        'propertyId':Sequelize.INTEGER
+        'propertyId':{type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true},
+        'streetNumber':Sequelize.STRING,
+        'street':Sequelize.STRING,
+        'suburb':Sequelize.STRING,
+        'state':Sequelize.STRING,
+        'postcode':Sequelize.INTEGER
         },
         {
             timestamps: false,
@@ -101,11 +105,12 @@ export function initialize(database:string, username:string, password:string, op
                     var where:{[key:string]:any} = {};
                     var id:number = parseInt(propertyaddress);
                     if (isNaN(id)) {
-                        if (propertyaddress['id'] !== undefined) { where['id'] = propertyaddress['id']}
-                        if (propertyaddress['name'] !== undefined) { where['name'] = propertyaddress['name']}
-                        if (propertyaddress['identifier'] !== undefined) { where['identifier'] = propertyaddress['identifier']}
-                        if (propertyaddress['postcode'] !== undefined) { where['postcode'] = propertyaddress['postcode']}
                         if (propertyaddress['propertyId'] !== undefined) { where['propertyId'] = propertyaddress['propertyId']}
+                        if (propertyaddress['streetNumber'] !== undefined) { where['streetNumber'] = propertyaddress['streetNumber']}
+                        if (propertyaddress['street'] !== undefined) { where['street'] = propertyaddress['street']}
+                        if (propertyaddress['suburb'] !== undefined) { where['suburb'] = propertyaddress['suburb']}
+                        if (propertyaddress['state'] !== undefined) { where['state'] = propertyaddress['state']}
+                        if (propertyaddress['postcode'] !== undefined) { where['postcode'] = propertyaddress['postcode']}
                     } else {
                         where['propertyId'] = id;
                     }
@@ -114,16 +119,36 @@ export function initialize(database:string, username:string, password:string, op
             }
         });
     
+    propertydescription = <types.propertydescriptionModel> SEQUELIZE.define<types.propertydescriptionInstance, types.propertydescriptionPojo>('propertydescription', {
+        'propertyId':{type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true},
+        'propertydescription':Sequelize.STRING
+        },
+        {
+            timestamps: false,
+            classMethods: {
+                getpropertydescription:(propertydescription:any) => {
+                    var where:{[key:string]:any} = {};
+                    var id:number = parseInt(propertydescription);
+                    if (isNaN(id)) {
+                        if (propertydescription['propertyId'] !== undefined) { where['propertyId'] = propertydescription['propertyId']}
+                        if (propertydescription['propertydescription'] !== undefined) { where['propertydescription'] = propertydescription['propertydescription']}
+                    } else {
+                        where['propertyId'] = id;
+                    }
+                    return propertydescription.find({where: where});
+                }
+            }
+        });
+    
     propertyfeature = <types.propertyfeatureModel> SEQUELIZE.define<types.propertyfeatureInstance, types.propertyfeaturePojo>('propertyfeature', {
-        'id':{type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true},
-        'propertyId':Sequelize.INTEGER,
+        'propertyId':{type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true},
         'bedroom':Sequelize.INTEGER,
         'bathroom':Sequelize.INTEGER,
         'garages':Sequelize.INTEGER,
         'carports':Sequelize.INTEGER,
-        'airConditioning':Sequelize.BLOB,
-        'alarmSystem':Sequelize.BLOB,
-        'pool':Sequelize.BLOB,
+        'airConditioning':Sequelize.INTEGER,
+        'alarmSystem':Sequelize.INTEGER,
+        'pool':Sequelize.INTEGER,
         'otherFeatures':Sequelize.STRING,
         'propertyfeaturecol':Sequelize.STRING
         },
@@ -134,7 +159,6 @@ export function initialize(database:string, username:string, password:string, op
                     var where:{[key:string]:any} = {};
                     var id:number = parseInt(propertyfeature);
                     if (isNaN(id)) {
-                        if (propertyfeature['id'] !== undefined) { where['id'] = propertyfeature['id']}
                         if (propertyfeature['propertyId'] !== undefined) { where['propertyId'] = propertyfeature['propertyId']}
                         if (propertyfeature['bedroom'] !== undefined) { where['bedroom'] = propertyfeature['bedroom']}
                         if (propertyfeature['bathroom'] !== undefined) { where['bathroom'] = propertyfeature['bathroom']}
@@ -152,6 +176,18 @@ export function initialize(database:string, username:string, password:string, op
                 }
             }
         });
+    
+    property.hasMany(propertyaddress, {foreignKey: 'propertyId' });
+    propertyaddress.belongsTo(property, {as: undefined, foreignKey: 'propertyId' });
+
+    
+    property.hasMany(propertydescription, {foreignKey: 'propertyId' });
+    propertydescription.belongsTo(property, {as: undefined, foreignKey: 'propertyId' });
+
+    
+    property.hasMany(propertyfeature, {foreignKey: 'propertyId' });
+    propertyfeature.belongsTo(property, {as: undefined, foreignKey: 'propertyId' });
+
     
     return exports;
 }

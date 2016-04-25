@@ -4,6 +4,9 @@
 //module processRentalJSONModule {
 //declare function require(name: string);
 var propertyReport = require("./repository/propertyRepo");
+var propertyAddressReport = require("./repository/propertyAddressRepo");
+var propertyFeatureReport = require("./repository/propertyFeatureRepo");
+var propertyDescriptionReport = require("./repository/propertyDescriptionRepo");
 //import rentalDefinitions = require('rentalDefinitions');
 //import enumTypes = require('enumTypes');
 var Promise = require('q');
@@ -42,28 +45,35 @@ var processRentalJSON = (function () {
         var func = function (that) {
             if (Object.prototype.toString.call(obj) === '[object Array]') {
                 for (var o in obj) {
-                    that.addInformationToDB(that, obj[o]).then(that.addImages(that, obj[o]));
+                    //that.addInformationToDB(that, obj[o]).then(
+                    //    that.addImages(that, obj[o]));
+                    that.addImagesAndDB(obj[0]);
                 }
             }
             else {
-                that.addInformationToDB(that, obj).then(that.addImages(that, obj)); // copy files to processed location
+                that.addImagesAndDB(obj);
             }
         };
         return Promise.nfcall(func, this);
-        //return new Promise(function (resolve, reject) {
-        //    if (func()) {
-        //        resolve("This is true"); // State will be fulfilled
-        //    } else {
-        //        reject("This is false"); // State will be rejected
-        //    }
-        //})
+    };
+    processRentalJSON.prototype.addImagesAndDB = function (obj) {
+        this.addImages(this, obj).then(this.addInformationToDB(this, obj));
     };
     processRentalJSON.prototype.addInformationToDB = function (that, obj) {
         var func = function () {
             var repo = new propertyReport.propertyRepo();
+            var addressRepo = new propertyAddressReport.propertyAddressRepo();
+            var featureRepo = new propertyFeatureReport.propertyFeatureRepo();
+            var descriptionRepo = new propertyDescriptionReport.propertyDescriptionRepo();
             var fileName = that.path.basename(that.xmlPath);
             obj.fileName = fileName;
-            repo.saveProperty(obj);
+            repo.saveProperty(obj).then(function () {
+                addressRepo.savePropertyAddress(obj).then(function () {
+                    featureRepo.savePropertyFeature(obj).then(function () {
+                        descriptionRepo.savePropertyDescription(obj);
+                    });
+                });
+            });
         };
         return Promise.nfcall(func);
     };
@@ -120,6 +130,7 @@ var processRentalJSON = (function () {
                                         // Do something
                                         try {
                                             download(img.url, fileNameWithPath, func2);
+                                            obj.imageUrl = fileNameWithPath;
                                         }
                                         catch (ex) {
                                             console.log('Download image url ' + img.url + ' filename ' + obj.fileName);
@@ -127,6 +138,7 @@ var processRentalJSON = (function () {
                                         }
                                     }
                                 });
+                                obj.imageUrl = fileNameWithPath.replace('./', "/");
                                 return func2(img);
                             }
                             return func2(img);

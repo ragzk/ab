@@ -10,7 +10,7 @@ var request = require('request');
 var index = require('./routes/index');
 var users = require('./routes/users');
 var api = require('./routes/api');
-var buyResidental = require('./routes/residential');
+var trans = require('./routes/buy');
 var _ = require('lodash');
 
 var app = express();
@@ -33,6 +33,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/users', users);
+app.get('/buy', trans.buy);
+app.get('/buy/:type', trans.buy);
+app.get('/buy/:type/getProperties', trans.buy.getProperties);
 
 app.get('/api/getUnSoldProperties', api.getUnSoldProperties);
 app.get('/api/getSoldProperties', api.getSoldProperties);
@@ -44,9 +47,9 @@ app.use(function (req, res, next) {
     next(err);
 });
 
-app.listen(3000, function () {
-    console.log('Example app listening on port 3000!');
-});
+//app.listen(3000, function () {
+//    console.log('Example app listening on port 3000!');
+//});
 
 /*start chokidar*/
 var chokidar = require('chokidar');

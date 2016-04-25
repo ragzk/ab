@@ -15,6 +15,16 @@ var propertyRepo = (function () {
         var r = models.property.find({ where: { uniqueId: id } });
         return r;
     };
+    propertyRepo.prototype.getProperties = function (type) {
+        var findOptions = {};
+        findOptions.where = { isRental: false, status: 'current' };
+        findOptions.include = [{ model: models.propertyaddress, required: false },
+            { model: models.propertyfeature, required: false },
+            { model: models.propertydescription, required: false }];
+        //var r = models.property.findAll({ where: { isRental: false, status: 'current' } });
+        var r = models.property.findAll(findOptions);
+        return r;
+    };
     propertyRepo.prototype.saveProperty = function (rentalObj) {
         try {
             return this.getProperty1(rentalObj.uniqueID).then(function (e) {
@@ -36,7 +46,8 @@ var propertyRepo = (function () {
                     loc.soldDate = rentalObj.soldDetails ? rentalObj.soldDetails.date : null;
                     loc.soldPrice = rentalObj.soldDetails ? rentalObj.soldDetails.price.text : null;
                     loc.modifiedTime = rentalObj.modTime;
-                    loc.Status = rentalObj.status.toString();
+                    loc.imageUrl = rentalObj.imageUrl;
+                    loc.status = rentalObj.status.toString();
                 }
                 else {
                     loc = models.property.build({
@@ -56,10 +67,12 @@ var propertyRepo = (function () {
                         soldDate: rentalObj.soldDetails ? rentalObj.soldDetails.date : null,
                         soldPrice: rentalObj.soldDetails ? rentalObj.soldDetails.price.text : null,
                         modifiedTime: rentalObj.modTime,
-                        Status: rentalObj.status.toString()
+                        imageUrl: rentalObj.imageUrl,
+                        status: rentalObj.status.toString()
                     });
                 }
                 loc.save();
+                rentalObj.propertyId = +loc.propertyId;
                 this._instance = loc;
             });
         }

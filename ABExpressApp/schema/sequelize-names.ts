@@ -18,12 +18,14 @@ export interface SequelizeNames {
     references:References;
     propertyFields:propertyFields;
     propertyaddressFields:propertyaddressFields;
+    propertydescriptionFields:propertydescriptionFields;
     propertyfeatureFields:propertyfeatureFields;
 }
 
 export class TableNames {
     property:string = 'property';
     propertyaddress:string = 'propertyaddress';
+    propertydescription:string = 'propertydescription';
     propertyfeature:string = 'propertyfeature';
 }
 export var tableNames:TableNames = new TableNames();
@@ -47,23 +49,36 @@ export class propertyFields {
     soldPrice:string = 'soldPrice';
     soldDate:string = 'soldDate';
     modifiedTime:string = 'modifiedTime';
-    Status:string = 'Status';
+    status:string = 'status';
+    imageUrl:string = 'imageUrl';
+    propertyaddress:string = 'propertyaddress';
+    propertydescription:string = 'propertydescription';
+    propertyfeature:string = 'propertyfeature';
 }
 export var propertyFields:propertyFields = new propertyFields();
 
 
 export class propertyaddressFields {
-    id:string = 'id';
-    name:string = 'name';
-    identifier:string = 'identifier';
-    postcode:string = 'postcode';
     propertyId:string = 'propertyId';
+    streetNumber:string = 'streetNumber';
+    street:string = 'street';
+    suburb:string = 'suburb';
+    state:string = 'state';
+    postcode:string = 'postcode';
+    property:string = 'property';
 }
 export var propertyaddressFields:propertyaddressFields = new propertyaddressFields();
 
 
+export class propertydescriptionFields {
+    propertyId:string = 'propertyId';
+    propertydescription:string = 'propertydescription';
+    property:string = 'property';
+}
+export var propertydescriptionFields:propertydescriptionFields = new propertydescriptionFields();
+
+
 export class propertyfeatureFields {
-    id:string = 'id';
     propertyId:string = 'propertyId';
     bedroom:string = 'bedroom';
     bathroom:string = 'bathroom';
@@ -74,6 +89,7 @@ export class propertyfeatureFields {
     pool:string = 'pool';
     otherFeatures:string = 'otherFeatures';
     propertyfeaturecol:string = 'propertyfeaturecol';
+    property:string = 'property';
 }
 export var propertyfeatureFields:propertyfeatureFields = new propertyfeatureFields();
 
@@ -83,7 +99,6 @@ export var calculatedFields:CalculatedFields = new CalculatedFields();
 
 export class References {
     propertyId:types.Reference = { tableName: 'property', primaryKey: 'propertyId', foreignKey: 'propertyId', as: undefined};
-    id:types.Reference = { tableName: 'propertyaddress', primaryKey: 'id', foreignKey: 'id', as: undefined};
 }
 
 export var references:References = new References();
