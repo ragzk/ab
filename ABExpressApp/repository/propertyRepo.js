@@ -25,6 +25,16 @@ var propertyRepo = (function () {
         var r = models.property.findAll(findOptions);
         return r;
     };
+    propertyRepo.prototype.getPropertyByUniqueId = function (uniqueId) {
+        var findOptions = {};
+        findOptions.where = { uniqueId: uniqueId };
+        findOptions.include = [{ model: models.propertyaddress, required: false },
+            { model: models.propertyfeature, required: false },
+            { model: models.propertydescription, required: false }];
+        //var r = models.property.findAll({ where: { isRental: false, status: 'current' } });
+        var r = models.property.find(findOptions);
+        return r;
+    };
     propertyRepo.prototype.saveProperty = function (rentalObj) {
         try {
             return this.getProperty1(rentalObj.uniqueID).then(function (e) {

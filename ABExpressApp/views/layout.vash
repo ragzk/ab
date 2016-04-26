@@ -5,17 +5,17 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 		<!-- Latest compiled and minified CSS -->
-		<link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
-		<link rel="shortcut icon" href="../public/images/favicon.png">
+		<link href="/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+		<link rel="shortcut icon" href="/public/images/favicon.png">
 		<link href="http://cdnjs.cloudflare.com/ajax/libs/select2/3.4.8/select2.css" rel="stylesheet" />
 		<link href="http://cdnjs.cloudflare.com/ajax/libs/select2/3.4.8/select2-bootstrap.css" />
 		<link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
-		<link rel="stylesheet" href="../stylesheets/fontawesome.css" type="text/css" media="screen" charset="utf-8">
+		<link rel="stylesheet" href="/stylesheets/fontawesome.css" type="text/css" media="screen" charset="utf-8">
 		<title>@model.title</title>
-		<link rel="stylesheet" href="../stylesheets/custom.min.css" type="text/css" media="screen" charset="utf-8">
-		<link href="../bower_components/slick-carousel/slick/slick.css" rel="stylesheet" />
-		<link href="../bower_components/slick-carousel/slick/slick-theme.css" rel="stylesheet" />
-		<link href="../bower_components/bxslider-4/dist/jquery.bxslider.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="/stylesheets/custom.min.css" type="text/css" media="screen" charset="utf-8">
+		<link href="/bower_components/slick-carousel/slick/slick.css" rel="stylesheet" />
+		<link href="/bower_components/slick-carousel/slick/slick-theme.css" rel="stylesheet" />
+		<link href="/bower_components/bxslider-4/dist/jquery.bxslider.min.css" rel="stylesheet" />
 	</head>
 	<body>		
 		<div id="main-container" class="container" ng-controller="mainController">
@@ -200,26 +200,28 @@
         </div>-->
         <!--<a href="" class="btn b*tn-primary sharp">Search</a>-->
     </script>
-<script src="../bower_components/jquery/dist/jquery.js"></script>
-<script src="../bower_components/lodash/lodash.js"></script>
-<script src="../bower_components/bootstrap/dist/js/bootstrap.js"></script>
-<script src="../bower_components/angular/angular.js"></script>
-<script src="../bower_components/bxslider-4/dist/jquery.bxslider.min.js"></script>
-<script src="../bower_components/postal.js/lib/postal.js"></script>
-<script src="../bower_components/ngprogress/build/ngprogress.js"></script>
-<script src="../bower_components/matchMedia/matchMedia.js"></script>
-<script src="../bower_components/matchMedia-ng/matchMedia-ng.js"></script>
-<script src="../bower_components/slick-carousel/slick/slick.min.js"></script>
-<script src="../public/javascripts/app/app.js"></script>
-<script src="../public/javascripts/custom/postalAngularWrapper.js"></script>
-<script src="../public/javascripts/app/controllers/mainController.js"></script>
-<script src="../public/javascripts/app/controllers/SearchController.js"></script>
-<script src="../public/javascripts/app/controllers/buyController.js"></script>
-<script src="../public/javascripts/app/directives/shortPropertyDetails.js"></script>
-<script src="../public/javascripts/app/directives/showSelected.js"></script>
-<script src="../public/javascripts/app/directives/bxslider.js"></script>
-<script src="../public/javascripts/custom/slider.js"></script>
-<script src="../public/javascripts/custom/cut.js"></script>
+<script src="/bower_components/jquery/dist/jquery.js"></script>
+<script src="/bower_components/lodash/lodash.js"></script>
+<script src="/bower_components/bootstrap/dist/js/bootstrap.js"></script>
+<script src="/bower_components/angular/angular.js"></script>
+<script src="/bower_components/bxslider-4/dist/jquery.bxslider.min.js"></script>
+<script src="/bower_components/postal.js/lib/postal.js"></script>
+<script src="/bower_components/ngprogress/build/ngprogress.js"></script>
+<script src="/bower_components/matchMedia/matchMedia.js"></script>
+<script src="/bower_components/matchMedia-ng/matchMedia-ng.js"></script>
+<script src="/bower_components/slick-carousel/slick/slick.min.js"></script>
+<script src="/public/javascripts/app/app.js"></script>
+<script src="/public/javascripts/custom/postalAngularWrapper.js"></script>
+<script src="/public/javascripts/app/controllers/mainController.js"></script>
+<script src="/public/javascripts/app/controllers/SearchController.js"></script>
+<script src="/public/javascripts/app/controllers/buyController.js"></script>
+<script src="/public/javascripts/app/controllers/propertyController.js"></script>
+<script src="/public/javascripts/app/directives/propertyDetails.js"></script>
+<script src="/public/javascripts/app/directives/shortPropertyDetails.js"></script>
+<script src="/public/javascripts/app/directives/showSelected.js"></script>
+<script src="/public/javascripts/app/directives/bxslider.js"></script>
+<script src="/public/javascripts/custom/slider.js"></script>
+<script src="/public/javascripts/custom/cut.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/select2/3.4.8/select2.min.js"></script>
 
 </html>

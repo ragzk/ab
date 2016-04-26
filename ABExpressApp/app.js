@@ -11,6 +11,7 @@ var index = require('./routes/index');
 var users = require('./routes/users');
 var api = require('./routes/api');
 var trans = require('./routes/buy');
+var property = require('./routes/property');
 var _ = require('lodash');
 
 var app = express();
@@ -36,6 +37,9 @@ app.use('/users', users);
 app.get('/buy', trans.buy);
 app.get('/buy/:type', trans.buy);
 app.get('/buy/:type/getProperties', trans.buy.getProperties);
+
+app.get('/property/:suburb/:street/:streetNumber/:uniqueId', property.details);
+app.get('/property/getProperty/:uniqueId', property.details.getProperty);
 
 app.get('/api/getUnSoldProperties', api.getUnSoldProperties);
 app.get('/api/getSoldProperties', api.getSoldProperties);

@@ -38,6 +38,18 @@ export class propertyRepo {
         return r;
     }
 
+    getPropertyByUniqueId(uniqueId: string) {
+        var findOptions = <sequelize.FindOptions>{};
+        findOptions.where = { uniqueId: uniqueId };
+        findOptions.include = [{ model: models.propertyaddress, required: false },
+            { model: models.propertyfeature, required: false },
+            { model: models.propertydescription, required: false }];
+        
+        //var r = models.property.findAll({ where: { isRental: false, status: 'current' } });
+        var r = models.property.find(findOptions);
+        return r;
+    }
+
     saveProperty(rentalObj: IRental) {        
         try {
             return this.getProperty1(rentalObj.uniqueID).then(function (e) {
