@@ -9,6 +9,7 @@ import propertyReport = require("./repository/propertyRepo");
 import propertyAddressReport = require("./repository/propertyAddressRepo");
 import propertyFeatureReport = require("./repository/propertyFeatureRepo");
 import propertyDescriptionReport = require("./repository/propertyDescriptionRepo");
+import propertyImageReport = require("./repository/propertyImageRepo");
 import types = require('./schema/sequelize-types');
 //import rentalDefinitions = require('rentalDefinitions');
 //import enumTypes = require('enumTypes');
@@ -50,6 +51,7 @@ class processRentalJSON {
         //console.log(this.data);
         // add pipe or make it chain
         var obj = this.data.rental || this.data.residential || this.data.land;
+
         console.log(obj.status);
         var func = function (that) {
             if (Object.prototype.toString.call(obj) === '[object Array]') {
@@ -77,13 +79,35 @@ class processRentalJSON {
             var addressRepo = new propertyAddressReport.propertyAddressRepo();
             var featureRepo = new propertyFeatureReport.propertyFeatureRepo();
             var descriptionRepo = new propertyDescriptionReport.propertyDescriptionRepo();
+            var imageRepo = new propertyImageReport.propertyImageRepo();
+
             var fileName = that.path.basename(that.xmlPath);
             obj.fileName = fileName;
+            if (that.data.rental) {
+                obj.type = "rental";
+            }
+            if (that.data.residential) {
+                obj.type = "residential";
+            }
+            if (that.data.land) {
+                obj.type = "land";
+            }
+
             repo.saveProperty(obj).then(function () {
                 addressRepo.savePropertyAddress(obj).then(function () {
                     featureRepo.savePropertyFeature(obj).then(function () {
                         descriptionRepo.savePropertyDescription(obj);
                     });
+                }).then(function () {
+                    if (obj && obj.images && obj.images.img) {
+                        for (var i = 0; i < obj.images.img.length; i++) {
+                            var img = <IImage>obj.images.img[i];
+                            if (img && img.url) {
+                                imageRepo.savePropertyImage(img, obj.propertyId);
+                            }
+                        }
+
+                    }                    
                 })
             });
         }
@@ -110,9 +134,11 @@ class processRentalJSON {
             });
         };
         var func = function () {
+//            var imageRepo = new propertyImageReport.propertyImageRepo();
             if (obj && obj.images && obj.images.img) {
                 for (var i = 0; i < obj.images.img.length; i++) {
                     var img = <IImage>obj.images.img[i];
+                    img.index = i;
                     var dirName = "./public/images/" + obj.uniqueID;
                     var funcImage = function (img) {
                         var func3 = function (img) {
@@ -145,12 +171,15 @@ class processRentalJSON {
                                         try {
                                             download(img.url, fileNameWithPath, func2);
                                             obj.imageUrl = fileNameWithPath;
+//                                            img.index = i;
+                                            img.url = fileNameWithPath.replace("./", "/");
                                         }
                                         catch (ex) {
                                             console.log('Download image url ' + img.url + ' filename ' + obj.fileName);
                                             console.log(ex.message);
                                         }
                                     }
+//                                    imageRepo.savePropertyImage(img, obj.propertyId, fileNameWithPath);
                                     
                                 });
                                 obj.imageUrl = fileNameWithPath.replace('./', "/");
@@ -175,6 +204,9 @@ class processRentalJSON {
                                             console.log(ex.message);
                                         }
                                     }
+//                                    img.index = i;
+                                    img.url = fileNameWithPath.replace("./", "/");
+                                    //imageRepo.savePropertyImage(img, obj.propertyId, fileNameWithPath);
                                 });
                                 
                             }

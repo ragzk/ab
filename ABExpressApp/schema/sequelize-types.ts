@@ -14,6 +14,7 @@
 import types = require('./sequelize-types'); // important so we can use same fully qualified names in all generated files
 
 export interface PropertyId { PropertyId:number; }
+export interface PropertyImageId { PropertyImageId:number; }
 
 
 var asserters:{[typeName:string]:(pojo:any, allowUndefined?:boolean) => void} = {};
@@ -38,7 +39,7 @@ export interface propertyPojo
     inspectionTimes?:string;
     latitude?:number;
     longitude?:number;
-    isRental?:boolean;
+    type?:string;
     priceView?:string;
     bond?:number;
     uniqueId?:number;
@@ -52,6 +53,7 @@ export interface propertyPojo
     propertyaddress?:propertyaddressPojo[];
     propertydescription?:propertydescriptionPojo[];
     propertyfeature?:propertyfeaturePojo[];
+    propertyimage?:propertyimagePojo[];
 }
 
 export interface propertyInstance extends sequelize.Instance<propertyInstance, propertyPojo>, propertyPojo { }
@@ -86,7 +88,7 @@ export function assertValidproperty(pojo:propertyPojo, allowUndefined?:boolean):
             case 'inspectionTimes': assertValidFieldType('property', 'inspectionTimes', pojo, 'string'); break;
             case 'latitude': assertValidFieldType('property', 'latitude', pojo, 'number'); break;
             case 'longitude': assertValidFieldType('property', 'longitude', pojo, 'number'); break;
-            case 'isRental': assertValidFieldType('property', 'isRental', pojo, 'boolean'); break;
+            case 'type': assertValidFieldType('property', 'type', pojo, 'string'); break;
             case 'priceView': assertValidFieldType('property', 'priceView', pojo, 'string'); break;
             case 'bond': assertValidFieldType('property', 'bond', pojo, 'number'); break;
             case 'uniqueId': assertValidFieldType('property', 'uniqueId', pojo, 'number'); break;
@@ -100,6 +102,7 @@ export function assertValidproperty(pojo:propertyPojo, allowUndefined?:boolean):
             case 'propertyaddress': assertValidFieldType('property', 'propertyaddress', pojo, 'propertyaddressPojo[]'); break;
             case 'propertydescription': assertValidFieldType('property', 'propertydescription', pojo, 'propertydescriptionPojo[]'); break;
             case 'propertyfeature': assertValidFieldType('property', 'propertyfeature', pojo, 'propertyfeaturePojo[]'); break;
+            case 'propertyimage': assertValidFieldType('property', 'propertyimage', pojo, 'propertyimagePojo[]'); break;
             default:
                 throw new Error('Invalid property provided. Field \'' + fieldNames[i] + '\' is not supported.')
         }
@@ -289,6 +292,65 @@ export function assertValidpropertyfeature(pojo:propertyfeaturePojo, allowUndefi
     }
 }
 asserters['propertyfeature'] = assertValidpropertyfeature;
+
+
+
+
+
+//////////////////////////////////////////////////////////////////////////////
+//
+//
+//               propertyimage
+//
+//
+//////////////////////////////////////////////////////////////////////////////
+
+
+export interface propertyimagePojo
+{
+    propertyImageId?:PropertyImageId;
+    propertyId?:PropertyId;
+    imageId?:string;
+    imageUrl?:string;
+    imageIndex?:number;
+    property?:propertyPojo;
+}
+
+export interface propertyimageInstance extends sequelize.Instance<propertyimageInstance, propertyimagePojo>, propertyimagePojo { }
+
+export interface propertyimageModel extends sequelize.Model<propertyimageInstance, propertyimagePojo> {
+    getpropertyimage(propertyImageId:PropertyImageId):sequelize.PromiseT<propertyimageInstance>;
+    getpropertyimage(propertyimage:propertyimagePojo):sequelize.PromiseT<propertyimageInstance>;
+}
+
+export function assertValidpropertyimage(pojo:propertyimagePojo, allowUndefined?:boolean):void {
+
+    if (pojo === undefined || pojo === null) {
+        if (allowUndefined) {
+            return;
+        }
+        throw new Error('Invalid propertyimage provided. It is \'' + (typeof pojo) + '\'.');
+    }
+    var fieldNames:string[] = Object.keys(pojo);
+    if (fieldNames.length === 0) {
+        throw new Error('Invalid propertyimage provided. It is an empty object.');
+    }
+
+    var i:number = fieldNames.length;
+    while(i-- > 0) {
+        switch(fieldNames[i]) {
+            case 'propertyImageId': assertValidFieldType('propertyimage', 'propertyImageId', pojo, 'number'); break;
+            case 'propertyId': assertValidFieldType('propertyimage', 'propertyId', pojo, 'number'); break;
+            case 'imageId': assertValidFieldType('propertyimage', 'imageId', pojo, 'string'); break;
+            case 'imageUrl': assertValidFieldType('propertyimage', 'imageUrl', pojo, 'string'); break;
+            case 'imageIndex': assertValidFieldType('propertyimage', 'imageIndex', pojo, 'number'); break;
+            case 'property': assertValidFieldType('propertyimage', 'property', pojo, 'propertyPojo'); break;
+            default:
+                throw new Error('Invalid propertyimage provided. Field \'' + fieldNames[i] + '\' is not supported.')
+        }
+    }
+}
+asserters['propertyimage'] = assertValidpropertyimage;
 
 
 

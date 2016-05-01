@@ -31,6 +31,7 @@
         allowances: IAllowances;
         address: IAddress;
         isRental: boolean;
+        type: string; //residential, rental, land
         isSold: boolean;
         priceView: string;
         bond: number;
@@ -70,6 +71,7 @@
 
     interface IImage {
         id: string;
+        index: number;
         modTime: Date;
         url: string;
     }

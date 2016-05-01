@@ -20,8 +20,7 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'vash');
 
-app.use('/bower_components', express.static(path.join(__dirname, '/bower_components')));
-app.use('/public', express.static(path.join(__dirname, '/public')));
+
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(__dirname + '/public/favicon.ico'));
@@ -29,8 +28,16 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+var compression = require('compression');
+app.use(compression());
+
+app.use('/bower_components', express.static(path.join(__dirname, '/bower_components')));
+app.use('/public', express.static(path.join(__dirname, '/public')));
+
 app.use(require('stylus').middleware(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
+
 
 app.use('/', index);
 app.use('/users', users);
@@ -39,10 +46,13 @@ app.get('/buy/:type', trans.buy);
 app.get('/buy/:type/getProperties', trans.buy.getProperties);
 
 app.get('/property/:suburb/:street/:streetNumber/:uniqueId', property.details);
+app.get('/property/:suburb/:street/:streetNumber/:streetNumber2/:uniqueId', property.details);
+
 app.get('/property/getProperty/:uniqueId', property.details.getProperty);
 
 app.get('/api/getUnSoldProperties', api.getUnSoldProperties);
 app.get('/api/getSoldProperties', api.getSoldProperties);
+
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

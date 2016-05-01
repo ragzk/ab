@@ -69,6 +69,7 @@ ul.dropdown-menu a{
 .propertydetailscontainer { 
     width: auto;
     overflow: hidden;
+    line-height:1.6;
     .property-details {
         width: 100%;
         float: left;
@@ -100,6 +101,31 @@ ul.dropdown-menu a{
 
     }
 
+}
+
+// spacing fontawesome icons in slider in index page
+.spacing-icon {
+    padding-left: 5px;
+}
+
+.extra-spacing-icon {
+    padding-left: 15px;
+}
+
+
+.bxslider1 {
+    .bxslider-property-details {
+        padding: 5px;
+
+        .bxslider-property-features {
+            display:inline-block;
+            span {
+                img {
+                    display:inline-block !important;
+                }
+            }
+        }
+    }
 }
 
 .ellipsis

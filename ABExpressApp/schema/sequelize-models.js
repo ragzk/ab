@@ -24,7 +24,7 @@ function initialize(database, username, password, options) {
         'inspectionTimes': Sequelize.STRING,
         'latitude': Sequelize.DECIMAL,
         'longitude': Sequelize.DECIMAL,
-        'isRental': Sequelize.INTEGER,
+        'type': Sequelize.STRING,
         'priceView': Sequelize.STRING,
         'bond': Sequelize.DECIMAL,
         'uniqueId': Sequelize.INTEGER,
@@ -69,8 +69,8 @@ function initialize(database, username, password, options) {
                     if (property['longitude'] !== undefined) {
                         where['longitude'] = property['longitude'];
                     }
-                    if (property['isRental'] !== undefined) {
-                        where['isRental'] = property['isRental'];
+                    if (property['type'] !== undefined) {
+                        where['type'] = property['type'];
                     }
                     if (property['priceView'] !== undefined) {
                         where['priceView'] = property['priceView'];
@@ -230,12 +230,50 @@ function initialize(database, username, password, options) {
             }
         }
     });
+    exports.propertyimage = exports.SEQUELIZE.define('propertyimage', {
+        'propertyImageId': { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
+        'propertyId': Sequelize.INTEGER,
+        'imageId': Sequelize.STRING,
+        'imageUrl': Sequelize.STRING,
+        'imageIndex': Sequelize.INTEGER
+    }, {
+        timestamps: false,
+        classMethods: {
+            getpropertyimage: function (propertyimage) {
+                var where = {};
+                var id = parseInt(propertyimage);
+                if (isNaN(id)) {
+                    if (propertyimage['propertyImageId'] !== undefined) {
+                        where['propertyImageId'] = propertyimage['propertyImageId'];
+                    }
+                    if (propertyimage['propertyId'] !== undefined) {
+                        where['propertyId'] = propertyimage['propertyId'];
+                    }
+                    if (propertyimage['imageId'] !== undefined) {
+                        where['imageId'] = propertyimage['imageId'];
+                    }
+                    if (propertyimage['imageUrl'] !== undefined) {
+                        where['imageUrl'] = propertyimage['imageUrl'];
+                    }
+                    if (propertyimage['imageIndex'] !== undefined) {
+                        where['imageIndex'] = propertyimage['imageIndex'];
+                    }
+                }
+                else {
+                    where['propertyImageId'] = id;
+                }
+                return propertyimage.find({ where: where });
+            }
+        }
+    });
     exports.property.hasMany(exports.propertyaddress, { foreignKey: 'propertyId' });
     exports.propertyaddress.belongsTo(exports.property, { as: undefined, foreignKey: 'propertyId' });
     exports.property.hasMany(exports.propertydescription, { foreignKey: 'propertyId' });
     exports.propertydescription.belongsTo(exports.property, { as: undefined, foreignKey: 'propertyId' });
     exports.property.hasMany(exports.propertyfeature, { foreignKey: 'propertyId' });
     exports.propertyfeature.belongsTo(exports.property, { as: undefined, foreignKey: 'propertyId' });
+    exports.property.hasMany(exports.propertyimage, { foreignKey: 'propertyId' });
+    exports.propertyimage.belongsTo(exports.property, { as: undefined, foreignKey: 'propertyId' });
     return exports;
 }
 exports.initialize = initialize;

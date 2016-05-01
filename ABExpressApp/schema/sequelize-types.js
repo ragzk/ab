@@ -49,8 +49,8 @@ function assertValidproperty(pojo, allowUndefined) {
             case 'longitude':
                 assertValidFieldType('property', 'longitude', pojo, 'number');
                 break;
-            case 'isRental':
-                assertValidFieldType('property', 'isRental', pojo, 'boolean');
+            case 'type':
+                assertValidFieldType('property', 'type', pojo, 'string');
                 break;
             case 'priceView':
                 assertValidFieldType('property', 'priceView', pojo, 'string');
@@ -90,6 +90,9 @@ function assertValidproperty(pojo, allowUndefined) {
                 break;
             case 'propertyfeature':
                 assertValidFieldType('property', 'propertyfeature', pojo, 'propertyfeaturePojo[]');
+                break;
+            case 'propertyimage':
+                assertValidFieldType('property', 'propertyimage', pojo, 'propertyimagePojo[]');
                 break;
             default:
                 throw new Error('Invalid property provided. Field \'' + fieldNames[i] + '\' is not supported.');
@@ -224,6 +227,45 @@ function assertValidpropertyfeature(pojo, allowUndefined) {
 }
 exports.assertValidpropertyfeature = assertValidpropertyfeature;
 asserters['propertyfeature'] = assertValidpropertyfeature;
+function assertValidpropertyimage(pojo, allowUndefined) {
+    if (pojo === undefined || pojo === null) {
+        if (allowUndefined) {
+            return;
+        }
+        throw new Error('Invalid propertyimage provided. It is \'' + (typeof pojo) + '\'.');
+    }
+    var fieldNames = Object.keys(pojo);
+    if (fieldNames.length === 0) {
+        throw new Error('Invalid propertyimage provided. It is an empty object.');
+    }
+    var i = fieldNames.length;
+    while (i-- > 0) {
+        switch (fieldNames[i]) {
+            case 'propertyImageId':
+                assertValidFieldType('propertyimage', 'propertyImageId', pojo, 'number');
+                break;
+            case 'propertyId':
+                assertValidFieldType('propertyimage', 'propertyId', pojo, 'number');
+                break;
+            case 'imageId':
+                assertValidFieldType('propertyimage', 'imageId', pojo, 'string');
+                break;
+            case 'imageUrl':
+                assertValidFieldType('propertyimage', 'imageUrl', pojo, 'string');
+                break;
+            case 'imageIndex':
+                assertValidFieldType('propertyimage', 'imageIndex', pojo, 'number');
+                break;
+            case 'property':
+                assertValidFieldType('propertyimage', 'property', pojo, 'propertyPojo');
+                break;
+            default:
+                throw new Error('Invalid propertyimage provided. Field \'' + fieldNames[i] + '\' is not supported.');
+        }
+    }
+}
+exports.assertValidpropertyimage = assertValidpropertyimage;
+asserters['propertyimage'] = assertValidpropertyimage;
 var BOOLEAN_TYPE = typeof (true);
 var NUMBER_TYPE = typeof (1);
 var STRING_TYPE = typeof ('');

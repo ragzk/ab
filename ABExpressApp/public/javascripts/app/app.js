@@ -1,5 +1,10 @@
-﻿var APP = angular.module('APP', ['matchmedia-ng', 'ngProgress']);
-
+﻿var APP = angular.module('APP', ['matchmedia-ng', 'ngProgress', 'ngSanitize']);
+//APP.config(function ($locationProvider) {
+//    $locationProvider.html5Mode({
+//        enabled: true,
+//        requireBase: false
+//    });
+//});
 
 $(document).ready(function () {
     $('.slider3').bxSlider({

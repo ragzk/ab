@@ -7,6 +7,7 @@ var propertyReport = require("./repository/propertyRepo");
 var propertyAddressReport = require("./repository/propertyAddressRepo");
 var propertyFeatureReport = require("./repository/propertyFeatureRepo");
 var propertyDescriptionReport = require("./repository/propertyDescriptionRepo");
+var propertyImageReport = require("./repository/propertyImageRepo");
 //import rentalDefinitions = require('rentalDefinitions');
 //import enumTypes = require('enumTypes');
 var Promise = require('q');
@@ -65,13 +66,32 @@ var processRentalJSON = (function () {
             var addressRepo = new propertyAddressReport.propertyAddressRepo();
             var featureRepo = new propertyFeatureReport.propertyFeatureRepo();
             var descriptionRepo = new propertyDescriptionReport.propertyDescriptionRepo();
+            var imageRepo = new propertyImageReport.propertyImageRepo();
             var fileName = that.path.basename(that.xmlPath);
             obj.fileName = fileName;
+            if (that.data.rental) {
+                obj.type = "rental";
+            }
+            if (that.data.residential) {
+                obj.type = "residential";
+            }
+            if (that.data.land) {
+                obj.type = "land";
+            }
             repo.saveProperty(obj).then(function () {
                 addressRepo.savePropertyAddress(obj).then(function () {
                     featureRepo.savePropertyFeature(obj).then(function () {
                         descriptionRepo.savePropertyDescription(obj);
                     });
+                }).then(function () {
+                    if (obj && obj.images && obj.images.img) {
+                        for (var i = 0; i < obj.images.img.length; i++) {
+                            var img = obj.images.img[i];
+                            if (img && img.url) {
+                                imageRepo.savePropertyImage(img, obj.propertyId);
+                            }
+                        }
+                    }
                 });
             });
         };
@@ -98,9 +118,11 @@ var processRentalJSON = (function () {
             });
         };
         var func = function () {
+            //            var imageRepo = new propertyImageReport.propertyImageRepo();
             if (obj && obj.images && obj.images.img) {
                 for (var i = 0; i < obj.images.img.length; i++) {
                     var img = obj.images.img[i];
+                    img.index = i;
                     var dirName = "./public/images/" + obj.uniqueID;
                     var funcImage = function (img) {
                         var func3 = function (img) {
@@ -131,12 +153,15 @@ var processRentalJSON = (function () {
                                         try {
                                             download(img.url, fileNameWithPath, func2);
                                             obj.imageUrl = fileNameWithPath;
+                                            //                                            img.index = i;
+                                            img.url = fileNameWithPath.replace("./", "/");
                                         }
                                         catch (ex) {
                                             console.log('Download image url ' + img.url + ' filename ' + obj.fileName);
                                             console.log(ex.message);
                                         }
                                     }
+                                    //                                    imageRepo.savePropertyImage(img, obj.propertyId, fileNameWithPath);
                                 });
                                 obj.imageUrl = fileNameWithPath.replace('./', "/");
                                 return func2(img);
@@ -159,6 +184,9 @@ var processRentalJSON = (function () {
                                             console.log(ex.message);
                                         }
                                     }
+                                    //                                    img.index = i;
+                                    img.url = fileNameWithPath.replace("./", "/");
+                                    //imageRepo.savePropertyImage(img, obj.propertyId, fileNameWithPath);
                                 });
                             }
                         };

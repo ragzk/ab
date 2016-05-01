@@ -20,6 +20,7 @@ export interface SequelizeNames {
     propertyaddressFields:propertyaddressFields;
     propertydescriptionFields:propertydescriptionFields;
     propertyfeatureFields:propertyfeatureFields;
+    propertyimageFields:propertyimageFields;
 }
 
 export class TableNames {
@@ -27,6 +28,7 @@ export class TableNames {
     propertyaddress:string = 'propertyaddress';
     propertydescription:string = 'propertydescription';
     propertyfeature:string = 'propertyfeature';
+    propertyimage:string = 'propertyimage';
 }
 export var tableNames:TableNames = new TableNames();
 
@@ -40,7 +42,7 @@ export class propertyFields {
     inspectionTimes:string = 'inspectionTimes';
     latitude:string = 'latitude';
     longitude:string = 'longitude';
-    isRental:string = 'isRental';
+    type:string = 'type';
     priceView:string = 'priceView';
     bond:string = 'bond';
     uniqueId:string = 'uniqueId';
@@ -54,6 +56,7 @@ export class propertyFields {
     propertyaddress:string = 'propertyaddress';
     propertydescription:string = 'propertydescription';
     propertyfeature:string = 'propertyfeature';
+    propertyimage:string = 'propertyimage';
 }
 export var propertyFields:propertyFields = new propertyFields();
 
@@ -92,6 +95,17 @@ export class propertyfeatureFields {
     property:string = 'property';
 }
 export var propertyfeatureFields:propertyfeatureFields = new propertyfeatureFields();
+
+
+export class propertyimageFields {
+    propertyImageId:string = 'propertyImageId';
+    propertyId:string = 'propertyId';
+    imageId:string = 'imageId';
+    imageUrl:string = 'imageUrl';
+    imageIndex:string = 'imageIndex';
+    property:string = 'property';
+}
+export var propertyimageFields:propertyimageFields = new propertyimageFields();
 
 
 export class CalculatedFields {}

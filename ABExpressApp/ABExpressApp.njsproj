@@ -39,6 +39,7 @@
     <Compile Include="public\javascripts\app\controllers\mainController.js" />
     <Compile Include="public\javascripts\app\controllers\propertyController.js" />
     <Compile Include="public\javascripts\app\controllers\searchController.js" />
+    <Compile Include="public\javascripts\app\controllers\sidebarController.js" />
     <Compile Include="public\javascripts\app\directives\bxSlider.js" />
     <Compile Include="public\javascripts\app\directives\propertyDetails.js" />
     <Compile Include="public\javascripts\app\directives\shortPropertyDetails.js" />
@@ -47,6 +48,7 @@
     <Compile Include="public\javascripts\custom\postalAngularWrapper.js" />
     <Compile Include="public\javascripts\custom\slider.js" />
     <Compile Include="routes\api.js" />
+    <Compile Include="routes\assets.js" />
     <Compile Include="routes\buy.js" />
     <Compile Include="routes\index.js" />
     <Compile Include="routes\property.js" />
@@ -103,6 +105,7 @@
     <TypeScriptCompile Include="repository\propertyAddressRepo.ts" />
     <TypeScriptCompile Include="repository\propertyDescriptionRepo.ts" />
     <TypeScriptCompile Include="repository\propertyFeatureRepo.ts" />
+    <TypeScriptCompile Include="repository\propertyImageRepo.ts" />
     <TypeScriptCompile Include="repository\propertyRepo.ts" />
   </ItemGroup>
   <!-- Do not delete the following Import Project.  While this appears to do nothing it is a marker for setting TypeScript properties before our import that depends on them. -->

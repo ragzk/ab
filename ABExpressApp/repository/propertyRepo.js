@@ -3,6 +3,7 @@
 var models = require('../schema/sequelize-models');
 var dbConfig = require('../dbConfig');
 var moment = require('moment');
+var _ = require('lodash');
 //import rentalDefinitions = require('rentalDefinitions');
 var propertyRepo = (function () {
     function propertyRepo() {
@@ -15,9 +16,22 @@ var propertyRepo = (function () {
         var r = models.property.find({ where: { uniqueId: id } });
         return r;
     };
-    propertyRepo.prototype.getProperties = function (type) {
+    propertyRepo.prototype.getProperties = function (tran, type) {
         var findOptions = {};
-        findOptions.where = { isRental: false, status: 'current' };
+        var where = {};
+        if (tran == "buy" || tran == "rent") {
+            _.extend(where, { status: 'current', type: 'residential' });
+        }
+        if (tran == "sold") {
+            _.extend(where, { status: 'sold' });
+        }
+        if (tran == "rent") {
+            _.extend(where, { type: "rental" });
+        }
+        if (type == "inspection") {
+            _.extend(where, { inspectionTimes: { ne: null } });
+        }
+        findOptions.where = where;
         findOptions.include = [{ model: models.propertyaddress, required: false },
             { model: models.propertyfeature, required: false },
             { model: models.propertydescription, required: false }];
@@ -30,7 +44,8 @@ var propertyRepo = (function () {
         findOptions.where = { uniqueId: uniqueId };
         findOptions.include = [{ model: models.propertyaddress, required: false },
             { model: models.propertyfeature, required: false },
-            { model: models.propertydescription, required: false }];
+            { model: models.propertydescription, required: false },
+            { model: models.propertyimage, required: false }];
         //var r = models.property.findAll({ where: { isRental: false, status: 'current' } });
         var r = models.property.find(findOptions);
         return r;
@@ -50,7 +65,7 @@ var propertyRepo = (function () {
                     loc.inspectionTimes = rentalObj.inspectionTimes ? Array.isArray(rentalObj.inspectionTimes.inspection) ? rentalObj.inspectionTimes.inspection.toString() : rentalObj.inspectionTimes.inspection : null;
                     loc.longitude = rentalObj.geocode.longitude || null;
                     loc.latitude = rentalObj.geocode.latitude || null;
-                    loc.isRental = rentalObj.priceView ? false : true;
+                    loc.type = rentalObj.type;
                     loc.priceView = rentalObj.priceView;
                     loc.bond = rentalObj.bond;
                     loc.soldDate = rentalObj.soldDetails ? rentalObj.soldDetails.date : null;
@@ -71,7 +86,7 @@ var propertyRepo = (function () {
                         inspectionTimes: rentalObj.inspectionTimes ? Array.isArray(rentalObj.inspectionTimes.inspection) ? rentalObj.inspectionTimes.inspection.toString() : rentalObj.inspectionTimes.inspection : null,
                         longitude: rentalObj.geocode.longitude || null,
                         latitude: rentalObj.geocode.latitude || null,
-                        isRental: rentalObj.priceView ? false : true,
+                        type: rentalObj.type,
                         priceView: rentalObj.priceView,
                         bond: rentalObj.bond,
                         soldDate: rentalObj.soldDetails ? rentalObj.soldDetails.date : null,
@@ -83,6 +98,7 @@ var propertyRepo = (function () {
                 }
                 loc.save();
                 rentalObj.propertyId = +loc.propertyId;
+                console.log(rentalObj.type + " " + rentalObj.fileName);
                 this._instance = loc;
             });
         }

@@ -22,6 +22,7 @@ export var property:types.propertyModel;
 export var propertyaddress:types.propertyaddressModel;
 export var propertydescription:types.propertydescriptionModel;
 export var propertyfeature:types.propertyfeatureModel;
+export var propertyimage:types.propertyimageModel;
 
 
 export function initialize(database:string, username:string, password:string, options:sequelize.Options):any
@@ -43,7 +44,7 @@ export function initialize(database:string, username:string, password:string, op
         'inspectionTimes':Sequelize.STRING,
         'latitude':Sequelize.DECIMAL,
         'longitude':Sequelize.DECIMAL,
-        'isRental':Sequelize.INTEGER,
+        'type':Sequelize.STRING,
         'priceView':Sequelize.STRING,
         'bond':Sequelize.DECIMAL,
         'uniqueId':Sequelize.INTEGER,
@@ -71,7 +72,7 @@ export function initialize(database:string, username:string, password:string, op
                         if (property['inspectionTimes'] !== undefined) { where['inspectionTimes'] = property['inspectionTimes']}
                         if (property['latitude'] !== undefined) { where['latitude'] = property['latitude']}
                         if (property['longitude'] !== undefined) { where['longitude'] = property['longitude']}
-                        if (property['isRental'] !== undefined) { where['isRental'] = property['isRental']}
+                        if (property['type'] !== undefined) { where['type'] = property['type']}
                         if (property['priceView'] !== undefined) { where['priceView'] = property['priceView']}
                         if (property['bond'] !== undefined) { where['bond'] = property['bond']}
                         if (property['uniqueId'] !== undefined) { where['uniqueId'] = property['uniqueId']}
@@ -177,6 +178,33 @@ export function initialize(database:string, username:string, password:string, op
             }
         });
     
+    propertyimage = <types.propertyimageModel> SEQUELIZE.define<types.propertyimageInstance, types.propertyimagePojo>('propertyimage', {
+        'propertyImageId':{type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true},
+        'propertyId':Sequelize.INTEGER,
+        'imageId':Sequelize.STRING,
+        'imageUrl':Sequelize.STRING,
+        'imageIndex':Sequelize.INTEGER
+        },
+        {
+            timestamps: false,
+            classMethods: {
+                getpropertyimage:(propertyimage:any) => {
+                    var where:{[key:string]:any} = {};
+                    var id:number = parseInt(propertyimage);
+                    if (isNaN(id)) {
+                        if (propertyimage['propertyImageId'] !== undefined) { where['propertyImageId'] = propertyimage['propertyImageId']}
+                        if (propertyimage['propertyId'] !== undefined) { where['propertyId'] = propertyimage['propertyId']}
+                        if (propertyimage['imageId'] !== undefined) { where['imageId'] = propertyimage['imageId']}
+                        if (propertyimage['imageUrl'] !== undefined) { where['imageUrl'] = propertyimage['imageUrl']}
+                        if (propertyimage['imageIndex'] !== undefined) { where['imageIndex'] = propertyimage['imageIndex']}
+                    } else {
+                        where['propertyImageId'] = id;
+                    }
+                    return propertyimage.find({where: where});
+                }
+            }
+        });
+    
     property.hasMany(propertyaddress, {foreignKey: 'propertyId' });
     propertyaddress.belongsTo(property, {as: undefined, foreignKey: 'propertyId' });
 
@@ -187,6 +215,10 @@ export function initialize(database:string, username:string, password:string, op
     
     property.hasMany(propertyfeature, {foreignKey: 'propertyId' });
     propertyfeature.belongsTo(property, {as: undefined, foreignKey: 'propertyId' });
+
+    
+    property.hasMany(propertyimage, {foreignKey: 'propertyId' });
+    propertyimage.belongsTo(property, {as: undefined, foreignKey: 'propertyId' });
 
     
     return exports;

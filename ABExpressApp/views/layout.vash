@@ -24,11 +24,11 @@
 			</div>
 			<div id="body-container">
 		<div class="sidebar">
-			<div id="MainMenu" class="sideMenu">
+			<div id="MainMenu" class="sideMenu" ng-controller="sidebarController">
 			  <div class="list-group panel">
-				<a href="#demo3" class="list-group-item strong" data-toggle="collapse" data-parent="#MainMenu"><span id="buy">Buy</span><i class="fa fa-caret-down"></i></a>
+				<a href="#demo3" class="list-group-item strong" data-toggle="collapse" data-parent="#MainMenu"><span id="buy" ng-click="buy()">Buy</span><i class="fa fa-caret-down"></i></a>
 				<div class="collapse" id="demo3">
-				  <a href="./buy/residential" class="list-group-item strong" data-toggle="collapse" data-parent="#SubMenu1">Residential<i class="fa fa-caret-down"></i></a>
+				  <a href="/buy/residential" class="list-group-item strong" data-toggle="collapse" data-parent="#SubMenu1">Residential<i class="fa fa-caret-down"></i></a>
 				  <a href="#SubMenu1" class="list-group-item strong" data-toggle="collapse" data-parent="#SubMenu1">Open For Inspection<i class="fa fa-caret-down"></i></a>
 				  <a href="#SubMenu1" class="list-group-item strong" data-toggle="collapse" data-parent="#SubMenu1">Auctions<i class="fa fa-caret-down"></i></a>
 				</div>
@@ -204,6 +204,7 @@
 <script src="/bower_components/lodash/lodash.js"></script>
 <script src="/bower_components/bootstrap/dist/js/bootstrap.js"></script>
 <script src="/bower_components/angular/angular.js"></script>
+<script src="/bower_components/angular-sanitize/angular-sanitize.js"></script>
 <script src="/bower_components/bxslider-4/dist/jquery.bxslider.min.js"></script>
 <script src="/bower_components/postal.js/lib/postal.js"></script>
 <script src="/bower_components/ngprogress/build/ngprogress.js"></script>
@@ -213,6 +214,7 @@
 <script src="/public/javascripts/app/app.js"></script>
 <script src="/public/javascripts/custom/postalAngularWrapper.js"></script>
 <script src="/public/javascripts/app/controllers/mainController.js"></script>
+<script src="/public/javascripts/app/controllers/sidebarController.js"></script>
 <script src="/public/javascripts/app/controllers/SearchController.js"></script>
 <script src="/public/javascripts/app/controllers/buyController.js"></script>
 <script src="/public/javascripts/app/controllers/propertyController.js"></script>
