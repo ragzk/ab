@@ -517,8 +517,7 @@ div#slider {
         {
            // display:inline-block;
             height:400px;
-            float:right;
-            width:60%;
+            max-height:400px;
         }
 
     }

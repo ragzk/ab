@@ -25,26 +25,29 @@
 			<div id="body-container">
 		<div class="sidebar">
 			<div id="MainMenu" class="sideMenu" ng-controller="sidebarController">
-			  <div class="list-group panel">
-				<a href="#demo3" class="list-group-item strong" data-toggle="collapse" data-parent="#MainMenu"><span id="buy" ng-click="buy()">Buy</span><i class="fa fa-caret-down"></i></a>
-				<div class="collapse" id="demo3">
-				  <a href="/buy/residential" class="list-group-item strong" data-toggle="collapse" data-parent="#SubMenu1">Residential<i class="fa fa-caret-down"></i></a>
-				  <a href="#SubMenu1" class="list-group-item strong" data-toggle="collapse" data-parent="#SubMenu1">Open For Inspection<i class="fa fa-caret-down"></i></a>
-				  <a href="#SubMenu1" class="list-group-item strong" data-toggle="collapse" data-parent="#SubMenu1">Auctions<i class="fa fa-caret-down"></i></a>
+				<div id="container">
+
+					<div id="nav" class="list-group panel">   
+					<div class="title"><a class="list-group-item" href="/buy" ng-click="toggleMenu($event)">Buy<i ng-show="toggle" class="fa fa-caret-down"></i><i ng-hide="toggle" class="fa fa-caret-up"></i></a>
+						<div>
+								<a class="list-group-item" href="/buy/residential">Residential</a>
+								<a class="list-group-item" href="/buy/inspection">Open for Inspection</a>
+								<a class="list-group-item" href="/buy/Auction">Auction</a>
+						</div>
+					</div>
+
+					<div class="title list-group-item"><a href="/rent">Buy</a>
+						<div>
+								<div class="list-group-item"><a href="/rent/residential">Residential</a></div>
+								<div class="list-group-item"><a href="/rent/inspection">Open for Inspection</a></div>
+								<div class="list-group-item"><a href="/rent/Application">Rental Application</a></div>
+						</div>
+					</div>
+
+					<div class="title list-group-item"><a href="/sold">Sold</a>
+					</div>
+					</div>    
 				</div>
-				<a href="#demo4" class="list-group-item strong" data-toggle="collapse" data-parent="#MainMenu">Rent<i class="fa fa-caret-down"></i></a>
-				<div class="collapse" id="demo4">
-				  <a href="#SubSubMenu4" class="list-group-item strong" data-toggle="collapse" data-parent="#SubSubMenu4">Residential<i class="fa fa-caret-down"></i></a>
-				  <a href="#SubSubMenu4" class="list-group-item strong" data-toggle="collapse" data-parent="#SubSubMenu4">Open For Inspection<i class="fa fa-caret-down"></i></a>
-				  <a href="#SubSubMenu4" class="list-group-item strong" data-toggle="collapse" data-parent="#SubSubMenu4">Rental Application<i class="fa fa-caret-down"></i></a>
-				</div>
-				<a href="#demo5" class="list-group-item strong" data-toggle="collapse" data-parent="#MainMenu">Sell<i class="fa fa-caret-down"></i></a>
-				<div class="collapse" id="demo5">
-				  <a href="#SubSubMenu5" class="list-group-item strong" data-toggle="collapse" data-parent="#SubSubMenu5">Residential<i class="fa fa-caret-down"></i></a>
-				  <a href="#SubSubMenu5" class="list-group-item strong" data-toggle="collapse" data-parent="#SubSubMenu5">Open For Inspection<i class="fa fa-caret-down"></i></a>
-				  <a href="#SubSubMenu5" class="list-group-item strong" data-toggle="collapse" data-parent="#SubSubMenu5">Rental Application<i class="fa fa-caret-down"></i></a>
-				</div>
-			  </div>
 			</div>
 		</div>
 				@html.block('content')

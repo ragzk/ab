@@ -29,9 +29,9 @@
 						</div>
 					</div>
 					<div class= "rightSideSliderParent">
-						<div class="rightSideSliderContent1">
+						<div class="rightSideSliderContent">
 						<h3>Don't miss these properties</h3>
-						<div>
+						<div class="sold-properties">
 							<bx-slider url="api/getUnSoldProperties" showdetails="true"/>							
 						</div>
 						</div>
