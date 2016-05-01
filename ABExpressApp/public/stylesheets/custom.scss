@@ -443,6 +443,15 @@ div#slider {
 .sliderParent
 {
     display:inline; //inline-block will not work
+    .rightSideContent {
+        .sold-properties {
+            .sliderimg {
+           // display:inline-block;
+            height:500px;
+            max-height:500px;
+            }
+        }
+    }
 }
 
 
@@ -513,11 +522,13 @@ div#slider {
     .rightSideSliderContent
     {
         //display: inline-block;
-        .sold-properties
+        .un-sold-properties
         {
+            .sliderimg {
            // display:inline-block;
-            height:400px;
-            max-height:400px;
+            height:350px;
+            max-height:350px;
+            }
         }
 
     }
