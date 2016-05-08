@@ -18,8 +18,10 @@ var Sequelize:sequelize.SequelizeStatic = require('sequelize');
 export var initialized:boolean = false;
 export var SEQUELIZE:sequelize.Sequelize;
 
+export var agent:types.agentModel;
 export var property:types.propertyModel;
 export var propertyaddress:types.propertyaddressModel;
+export var propertyagent:types.propertyagentModel;
 export var propertydescription:types.propertydescriptionModel;
 export var propertyfeature:types.propertyfeatureModel;
 export var propertyimage:types.propertyimageModel;
@@ -34,6 +36,41 @@ export function initialize(database:string, username:string, password:string, op
 
     SEQUELIZE = new Sequelize(database, username, password, options);
 
+    agent = <types.agentModel> SEQUELIZE.define<types.agentInstance, types.agentPojo>('agent', {
+        'agentId':{type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true},
+        'name':Sequelize.STRING,
+        'mobile':Sequelize.STRING,
+        'telephone':Sequelize.STRING,
+        'workphone':Sequelize.STRING,
+        'email':Sequelize.STRING,
+        'facebook':Sequelize.STRING,
+        'linkedin':Sequelize.STRING,
+        'mydesktopAgentId':Sequelize.INTEGER
+        },
+        {
+            timestamps: false,
+            classMethods: {
+                getagent:(agent:any) => {
+                    var where:{[key:string]:any} = {};
+                    var id:number = parseInt(agent);
+                    if (isNaN(id)) {
+                        if (agent['agentId'] !== undefined) { where['agentId'] = agent['agentId']}
+                        if (agent['name'] !== undefined) { where['name'] = agent['name']}
+                        if (agent['mobile'] !== undefined) { where['mobile'] = agent['mobile']}
+                        if (agent['telephone'] !== undefined) { where['telephone'] = agent['telephone']}
+                        if (agent['workphone'] !== undefined) { where['workphone'] = agent['workphone']}
+                        if (agent['email'] !== undefined) { where['email'] = agent['email']}
+                        if (agent['facebook'] !== undefined) { where['facebook'] = agent['facebook']}
+                        if (agent['linkedin'] !== undefined) { where['linkedin'] = agent['linkedin']}
+                        if (agent['mydesktopAgentId'] !== undefined) { where['mydesktopAgentId'] = agent['mydesktopAgentId']}
+                    } else {
+                        where['agentId'] = id;
+                    }
+                    return agent.find({where: where});
+                }
+            }
+        });
+    
     property = <types.propertyModel> SEQUELIZE.define<types.propertyInstance, types.propertyPojo>('property', {
         'propertyId':{type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true},
         'name':Sequelize.STRING,
@@ -116,6 +153,31 @@ export function initialize(database:string, username:string, password:string, op
                         where['propertyId'] = id;
                     }
                     return propertyaddress.find({where: where});
+                }
+            }
+        });
+    
+    propertyagent = <types.propertyagentModel> SEQUELIZE.define<types.propertyagentInstance, types.propertyagentPojo>('propertyagent', {
+        'propertyAgentId':{type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true},
+        'agentId':Sequelize.INTEGER,
+        'propertyId':Sequelize.INTEGER,
+        'mydesktopAgentId':Sequelize.INTEGER
+        },
+        {
+            timestamps: false,
+            classMethods: {
+                getpropertyagent:(propertyagent:any) => {
+                    var where:{[key:string]:any} = {};
+                    var id:number = parseInt(propertyagent);
+                    if (isNaN(id)) {
+                        if (propertyagent['propertyAgentId'] !== undefined) { where['propertyAgentId'] = propertyagent['propertyAgentId']}
+                        if (propertyagent['agentId'] !== undefined) { where['agentId'] = propertyagent['agentId']}
+                        if (propertyagent['propertyId'] !== undefined) { where['propertyId'] = propertyagent['propertyId']}
+                        if (propertyagent['mydesktopAgentId'] !== undefined) { where['mydesktopAgentId'] = propertyagent['mydesktopAgentId']}
+                    } else {
+                        where['propertyAgentId'] = id;
+                    }
+                    return propertyagent.find({where: where});
                 }
             }
         });
@@ -207,6 +269,14 @@ export function initialize(database:string, username:string, password:string, op
     
     property.hasMany(propertyaddress, {foreignKey: 'propertyId' });
     propertyaddress.belongsTo(property, {as: undefined, foreignKey: 'propertyId' });
+
+    
+    agent.hasMany(propertyagent, {foreignKey: 'agentId' });
+    propertyagent.belongsTo(agent, {as: undefined, foreignKey: 'agentId' });
+
+    
+    property.hasMany(propertyagent, {foreignKey: 'propertyId' });
+    propertyagent.belongsTo(property, {as: undefined, foreignKey: 'propertyId' });
 
     
     property.hasMany(propertydescription, {foreignKey: 'propertyId' });

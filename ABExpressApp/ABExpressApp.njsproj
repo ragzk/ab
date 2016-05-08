@@ -103,6 +103,7 @@
     <TypeScriptCompile Include="processRentalJSONModule.ts" />
     <TypeScriptCompile Include="rentalInterface.d.ts" />
     <TypeScriptCompile Include="repository\propertyAddressRepo.ts" />
+    <TypeScriptCompile Include="repository\propertyAgentRepo.ts" />
     <TypeScriptCompile Include="repository\propertyDescriptionRepo.ts" />
     <TypeScriptCompile Include="repository\propertyFeatureRepo.ts" />
     <TypeScriptCompile Include="repository\propertyImageRepo.ts" />

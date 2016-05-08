@@ -13,11 +13,80 @@
 
 import types = require('./sequelize-types'); // important so we can use same fully qualified names in all generated files
 
+export interface AgentId { AgentId:number; }
 export interface PropertyId { PropertyId:number; }
+export interface PropertyAgentId { PropertyAgentId:number; }
 export interface PropertyImageId { PropertyImageId:number; }
 
 
 var asserters:{[typeName:string]:(pojo:any, allowUndefined?:boolean) => void} = {};
+
+//////////////////////////////////////////////////////////////////////////////
+//
+//
+//               agent
+//
+//
+//////////////////////////////////////////////////////////////////////////////
+
+
+export interface agentPojo
+{
+    agentId?:AgentId;
+    name?:string;
+    mobile?:string;
+    telephone?:string;
+    workphone?:string;
+    email?:string;
+    facebook?:string;
+    linkedin?:string;
+    mydesktopAgentId?:AgentId;
+    propertyagent?:propertyagentPojo[];
+}
+
+export interface agentInstance extends sequelize.Instance<agentInstance, agentPojo>, agentPojo { }
+
+export interface agentModel extends sequelize.Model<agentInstance, agentPojo> {
+    getagent(agentId:AgentId):sequelize.PromiseT<agentInstance>;
+    getagent(agent:agentPojo):sequelize.PromiseT<agentInstance>;
+}
+
+export function assertValidagent(pojo:agentPojo, allowUndefined?:boolean):void {
+
+    if (pojo === undefined || pojo === null) {
+        if (allowUndefined) {
+            return;
+        }
+        throw new Error('Invalid agent provided. It is \'' + (typeof pojo) + '\'.');
+    }
+    var fieldNames:string[] = Object.keys(pojo);
+    if (fieldNames.length === 0) {
+        throw new Error('Invalid agent provided. It is an empty object.');
+    }
+
+    var i:number = fieldNames.length;
+    while(i-- > 0) {
+        switch(fieldNames[i]) {
+            case 'agentId': assertValidFieldType('agent', 'agentId', pojo, 'number'); break;
+            case 'name': assertValidFieldType('agent', 'name', pojo, 'string'); break;
+            case 'mobile': assertValidFieldType('agent', 'mobile', pojo, 'string'); break;
+            case 'telephone': assertValidFieldType('agent', 'telephone', pojo, 'string'); break;
+            case 'workphone': assertValidFieldType('agent', 'workphone', pojo, 'string'); break;
+            case 'email': assertValidFieldType('agent', 'email', pojo, 'string'); break;
+            case 'facebook': assertValidFieldType('agent', 'facebook', pojo, 'string'); break;
+            case 'linkedin': assertValidFieldType('agent', 'linkedin', pojo, 'string'); break;
+            case 'mydesktopAgentId': assertValidFieldType('agent', 'mydesktopAgentId', pojo, 'number'); break;
+            case 'propertyagent': assertValidFieldType('agent', 'propertyagent', pojo, 'propertyagentPojo[]'); break;
+            default:
+                throw new Error('Invalid agent provided. Field \'' + fieldNames[i] + '\' is not supported.')
+        }
+    }
+}
+asserters['agent'] = assertValidagent;
+
+
+
+
 
 //////////////////////////////////////////////////////////////////////////////
 //
@@ -51,6 +120,7 @@ export interface propertyPojo
     status?:string;
     imageUrl?:string;
     propertyaddress?:propertyaddressPojo[];
+    propertyagent?:propertyagentPojo[];
     propertydescription?:propertydescriptionPojo[];
     propertyfeature?:propertyfeaturePojo[];
     propertyimage?:propertyimagePojo[];
@@ -100,6 +170,7 @@ export function assertValidproperty(pojo:propertyPojo, allowUndefined?:boolean):
             case 'status': assertValidFieldType('property', 'status', pojo, 'string'); break;
             case 'imageUrl': assertValidFieldType('property', 'imageUrl', pojo, 'string'); break;
             case 'propertyaddress': assertValidFieldType('property', 'propertyaddress', pojo, 'propertyaddressPojo[]'); break;
+            case 'propertyagent': assertValidFieldType('property', 'propertyagent', pojo, 'propertyagentPojo[]'); break;
             case 'propertydescription': assertValidFieldType('property', 'propertydescription', pojo, 'propertydescriptionPojo[]'); break;
             case 'propertyfeature': assertValidFieldType('property', 'propertyfeature', pojo, 'propertyfeaturePojo[]'); break;
             case 'propertyimage': assertValidFieldType('property', 'propertyimage', pojo, 'propertyimagePojo[]'); break;
@@ -170,6 +241,65 @@ export function assertValidpropertyaddress(pojo:propertyaddressPojo, allowUndefi
     }
 }
 asserters['propertyaddress'] = assertValidpropertyaddress;
+
+
+
+
+
+//////////////////////////////////////////////////////////////////////////////
+//
+//
+//               propertyagent
+//
+//
+//////////////////////////////////////////////////////////////////////////////
+
+
+export interface propertyagentPojo
+{
+    propertyAgentId?:PropertyAgentId;
+    agentId?:AgentId;
+    propertyId?:PropertyId;
+    mydesktopAgentId?:AgentId;
+    agent?:agentPojo;
+    property?:propertyPojo;
+}
+
+export interface propertyagentInstance extends sequelize.Instance<propertyagentInstance, propertyagentPojo>, propertyagentPojo { }
+
+export interface propertyagentModel extends sequelize.Model<propertyagentInstance, propertyagentPojo> {
+    getpropertyagent(propertyAgentId:PropertyAgentId):sequelize.PromiseT<propertyagentInstance>;
+    getpropertyagent(propertyagent:propertyagentPojo):sequelize.PromiseT<propertyagentInstance>;
+}
+
+export function assertValidpropertyagent(pojo:propertyagentPojo, allowUndefined?:boolean):void {
+
+    if (pojo === undefined || pojo === null) {
+        if (allowUndefined) {
+            return;
+        }
+        throw new Error('Invalid propertyagent provided. It is \'' + (typeof pojo) + '\'.');
+    }
+    var fieldNames:string[] = Object.keys(pojo);
+    if (fieldNames.length === 0) {
+        throw new Error('Invalid propertyagent provided. It is an empty object.');
+    }
+
+    var i:number = fieldNames.length;
+    while(i-- > 0) {
+        switch(fieldNames[i]) {
+            case 'propertyAgentId': assertValidFieldType('propertyagent', 'propertyAgentId', pojo, 'number'); break;
+            case 'agentId': assertValidFieldType('propertyagent', 'agentId', pojo, 'number'); break;
+            case 'propertyId': assertValidFieldType('propertyagent', 'propertyId', pojo, 'number'); break;
+            case 'mydesktopAgentId': assertValidFieldType('propertyagent', 'mydesktopAgentId', pojo, 'number'); break;
+            case 'agent': assertValidFieldType('propertyagent', 'agent', pojo, 'agentPojo'); break;
+            case 'property': assertValidFieldType('propertyagent', 'property', pojo, 'propertyPojo'); break;
+            default:
+                throw new Error('Invalid propertyagent provided. Field \'' + fieldNames[i] + '\' is not supported.')
+        }
+    }
+}
+asserters['propertyagent'] = assertValidpropertyagent;
 
 
 

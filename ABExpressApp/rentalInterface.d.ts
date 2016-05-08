@@ -15,7 +15,7 @@
         clientID: string;
         uniqueID: number;
         authority: string;
-        listingAgent: IListingAgent;
+        listingAgent: Array<IListingAgent>;
         dateAvailable: Date;
         rent: IRent;
         category: ICategory;
@@ -126,8 +126,6 @@
         agentid: number;
         telephone: Array<ITelephone>;
         email: string;
-
-
     }
 
     interface ITelephone {

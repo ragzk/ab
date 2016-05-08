@@ -28,24 +28,22 @@
 				<div id="container">
 
 					<div id="nav" class="list-group panel">   
-					<div class="title"><a class="list-group-item" href="/buy" ng-click="toggleMenu($event)">Buy<i ng-show="toggle" class="fa fa-caret-down"></i><i ng-hide="toggle" class="fa fa-caret-up"></i></a>
-						<div>
-								<a class="list-group-item" href="/buy/residential">Residential</a>
-								<a class="list-group-item" href="/buy/inspection">Open for Inspection</a>
-								<a class="list-group-item" href="/buy/Auction">Auction</a>
+						<div class="title parent"><a class="list-group-item  route" href="/buy" ng-click="toggleMenu($event)">Buy<i ng-show="toggle" class="fa fa-caret-down"></i><i ng-hide="toggle" class="fa fa-caret-up"></i></a>
+							<div>
+									<a class="list-group-item child route" href="/buy/residential">Residential</a>
+									<a class="list-group-item child route" href="/buy/inspection">Open for Inspection</a>
+									<a class="list-group-item child route" href="/buy/Auction">Auction</a>
+							</div>
 						</div>
-					</div>
-
-					<div class="title list-group-item"><a href="/rent">Buy</a>
-						<div>
-								<div class="list-group-item"><a href="/rent/residential">Residential</a></div>
-								<div class="list-group-item"><a href="/rent/inspection">Open for Inspection</a></div>
-								<div class="list-group-item"><a href="/rent/Application">Rental Application</a></div>
+						<div class="title parent"><a class="list-group-item parent route" href="/rent" ng-click="toggleMenu($event)">Rent<i ng-show="toggle" class="fa fa-caret-down"></i><i ng-hide="toggle" class="fa fa-caret-up"></i></a>
+							<div>
+									<a class="list-group-item child route" href="/rent/residential">Residential</a>
+									<a class="list-group-item child route" href="/rent/inspection">Open for Inspection</a>
+									<a class="list-group-item child route" href="/rent/Auction">Auction</a>
+							</div>
 						</div>
-					</div>
-
-					<div class="title list-group-item"><a href="/sold">Sold</a>
-					</div>
+						<div class="title list-group-item parent route"><a href="/sold">Sold</a>
+						</div>
 					</div>    
 				</div>
 			</div>

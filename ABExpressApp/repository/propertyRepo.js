@@ -96,10 +96,11 @@ var propertyRepo = (function () {
                         status: rentalObj.status.toString()
                     });
                 }
-                loc.save();
-                rentalObj.propertyId = +loc.propertyId;
+                return loc.save();
+                //rentalObj.propertyId = +loc.propertyId;
                 console.log(rentalObj.type + " " + rentalObj.fileName);
-                this._instance = loc;
+                //this._instance = loc
+                //return this._instance;
             });
         }
         catch (ex) {

@@ -8,6 +8,57 @@
 //
 ////////////////////////////////////////////////////////////////////
 var asserters = {};
+function assertValidagent(pojo, allowUndefined) {
+    if (pojo === undefined || pojo === null) {
+        if (allowUndefined) {
+            return;
+        }
+        throw new Error('Invalid agent provided. It is \'' + (typeof pojo) + '\'.');
+    }
+    var fieldNames = Object.keys(pojo);
+    if (fieldNames.length === 0) {
+        throw new Error('Invalid agent provided. It is an empty object.');
+    }
+    var i = fieldNames.length;
+    while (i-- > 0) {
+        switch (fieldNames[i]) {
+            case 'agentId':
+                assertValidFieldType('agent', 'agentId', pojo, 'number');
+                break;
+            case 'name':
+                assertValidFieldType('agent', 'name', pojo, 'string');
+                break;
+            case 'mobile':
+                assertValidFieldType('agent', 'mobile', pojo, 'string');
+                break;
+            case 'telephone':
+                assertValidFieldType('agent', 'telephone', pojo, 'string');
+                break;
+            case 'workphone':
+                assertValidFieldType('agent', 'workphone', pojo, 'string');
+                break;
+            case 'email':
+                assertValidFieldType('agent', 'email', pojo, 'string');
+                break;
+            case 'facebook':
+                assertValidFieldType('agent', 'facebook', pojo, 'string');
+                break;
+            case 'linkedin':
+                assertValidFieldType('agent', 'linkedin', pojo, 'string');
+                break;
+            case 'mydesktopAgentId':
+                assertValidFieldType('agent', 'mydesktopAgentId', pojo, 'number');
+                break;
+            case 'propertyagent':
+                assertValidFieldType('agent', 'propertyagent', pojo, 'propertyagentPojo[]');
+                break;
+            default:
+                throw new Error('Invalid agent provided. Field \'' + fieldNames[i] + '\' is not supported.');
+        }
+    }
+}
+exports.assertValidagent = assertValidagent;
+asserters['agent'] = assertValidagent;
 function assertValidproperty(pojo, allowUndefined) {
     if (pojo === undefined || pojo === null) {
         if (allowUndefined) {
@@ -85,6 +136,9 @@ function assertValidproperty(pojo, allowUndefined) {
             case 'propertyaddress':
                 assertValidFieldType('property', 'propertyaddress', pojo, 'propertyaddressPojo[]');
                 break;
+            case 'propertyagent':
+                assertValidFieldType('property', 'propertyagent', pojo, 'propertyagentPojo[]');
+                break;
             case 'propertydescription':
                 assertValidFieldType('property', 'propertydescription', pojo, 'propertydescriptionPojo[]');
                 break;
@@ -143,6 +197,45 @@ function assertValidpropertyaddress(pojo, allowUndefined) {
 }
 exports.assertValidpropertyaddress = assertValidpropertyaddress;
 asserters['propertyaddress'] = assertValidpropertyaddress;
+function assertValidpropertyagent(pojo, allowUndefined) {
+    if (pojo === undefined || pojo === null) {
+        if (allowUndefined) {
+            return;
+        }
+        throw new Error('Invalid propertyagent provided. It is \'' + (typeof pojo) + '\'.');
+    }
+    var fieldNames = Object.keys(pojo);
+    if (fieldNames.length === 0) {
+        throw new Error('Invalid propertyagent provided. It is an empty object.');
+    }
+    var i = fieldNames.length;
+    while (i-- > 0) {
+        switch (fieldNames[i]) {
+            case 'propertyAgentId':
+                assertValidFieldType('propertyagent', 'propertyAgentId', pojo, 'number');
+                break;
+            case 'agentId':
+                assertValidFieldType('propertyagent', 'agentId', pojo, 'number');
+                break;
+            case 'propertyId':
+                assertValidFieldType('propertyagent', 'propertyId', pojo, 'number');
+                break;
+            case 'mydesktopAgentId':
+                assertValidFieldType('propertyagent', 'mydesktopAgentId', pojo, 'number');
+                break;
+            case 'agent':
+                assertValidFieldType('propertyagent', 'agent', pojo, 'agentPojo');
+                break;
+            case 'property':
+                assertValidFieldType('propertyagent', 'property', pojo, 'propertyPojo');
+                break;
+            default:
+                throw new Error('Invalid propertyagent provided. Field \'' + fieldNames[i] + '\' is not supported.');
+        }
+    }
+}
+exports.assertValidpropertyagent = assertValidpropertyagent;
+asserters['propertyagent'] = assertValidpropertyagent;
 function assertValidpropertydescription(pojo, allowUndefined) {
     if (pojo === undefined || pojo === null) {
         if (allowUndefined) {

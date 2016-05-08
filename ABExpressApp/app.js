@@ -37,6 +37,7 @@ app.use('/public', express.static(path.join(__dirname, '/public')));
 
 app.use(require('stylus').middleware(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'bower_components')));
 
 
 app.use('/', index);
@@ -64,6 +65,8 @@ app.use(function (req, res, next) {
 //app.listen(3000, function () {
 //    console.log('Example app listening on port 3000!');
 //});
+
+app.listen(90);
 
 /*start chokidar*/
 var chokidar = require('chokidar');

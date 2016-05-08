@@ -14,6 +14,58 @@ function initialize(database, username, password, options) {
         return;
     }
     exports.SEQUELIZE = new Sequelize(database, username, password, options);
+    exports.agent = exports.SEQUELIZE.define('agent', {
+        'agentId': { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
+        'name': Sequelize.STRING,
+        'mobile': Sequelize.STRING,
+        'telephone': Sequelize.STRING,
+        'workphone': Sequelize.STRING,
+        'email': Sequelize.STRING,
+        'facebook': Sequelize.STRING,
+        'linkedin': Sequelize.STRING,
+        'mydesktopAgentId': Sequelize.INTEGER
+    }, {
+        timestamps: false,
+        classMethods: {
+            getagent: function (agent) {
+                var where = {};
+                var id = parseInt(agent);
+                if (isNaN(id)) {
+                    if (agent['agentId'] !== undefined) {
+                        where['agentId'] = agent['agentId'];
+                    }
+                    if (agent['name'] !== undefined) {
+                        where['name'] = agent['name'];
+                    }
+                    if (agent['mobile'] !== undefined) {
+                        where['mobile'] = agent['mobile'];
+                    }
+                    if (agent['telephone'] !== undefined) {
+                        where['telephone'] = agent['telephone'];
+                    }
+                    if (agent['workphone'] !== undefined) {
+                        where['workphone'] = agent['workphone'];
+                    }
+                    if (agent['email'] !== undefined) {
+                        where['email'] = agent['email'];
+                    }
+                    if (agent['facebook'] !== undefined) {
+                        where['facebook'] = agent['facebook'];
+                    }
+                    if (agent['linkedin'] !== undefined) {
+                        where['linkedin'] = agent['linkedin'];
+                    }
+                    if (agent['mydesktopAgentId'] !== undefined) {
+                        where['mydesktopAgentId'] = agent['mydesktopAgentId'];
+                    }
+                }
+                else {
+                    where['agentId'] = id;
+                }
+                return agent.find({ where: where });
+            }
+        }
+    });
     exports.property = exports.SEQUELIZE.define('property', {
         'propertyId': { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
         'name': Sequelize.STRING,
@@ -150,6 +202,38 @@ function initialize(database, username, password, options) {
             }
         }
     });
+    exports.propertyagent = exports.SEQUELIZE.define('propertyagent', {
+        'propertyAgentId': { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
+        'agentId': Sequelize.INTEGER,
+        'propertyId': Sequelize.INTEGER,
+        'mydesktopAgentId': Sequelize.INTEGER
+    }, {
+        timestamps: false,
+        classMethods: {
+            getpropertyagent: function (propertyagent) {
+                var where = {};
+                var id = parseInt(propertyagent);
+                if (isNaN(id)) {
+                    if (propertyagent['propertyAgentId'] !== undefined) {
+                        where['propertyAgentId'] = propertyagent['propertyAgentId'];
+                    }
+                    if (propertyagent['agentId'] !== undefined) {
+                        where['agentId'] = propertyagent['agentId'];
+                    }
+                    if (propertyagent['propertyId'] !== undefined) {
+                        where['propertyId'] = propertyagent['propertyId'];
+                    }
+                    if (propertyagent['mydesktopAgentId'] !== undefined) {
+                        where['mydesktopAgentId'] = propertyagent['mydesktopAgentId'];
+                    }
+                }
+                else {
+                    where['propertyAgentId'] = id;
+                }
+                return propertyagent.find({ where: where });
+            }
+        }
+    });
     exports.propertydescription = exports.SEQUELIZE.define('propertydescription', {
         'propertyId': { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
         'propertydescription': Sequelize.STRING
@@ -268,6 +352,10 @@ function initialize(database, username, password, options) {
     });
     exports.property.hasMany(exports.propertyaddress, { foreignKey: 'propertyId' });
     exports.propertyaddress.belongsTo(exports.property, { as: undefined, foreignKey: 'propertyId' });
+    exports.agent.hasMany(exports.propertyagent, { foreignKey: 'agentId' });
+    exports.propertyagent.belongsTo(exports.agent, { as: undefined, foreignKey: 'agentId' });
+    exports.property.hasMany(exports.propertyagent, { foreignKey: 'propertyId' });
+    exports.propertyagent.belongsTo(exports.property, { as: undefined, foreignKey: 'propertyId' });
     exports.property.hasMany(exports.propertydescription, { foreignKey: 'propertyId' });
     exports.propertydescription.belongsTo(exports.property, { as: undefined, foreignKey: 'propertyId' });
     exports.property.hasMany(exports.propertyfeature, { foreignKey: 'propertyId' });

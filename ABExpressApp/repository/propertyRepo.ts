@@ -67,7 +67,8 @@ export class propertyRepo {
 
     saveProperty(rentalObj: IRental) {        
         try {
-            return this.getProperty1(rentalObj.uniqueID).then(function (e) {
+            return this.getProperty1(rentalObj.uniqueID).then(
+                function (e) {
                 var loc = e;
                 if (loc) {
                     loc.headline = rentalObj.headline;
@@ -111,12 +112,13 @@ export class propertyRepo {
                         status: rentalObj.status.toString()
                     });
                 }
-                loc.save();
-                rentalObj.propertyId = +loc.propertyId;
+                return loc.save();
+                //rentalObj.propertyId = +loc.propertyId;
                 console.log(rentalObj.type + " " + rentalObj.fileName);
-                this._instance = loc
+                //this._instance = loc
+                //return this._instance;
             });
-            //return this._instance;
+            
         }
         catch (ex) {
             throw ex;

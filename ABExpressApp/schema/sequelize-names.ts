@@ -16,21 +16,40 @@ export interface SequelizeNames {
     TableNames: TableNames;
     calculatedFields:CalculatedFields;
     references:References;
+    agentFields:agentFields;
     propertyFields:propertyFields;
     propertyaddressFields:propertyaddressFields;
+    propertyagentFields:propertyagentFields;
     propertydescriptionFields:propertydescriptionFields;
     propertyfeatureFields:propertyfeatureFields;
     propertyimageFields:propertyimageFields;
 }
 
 export class TableNames {
+    agent:string = 'agent';
     property:string = 'property';
     propertyaddress:string = 'propertyaddress';
+    propertyagent:string = 'propertyagent';
     propertydescription:string = 'propertydescription';
     propertyfeature:string = 'propertyfeature';
     propertyimage:string = 'propertyimage';
 }
 export var tableNames:TableNames = new TableNames();
+
+export class agentFields {
+    agentId:string = 'agentId';
+    name:string = 'name';
+    mobile:string = 'mobile';
+    telephone:string = 'telephone';
+    workphone:string = 'workphone';
+    email:string = 'email';
+    facebook:string = 'facebook';
+    linkedin:string = 'linkedin';
+    mydesktopAgentId:string = 'mydesktopAgentId';
+    propertyagent:string = 'propertyagent';
+}
+export var agentFields:agentFields = new agentFields();
+
 
 export class propertyFields {
     propertyId:string = 'propertyId';
@@ -54,6 +73,7 @@ export class propertyFields {
     status:string = 'status';
     imageUrl:string = 'imageUrl';
     propertyaddress:string = 'propertyaddress';
+    propertyagent:string = 'propertyagent';
     propertydescription:string = 'propertydescription';
     propertyfeature:string = 'propertyfeature';
     propertyimage:string = 'propertyimage';
@@ -71,6 +91,17 @@ export class propertyaddressFields {
     property:string = 'property';
 }
 export var propertyaddressFields:propertyaddressFields = new propertyaddressFields();
+
+
+export class propertyagentFields {
+    propertyAgentId:string = 'propertyAgentId';
+    agentId:string = 'agentId';
+    propertyId:string = 'propertyId';
+    mydesktopAgentId:string = 'mydesktopAgentId';
+    agent:string = 'agent';
+    property:string = 'property';
+}
+export var propertyagentFields:propertyagentFields = new propertyagentFields();
 
 
 export class propertydescriptionFields {
@@ -113,6 +144,7 @@ export var calculatedFields:CalculatedFields = new CalculatedFields();
 
 export class References {
     propertyId:types.Reference = { tableName: 'property', primaryKey: 'propertyId', foreignKey: 'propertyId', as: undefined};
+    agentId:types.Reference = { tableName: 'agent', primaryKey: 'agentId', foreignKey: 'agentId', as: undefined};
 }
 
 export var references:References = new References();
