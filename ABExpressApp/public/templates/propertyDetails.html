@@ -1,0 +1,57 @@
+﻿<div class="propertydetailscontainer">
+    <div class="property-details-header">
+        <div class="property-details-header-left">
+            <div>{{property.category}} for {{transaction}} at</div>
+            <div>{{propertyAddressAsText}}</div>
+            <div>
+                <span ng-show="propertyFeature.bedroom">{{propertyFeature.bedroom}}  <span class="fa fa-bed"></span></span>
+                <span ng-show="propertyFeature.bathroom">{{propertyFeature.bathroom}}  <img class="bath-icon" src="/public/images/icons/bath.png" /></span>
+                <span ng-show="propertyFeature.garages">{{propertyFeature.garages}}  <span class="fa fa-car"></span></span>
+            </div>
+        </div>
+        <div ng-show="property.status == 'sold'">
+            <span ng-show="property.soldDate">Sold Date : {{property.soldDate}} </span>
+            <span ng-show="property.soldPrice">Sold Price : {{property.soldPrice}} </span>
+        </div>
+        <div ng-show="!property.isSold">{{property.priceView}}</div>
+    </div>
+    <div class="property-details">
+        <div ng-if="property.propertyimages">
+            <bx-slider data="{{property.propertyimages}}" />
+        </div>
+        <div>
+            <div class="agentContainerShort" ng-repeat="agent in property.propertyagents">
+                <a href="/agent/{{agent.agent.name}}/{{agent.agent.agentId}}">
+                    <div class="agentPhoto">
+                        <img src="{{agent.agent.agentImageUrl}}"
+                             width="78" height="104" alt="{{agent.agent.name}}" title="{{agent.agent.name}}">
+                    </div>
+                </a>
+                <div class="agentContactInfo">
+                    <a href="/agent/{{agent.agent.name}}/{{agent.agent.agentId}}">
+                        <p class="agentName"><strong>{{agent.agent.name}}</strong></p>
+                    </a>
+                    <ul class="linkList contactDetails">
+                        <li>
+                            <a href="#" rel="showContact">
+                                <span class="fa fa-phone spacing-icon"></span>{{agent.agent.workphone}}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{agent.agent.facebook}}" target="_blank"><span class="fa fa-facebook spacing-icon"></span>Facebook</a>
+                        </li>
+                        <li class="agentProfile" style="display: list-item;">
+                            <a href="/agent/{{agent.agent.name}}/{{agent.agent.agentId}}" class="rui-icon rui-icon-avatar" title="View agent profile of {{agent.agent.name}}">View profile</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div class="property-description">
+                <h3>{{property.headline}}</h3>
+                <span ng-bind-html="propertyDescription"></span>
+            </div>
+        </div>
+    </div>
+</div>

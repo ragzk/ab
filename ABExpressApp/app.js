@@ -11,6 +11,10 @@ var index = require('./routes/index');
 var users = require('./routes/users');
 var api = require('./routes/api');
 var trans = require('./routes/buy');
+var transRent = require('./routes/rent');
+var transSold = require('./routes/sold');
+var transAgent = require('./routes/agent');
+var transAgents = require('./routes/agents');
 var property = require('./routes/property');
 var _ = require('lodash');
 
@@ -45,6 +49,22 @@ app.use('/users', users);
 app.get('/buy', trans.buy);
 app.get('/buy/:type', trans.buy);
 app.get('/buy/:type/getProperties', trans.buy.getProperties);
+
+app.get('/rent', transRent.rent);
+app.get('/rent/:type', transRent.rent);
+app.get('/rent/:type/getProperties', transRent.rent.getProperties);
+
+app.get('/sold', transSold.sold);
+app.get('/sold/:type', transSold.sold);
+app.get('/sold/:type/getProperties', transSold.sold.getProperties);
+
+app.get('/agent', transAgent.agent);
+app.get('/agent/:agentId', transAgent.agent);
+app.get('/agent/:name/:agentId', transAgent.agent);
+app.get('/agentDetails/:agentId', transAgent.agentDetails);
+
+app.get('/agents', transAgents.agents);
+app.get('/agents/getAgents', transAgents.getAgents);
 
 app.get('/property/:suburb/:street/:streetNumber/:uniqueId', property.details);
 app.get('/property/:suburb/:street/:streetNumber/:streetNumber2/:uniqueId', property.details);
@@ -84,7 +104,6 @@ watcher
         if (path.extname(filePath) == ".xml") {
             addFileCheck(filePath);
         }
-
 });
 
 var addFileCheck = function (xmlPath) {
@@ -97,7 +116,8 @@ var addFileCheck = function (xmlPath) {
         parser.parseString(data, function (err, result) {
             if (result && result.propertyList) {
                 var propertyList = toCamelCase(result.propertyList);
-                processProperty(propertyList, fs, request, path, xmlPath);
+                var processed = false
+                var processed = processProperty(propertyList, fs, request, path, xmlPath);
                 var fileName = path.basename(xmlPath)
                 //fs.renameSync(xmlPath, "./public/processedXmlFiles/" + fileName);
                 //fs.createReadStream(xmlPath).pipe(fs.createWriteStream("./public/processedXmlFiles/" + fileName));
@@ -109,7 +129,7 @@ var addFileCheck = function (xmlPath) {
 
 var processProperty = function (propertyJSON, fs, request, path, xmlPath) {  
     var processRentalJSONModule = require('./processRentalJSONModule.js');
-    processRentalJSONModule.init(propertyJSON, fs, request, path, xmlPath);
+    return processRentalJSONModule.init(propertyJSON, fs, request, path, xmlPath);
 }   
 
 

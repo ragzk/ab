@@ -1,0 +1,16 @@
+﻿
+
+@html.extend('layout', function(model){
+
+    @html.block('content', function(model){
+			<div class="agentsdetailscontainer">
+            <div class="" ng-controller="agentController as ctrl" ng-init="ctrl.init({agentId : '@model.agentId'})" >
+				<div ng-if="ctrl.agent">
+					<agent-details ng-show="ctrl.agent" agent="ctrl.agent"></agent-details>
+				</div>
+			</div>
+			</div>
+		    
+    })
+	
+})

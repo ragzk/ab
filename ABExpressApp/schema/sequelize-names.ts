@@ -46,6 +46,11 @@ export class agentFields {
     facebook:string = 'facebook';
     linkedin:string = 'linkedin';
     mydesktopAgentId:string = 'mydesktopAgentId';
+    isActive:string = 'isActive';
+    rateMyAgentUrl:string = 'rateMyAgentUrl';
+    agentImageUrl:string = 'agentImageUrl';
+    agentDescription:string = 'agentDescription';
+    rateMyAgentTestimonialUrl:string = 'rateMyAgentTestimonialUrl';
     propertyagent:string = 'propertyagent';
 }
 export var agentFields:agentFields = new agentFields();
@@ -72,6 +77,7 @@ export class propertyFields {
     modifiedTime:string = 'modifiedTime';
     status:string = 'status';
     imageUrl:string = 'imageUrl';
+    lastUpdateFileNumber:string = 'lastUpdateFileNumber';
     propertyaddress:string = 'propertyaddress';
     propertyagent:string = 'propertyagent';
     propertydescription:string = 'propertydescription';

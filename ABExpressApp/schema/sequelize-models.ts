@@ -45,7 +45,12 @@ export function initialize(database:string, username:string, password:string, op
         'email':Sequelize.STRING,
         'facebook':Sequelize.STRING,
         'linkedin':Sequelize.STRING,
-        'mydesktopAgentId':Sequelize.INTEGER
+        'mydesktopAgentId':Sequelize.INTEGER,
+        'isActive':Sequelize.INTEGER,
+        'rateMyAgentUrl':Sequelize.STRING,
+        'agentImageUrl':Sequelize.STRING,
+        'agentDescription':Sequelize.STRING,
+        'rateMyAgentTestimonialUrl':Sequelize.STRING
         },
         {
             timestamps: false,
@@ -63,6 +68,11 @@ export function initialize(database:string, username:string, password:string, op
                         if (agent['facebook'] !== undefined) { where['facebook'] = agent['facebook']}
                         if (agent['linkedin'] !== undefined) { where['linkedin'] = agent['linkedin']}
                         if (agent['mydesktopAgentId'] !== undefined) { where['mydesktopAgentId'] = agent['mydesktopAgentId']}
+                        if (agent['isActive'] !== undefined) { where['isActive'] = agent['isActive']}
+                        if (agent['rateMyAgentUrl'] !== undefined) { where['rateMyAgentUrl'] = agent['rateMyAgentUrl']}
+                        if (agent['agentImageUrl'] !== undefined) { where['agentImageUrl'] = agent['agentImageUrl']}
+                        if (agent['agentDescription'] !== undefined) { where['agentDescription'] = agent['agentDescription']}
+                        if (agent['rateMyAgentTestimonialUrl'] !== undefined) { where['rateMyAgentTestimonialUrl'] = agent['rateMyAgentTestimonialUrl']}
                     } else {
                         where['agentId'] = id;
                     }
@@ -91,7 +101,8 @@ export function initialize(database:string, username:string, password:string, op
         'soldDate':Sequelize.STRING,
         'modifiedTime':Sequelize.STRING,
         'status':Sequelize.STRING,
-        'imageUrl':Sequelize.STRING
+        'imageUrl':Sequelize.STRING,
+        'lastUpdateFileNumber':Sequelize.INTEGER
         },
         {
             timestamps: false,
@@ -120,6 +131,7 @@ export function initialize(database:string, username:string, password:string, op
                         if (property['modifiedTime'] !== undefined) { where['modifiedTime'] = property['modifiedTime']}
                         if (property['status'] !== undefined) { where['status'] = property['status']}
                         if (property['imageUrl'] !== undefined) { where['imageUrl'] = property['imageUrl']}
+                        if (property['lastUpdateFileNumber'] !== undefined) { where['lastUpdateFileNumber'] = property['lastUpdateFileNumber']}
                     } else {
                         where['propertyId'] = id;
                     }

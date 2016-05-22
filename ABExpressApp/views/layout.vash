@@ -67,7 +67,7 @@
             </div>
             <div ng-show="false">
                 <div class="pull-right">
-                    <a href="http://abproperties.com.au/">
+                    <a href="http://abproperty.com.au/">
                         <img class="" src="/public/images/ablogo.png" />
                     </a>
                 </div>
@@ -101,7 +101,7 @@
                         <ul class="nav navbar-nav">
                             <li class="active"><a href="#">Home<span class="sr-only">(current)</span></a></li>
                             <li><a href="#">Properties</a></li>
-                            <li><a href="#">Agents</a></li>
+                            <li><a href="/agents">Agents</a></li>
                             <li><a href="#">Testimonials</a></li>
                             <li><a href="#">Contact</a></li>
                             <!--<li class="dropdown">
@@ -155,17 +155,7 @@
     <!--Footer-->
 	<script type="text/ng-template" id="Footer.html">
         <div>
-            <div class="siteinfo">
-                <p class="officename">Ray White Ermington</p>
-                <div class="address">Shop 3, 39 Bartlett Street <br>Ermington, NSW 2115, Australia                </div>
-                <div class="contacts">
-                    <i class="icon-phone-sign icon-fixed-width"></i><a href="tel:(02) 9898 1822" style="color:#333333">(02) 9898 1822</a> &nbsp;&nbsp;
-                    <i class="icon-print icon-fixed-width"></i>(02) 9898 0900                                            <div class="office-email"><i class="icon-envelope-alt"></i> <a href="mailto:adam.stephens@raywhite.com ">adam.stephens@raywhite.com</a></div>
-                </div>
-                <div class="thesocials">
-                    <a rel="publisher" href="https://plus.google.com/102057235710714898320" class="thegooglesplus"><i class="icon-google-plus-sign icon-large"></i> Google+</a>                        <a href="http://www.facebook.com/rwermington" class="thefacebook"><i class="icon-facebook-sign icon-large"></i> Facebook</a>
-                </div>
-            </div>
+
         </div>
     </script>
     <!-- Search -->
@@ -218,9 +208,12 @@
 <script src="/public/javascripts/app/controllers/sidebarController.js"></script>
 <script src="/public/javascripts/app/controllers/SearchController.js"></script>
 <script src="/public/javascripts/app/controllers/buyController.js"></script>
+<script src="/public/javascripts/app/controllers/agentController.js"></script>
 <script src="/public/javascripts/app/controllers/propertyController.js"></script>
+<script src="/public/javascripts/app/directives/agentDetailsSummary.js"></script>
 <script src="/public/javascripts/app/directives/propertyDetails.js"></script>
 <script src="/public/javascripts/app/directives/shortPropertyDetails.js"></script>
+<script src="/public/javascripts/app/directives/agentDetails.js"></script>
 <script src="/public/javascripts/app/directives/showSelected.js"></script>
 <script src="/public/javascripts/app/directives/bxslider.js"></script>
 <script src="/public/javascripts/custom/slider.js"></script>

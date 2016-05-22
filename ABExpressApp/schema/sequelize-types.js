@@ -49,6 +49,21 @@ function assertValidagent(pojo, allowUndefined) {
             case 'mydesktopAgentId':
                 assertValidFieldType('agent', 'mydesktopAgentId', pojo, 'number');
                 break;
+            case 'isActive':
+                assertValidFieldType('agent', 'isActive', pojo, 'boolean');
+                break;
+            case 'rateMyAgentUrl':
+                assertValidFieldType('agent', 'rateMyAgentUrl', pojo, 'string');
+                break;
+            case 'agentImageUrl':
+                assertValidFieldType('agent', 'agentImageUrl', pojo, 'string');
+                break;
+            case 'agentDescription':
+                assertValidFieldType('agent', 'agentDescription', pojo, 'string');
+                break;
+            case 'rateMyAgentTestimonialUrl':
+                assertValidFieldType('agent', 'rateMyAgentTestimonialUrl', pojo, 'string');
+                break;
             case 'propertyagent':
                 assertValidFieldType('agent', 'propertyagent', pojo, 'propertyagentPojo[]');
                 break;
@@ -132,6 +147,9 @@ function assertValidproperty(pojo, allowUndefined) {
                 break;
             case 'imageUrl':
                 assertValidFieldType('property', 'imageUrl', pojo, 'string');
+                break;
+            case 'lastUpdateFileNumber':
+                assertValidFieldType('property', 'lastUpdateFileNumber', pojo, 'number');
                 break;
             case 'propertyaddress':
                 assertValidFieldType('property', 'propertyaddress', pojo, 'propertyaddressPojo[]');

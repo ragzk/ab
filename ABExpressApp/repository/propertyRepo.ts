@@ -7,6 +7,7 @@ import models = require('../schema/sequelize-models');
 import dbConfig = require('../dbConfig');
 import moment = require('moment');
 var _ = require('lodash');
+var Promise = require('q');
 //import rentalDefinitions = require('rentalDefinitions');
 
 
@@ -45,7 +46,8 @@ export class propertyRepo {
         findOptions.where = where;
         findOptions.include = [{ model: models.propertyaddress, required: false },
             { model: models.propertyfeature, required: false },
-            { model: models.propertydescription, required: false }];
+            { model: models.propertydescription, required: false }
+        ];
         
         //var r = models.property.findAll({ where: { isRental: false, status: 'current' } });
         var r = models.property.findAll(findOptions);
@@ -58,7 +60,9 @@ export class propertyRepo {
         findOptions.include = [{ model: models.propertyaddress, required: false },
             { model: models.propertyfeature, required: false },
             { model: models.propertydescription, required: false },
-            { model: models.propertyimage, required: false }];
+            { model: models.propertyimage, required: false },
+            { model: models.propertyagent, required: false, include: [{ model: models.agent}] }
+        ];
         
         //var r = models.property.findAll({ where: { isRental: false, status: 'current' } });
         var r = models.property.find(findOptions);
@@ -71,24 +75,31 @@ export class propertyRepo {
                 function (e) {
                 var loc = e;
                 if (loc) {
-                    loc.headline = rentalObj.headline;
-                    loc.uniqueId = rentalObj.uniqueID;
-                    loc.identifier = rentalObj.uniqueID.toString();
-                    loc.name = rentalObj.uniqueID.toString();
-                    loc.dateAvailable = rentalObj.dateAvailable ? moment(rentalObj.dateAvailable).toDate() : null;
-                    loc.rent = rentalObj.rent ? parseFloat(rentalObj.rent._) : null;
-                    loc.category = rentalObj.category ? rentalObj.category.name.toString() : "Land1";
-                    loc.inspectionTimes = rentalObj.inspectionTimes ? Array.isArray(rentalObj.inspectionTimes.inspection) ? rentalObj.inspectionTimes.inspection.toString() : rentalObj.inspectionTimes.inspection : null;
-                    loc.longitude = rentalObj.geocode.longitude || null;
-                    loc.latitude = rentalObj.geocode.latitude || null;
-                    loc.type = rentalObj.type;
-                    loc.priceView = rentalObj.priceView;
-                    loc.bond = rentalObj.bond
-                    loc.soldDate = rentalObj.soldDetails ? rentalObj.soldDetails.date : null;
-                    loc.soldPrice = rentalObj.soldDetails ? rentalObj.soldDetails.price.text : null;
-                    loc.modifiedTime = rentalObj.modTime;
-                    loc.imageUrl = rentalObj.imageUrl;
-                    loc.status = rentalObj.status.toString();
+                    if (loc.lastUpdateFileNumber < rentalObj.lastUpdateFileNumber) {
+                        loc.headline = rentalObj.headline;
+                        loc.uniqueId = rentalObj.uniqueID;
+                        loc.identifier = rentalObj.uniqueID.toString();
+                        loc.name = rentalObj.uniqueID.toString();
+                        loc.dateAvailable = rentalObj.dateAvailable ? moment(rentalObj.dateAvailable).toDate() : null;
+                        loc.rent = rentalObj.rent ? parseFloat(rentalObj.rent._) : null;
+                        loc.category = rentalObj.category ? rentalObj.category.name.toString() : "Land1";
+                        loc.inspectionTimes = rentalObj.inspectionTimes ? Array.isArray(rentalObj.inspectionTimes.inspection) ? rentalObj.inspectionTimes.inspection.toString() : rentalObj.inspectionTimes.inspection : null;
+                        loc.longitude = rentalObj.geocode.longitude || null;
+                        loc.latitude = rentalObj.geocode.latitude || null;
+                        loc.type = rentalObj.type;
+                        loc.priceView = rentalObj.priceView;
+                        loc.bond = rentalObj.bond
+                        loc.soldDate = rentalObj.soldDetails ? rentalObj.soldDetails.date : null;
+                        loc.soldPrice = rentalObj.soldDetails ? rentalObj.soldDetails.price.text : null;
+                        loc.modifiedTime = rentalObj.modTime;
+                        loc.imageUrl = rentalObj.imageUrl;
+                        loc.status = rentalObj.status.toString();
+                        loc.lastUpdateFileNumber = rentalObj.lastUpdateFileNumber; 
+                        return loc.save();
+                    }
+                    else {
+                        return Promise.resolve(loc);
+                    }
                 }
                 else {
                     loc = models.property.build({
@@ -109,10 +120,12 @@ export class propertyRepo {
                         soldPrice: rentalObj.soldDetails ? rentalObj.soldDetails.price.text : null,
                         modifiedTime: rentalObj.modTime,
                         imageUrl: rentalObj.imageUrl,
-                        status: rentalObj.status.toString()
+                        status: rentalObj.status.toString(),
+                        lastUpdateFileNumber: rentalObj.lastUpdateFileNumber 
                     });
+                    return loc.save();
                 }
-                return loc.save();
+                
                 //rentalObj.propertyId = +loc.propertyId;
                 console.log(rentalObj.type + " " + rentalObj.fileName);
                 //this._instance = loc

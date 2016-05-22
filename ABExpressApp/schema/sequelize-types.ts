@@ -41,6 +41,11 @@ export interface agentPojo
     facebook?:string;
     linkedin?:string;
     mydesktopAgentId?:AgentId;
+    isActive?:boolean;
+    rateMyAgentUrl?:string;
+    agentImageUrl?:string;
+    agentDescription?:string;
+    rateMyAgentTestimonialUrl?:string;
     propertyagent?:propertyagentPojo[];
 }
 
@@ -76,6 +81,11 @@ export function assertValidagent(pojo:agentPojo, allowUndefined?:boolean):void {
             case 'facebook': assertValidFieldType('agent', 'facebook', pojo, 'string'); break;
             case 'linkedin': assertValidFieldType('agent', 'linkedin', pojo, 'string'); break;
             case 'mydesktopAgentId': assertValidFieldType('agent', 'mydesktopAgentId', pojo, 'number'); break;
+            case 'isActive': assertValidFieldType('agent', 'isActive', pojo, 'boolean'); break;
+            case 'rateMyAgentUrl': assertValidFieldType('agent', 'rateMyAgentUrl', pojo, 'string'); break;
+            case 'agentImageUrl': assertValidFieldType('agent', 'agentImageUrl', pojo, 'string'); break;
+            case 'agentDescription': assertValidFieldType('agent', 'agentDescription', pojo, 'string'); break;
+            case 'rateMyAgentTestimonialUrl': assertValidFieldType('agent', 'rateMyAgentTestimonialUrl', pojo, 'string'); break;
             case 'propertyagent': assertValidFieldType('agent', 'propertyagent', pojo, 'propertyagentPojo[]'); break;
             default:
                 throw new Error('Invalid agent provided. Field \'' + fieldNames[i] + '\' is not supported.')
@@ -119,6 +129,7 @@ export interface propertyPojo
     modifiedTime?:string;
     status?:string;
     imageUrl?:string;
+    lastUpdateFileNumber?:number;
     propertyaddress?:propertyaddressPojo[];
     propertyagent?:propertyagentPojo[];
     propertydescription?:propertydescriptionPojo[];
@@ -169,6 +180,7 @@ export function assertValidproperty(pojo:propertyPojo, allowUndefined?:boolean):
             case 'modifiedTime': assertValidFieldType('property', 'modifiedTime', pojo, 'string'); break;
             case 'status': assertValidFieldType('property', 'status', pojo, 'string'); break;
             case 'imageUrl': assertValidFieldType('property', 'imageUrl', pojo, 'string'); break;
+            case 'lastUpdateFileNumber': assertValidFieldType('property', 'lastUpdateFileNumber', pojo, 'number'); break;
             case 'propertyaddress': assertValidFieldType('property', 'propertyaddress', pojo, 'propertyaddressPojo[]'); break;
             case 'propertyagent': assertValidFieldType('property', 'propertyagent', pojo, 'propertyagentPojo[]'); break;
             case 'propertydescription': assertValidFieldType('property', 'propertydescription', pojo, 'propertydescriptionPojo[]'); break;

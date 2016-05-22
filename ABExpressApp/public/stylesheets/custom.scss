@@ -102,7 +102,98 @@ ul.dropdown-menu a{
     }
 
 }
+.agentContainer {
+    display:inline-block;
+    float:left;
+    line-height:1.4;
+    width:50%;
 
+    .agentPhoto
+    {
+        width:250px;
+        height:300px;
+        img{
+        width:250px;
+        height:300px;
+        }
+    }
+    .agentContactInfo {
+    ul {
+            list-style:none;
+            padding:0;
+            li {
+                .fa {
+                    padding-right:5px;
+                }
+            }
+        }    
+            .agentName {
+            font-size:xx-large;
+        }
+    }
+    
+}
+
+.agentDetailsSummaryContainer {
+    display:inline-block;
+    float:left;
+    line-height:1.4;
+        width:285px;
+        height:285px;
+
+    .agentPhoto {
+        float:left;
+        width:275px;
+        height:275px;
+        background: no-repeat;
+        background-size: cover;
+    padding:5px;
+    -webkit-transition: all 1s ease; /* Safari and Chrome */
+    -moz-transition: all 1s ease; /* Firefox */
+    -ms-transition: all 1s ease; /* IE 9 */
+    -o-transition: all 1s ease; /* Opera */
+    transition: all 1s ease;
+        .content
+        {
+            
+            .bottom{
+                position:absolute;
+                bottom:0px;
+            }
+        }
+    }
+    .agentPhoto:hover {
+        opacity: 0.7;
+        -webkit-transform:scale(1.05); /* Safari and Chrome */
+        -moz-transform:scale(1.05); /* Firefox */
+        -ms-transform:scale(1.05); /* IE 9 */
+        -o-transform:scale(1.05); /* Opera */
+         transform:scale(1.05);
+         .content
+        {
+             
+            .bottom{
+                position:absolute;
+                bottom:0px;
+            }
+        }
+    }
+}
+.agentContainerShort{
+    display:inline-block;
+    float:left;
+    line-height:1.4;
+    width:50%;
+    ul {
+        list-style:none;
+        padding:0;
+        li {
+            .fa {
+                padding-right:5px;
+            }
+        }
+    }
+}
 // spacing fontawesome icons in slider in index page
 .spacing-icon {
     padding-left: 5px;

@@ -23,7 +23,12 @@ function initialize(database, username, password, options) {
         'email': Sequelize.STRING,
         'facebook': Sequelize.STRING,
         'linkedin': Sequelize.STRING,
-        'mydesktopAgentId': Sequelize.INTEGER
+        'mydesktopAgentId': Sequelize.INTEGER,
+        'isActive': Sequelize.INTEGER,
+        'rateMyAgentUrl': Sequelize.STRING,
+        'agentImageUrl': Sequelize.STRING,
+        'agentDescription': Sequelize.STRING,
+        'rateMyAgentTestimonialUrl': Sequelize.STRING
     }, {
         timestamps: false,
         classMethods: {
@@ -58,6 +63,21 @@ function initialize(database, username, password, options) {
                     if (agent['mydesktopAgentId'] !== undefined) {
                         where['mydesktopAgentId'] = agent['mydesktopAgentId'];
                     }
+                    if (agent['isActive'] !== undefined) {
+                        where['isActive'] = agent['isActive'];
+                    }
+                    if (agent['rateMyAgentUrl'] !== undefined) {
+                        where['rateMyAgentUrl'] = agent['rateMyAgentUrl'];
+                    }
+                    if (agent['agentImageUrl'] !== undefined) {
+                        where['agentImageUrl'] = agent['agentImageUrl'];
+                    }
+                    if (agent['agentDescription'] !== undefined) {
+                        where['agentDescription'] = agent['agentDescription'];
+                    }
+                    if (agent['rateMyAgentTestimonialUrl'] !== undefined) {
+                        where['rateMyAgentTestimonialUrl'] = agent['rateMyAgentTestimonialUrl'];
+                    }
                 }
                 else {
                     where['agentId'] = id;
@@ -86,7 +106,8 @@ function initialize(database, username, password, options) {
         'soldDate': Sequelize.STRING,
         'modifiedTime': Sequelize.STRING,
         'status': Sequelize.STRING,
-        'imageUrl': Sequelize.STRING
+        'imageUrl': Sequelize.STRING,
+        'lastUpdateFileNumber': Sequelize.INTEGER
     }, {
         timestamps: false,
         classMethods: {
@@ -153,6 +174,9 @@ function initialize(database, username, password, options) {
                     }
                     if (property['imageUrl'] !== undefined) {
                         where['imageUrl'] = property['imageUrl'];
+                    }
+                    if (property['lastUpdateFileNumber'] !== undefined) {
+                        where['lastUpdateFileNumber'] = property['lastUpdateFileNumber'];
                     }
                 }
                 else {

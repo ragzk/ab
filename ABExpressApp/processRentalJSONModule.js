@@ -13,6 +13,8 @@ var propertyAgentReport = require("./repository/propertyAgentRepo");
 //import enumTypes = require('enumTypes');
 var Promise = require('q');
 var request = require('request');
+var processGoingOn = false;
+var currentProcessing = null;
 var CategoryEnum;
 (function (CategoryEnum) {
     CategoryEnum[CategoryEnum["House"] = 0] = "House";
@@ -37,90 +39,150 @@ var processRentalJSON = (function () {
     function processRentalJSON() {
     }
     processRentalJSON.prototype.process = function () {
-        this.addToDBAndImages().then(function () {
-            return this.copyXmlFileToProcessedFiles();
+        var that = this;
+        waitfor(_isBusy, false, _TIMEOUT, 0, 'play->busy false', function () {
+            processGoingOn = true;
+            currentProcessing = that;
+            console.log('*****processing started for file' + that.xmlPath);
+            that.addToDBAndImages().then(function () {
+                console.log("addToDBAndImages done");
+                return that.copyXmlFileToProcessedFiles().then(function () {
+                    console.log('********************************* processing completed for file' + that.xmlPath);
+                    processGoingOn = false;
+                });
+            });
         });
     };
     processRentalJSON.prototype.addToDBAndImages = function () {
         //console.log(this.data);
         // add pipe or make it chain
         var obj = this.data.rental || this.data.residential || this.data.land;
+        var that = this;
         console.log(obj.status);
-        var func = function (that) {
-            if (Object.prototype.toString.call(obj) === '[object Array]') {
-                for (var o in obj) {
-                    return that.addImagesAndDB(that, obj[0]);
-                }
-            }
-            else {
-                return that.addImagesAndDB(that, obj);
-            }
-        };
-        return func(this);
+        //      var func = function (that) {
+        console.log("addImagesAndDB started");
+        if (Object.prototype.toString.call(obj) === '[object Array]') {
+            var i = 0;
+            return promiseWhile(function () { return obj.length > i; }, function () {
+                that.addImagesAndDB(that, obj[0]);
+                i++;
+            }).then(function () {
+                console.log('multiple properties processed');
+                return Promise.when([]);
+            });
+        }
+        else {
+            return that.addImagesAndDB(that, obj);
+        }
+        //        }
+        //        return func(this);
     };
     processRentalJSON.prototype.addImagesAndDB = function (that, obj) {
+        console.log("downloadImagesSynchornously started");
         return that.downloadImagesSynchornously(this, obj)
             .then(function () {
+            console.log("downloadImagesSynchornously done");
+            console.log("addInformationToDB started");
             return that.addInformationToDB(that, obj);
         });
     };
     processRentalJSON.prototype.addInformationToDB = function (that, obj) {
         var thatFunc = this;
-        var func = function () {
-            var repo = new propertyReport.propertyRepo();
-            var addressRepo = new propertyAddressReport.propertyAddressRepo();
-            var featureRepo = new propertyFeatureReport.propertyFeatureRepo();
-            var descriptionRepo = new propertyDescriptionReport.propertyDescriptionRepo();
-            var imageRepo = new propertyImageReport.propertyImageRepo();
-            var agentRepo = new propertyAgentReport.propertyagentRepo();
-            var fileName = that.path.basename(that.xmlPath);
-            obj.fileName = fileName;
-            if (that.data.rental) {
-                obj.type = "rental";
-            }
-            if (that.data.residential) {
-                obj.type = "residential";
-            }
-            if (that.data.land) {
-                obj.type = "land";
-            }
-            repo.saveProperty(obj).then(function (prop) {
-                obj.propertyId = prop.propertyId;
-                addressRepo.savePropertyAddress(obj)
-                    .then(function () {
+        //        var func = function () {
+        var repo = new propertyReport.propertyRepo();
+        var addressRepo = new propertyAddressReport.propertyAddressRepo();
+        var featureRepo = new propertyFeatureReport.propertyFeatureRepo();
+        var descriptionRepo = new propertyDescriptionReport.propertyDescriptionRepo();
+        var imageRepo = new propertyImageReport.propertyImageRepo();
+        var agentRepo = new propertyAgentReport.propertyagentRepo();
+        var fileName = that.path.basename(that.xmlPath);
+        obj.fileName = fileName;
+        if (that.data.rental) {
+            obj.type = "rental";
+        }
+        if (that.data.residential) {
+            obj.type = "residential";
+        }
+        if (that.data.land) {
+            obj.type = "land";
+        }
+        console.log("save property info started");
+        var fileNameWithoutExtension = that.xmlPath.slice(0, -4);
+        obj.lastUpdateFileNumber = +fileNameWithoutExtension.substring(fileNameWithoutExtension.lastIndexOf('_') + 1);
+        return repo.saveProperty(obj).then(function (prop) {
+            console.log("save property info done");
+            console.log("save property address started");
+            obj.propertyId = prop.propertyId;
+            return addressRepo.savePropertyAddress(obj)
+                .then(function () {
+                console.log("save property address done");
+                console.log("save property feature started");
+                if (obj.features) {
                     return featureRepo.savePropertyFeature(obj);
-                })
-                    .then(function () {
-                    return descriptionRepo.savePropertyDescription(obj);
-                })
-                    .then(function () {
-                    for (var i = 0; i < obj.listingAgent.length; i++) {
+                }
+                else {
+                    return Promise.when([]);
+                }
+            })
+                .then(function () {
+                console.log("save property feature done");
+                console.log("save property description started");
+                return descriptionRepo.savePropertyDescription(obj);
+            })
+                .then(function () {
+                console.log("save property description done");
+                console.log("save property agent info started");
+                if (obj.listingAgent.length) {
+                    var i = 0;
+                    return promiseWhile(function () { return obj.listingAgent.length > i; }, function () {
                         var agent = obj.listingAgent[i];
-                        return agentRepo.savepropertyagent(agent, obj.propertyId);
-                    }
-                })
-                    .then(function () {
-                    if (obj && obj.images && obj.images.img) {
-                        var img = obj.images.img[0];
-                        return thatFunc.savePropertyImagesInDb(img, obj, imageRepo, 0);
-                    }
-                });
+                        agentRepo.savepropertyagent(agent, obj.propertyId);
+                        i++;
+                    }).then(function () {
+                        console.log('all image saved in DB');
+                        return Promise.when([]);
+                    });
+                }
+                else {
+                    var agent1 = obj.listingAgent;
+                    return agentRepo.savepropertyagent(agent1, obj.propertyId);
+                }
+            })
+                .then(function () {
+                console.log("save property agent info done");
+                console.log("save property image info started");
+                if (obj && obj.images && obj.images.img) {
+                    var img = obj.images.img[0];
+                    return thatFunc.savePropertyImagesInDb(img, obj, imageRepo, 0);
+                }
             });
-        };
-        return Promise.nfcall(func);
+        });
+        //        }
+        //        return func();
     };
     processRentalJSON.prototype.savePropertyImagesInDb = function (img, obj, imageRepo, index) {
         var that = this;
-        return imageRepo.savePropertyImage(img, obj.propertyId).then(function (savedImage) {
-            if (++index < obj.images.img.length) {
-                img = obj.images.img[index];
-                that.savePropertyImagesInDb(img, obj, imageRepo, index);
+        //return imageRepo.savePropertyImage(img, obj.propertyId).then(function (savedImage) {
+        //    if (++index < obj.images.img.length) {
+        //        img = <IImage>obj.images.img[index];
+        //        that.savePropertyImagesInDb(img, obj, imageRepo, index);
+        //    }
+        //})
+        return promiseWhile(function () { return obj.images.img.length > index; }, function () {
+            img = obj.images.img[index];
+            if (img.url) {
+                imageRepo.savePropertyImage(img, obj.propertyId);
             }
+            index++;
+        }).then(function () {
+            console.log('all image saved in DB');
+            return Promise.when([]);
         });
     };
     processRentalJSON.prototype.copyXmlFileToProcessedFiles = function () {
         var fileName = this.path.basename(this.xmlPath);
-        return this.fs.renameSync(this.xmlPath, "./public/processedXmlFiles/" + fileName);
+        this.fs.renameSync(this.xmlPath, "./public/processedXmlFiles/" + fileName);
+        return Promise.when([]);
     };
     processRentalJSON.prototype.downloadImage = function (that, uri, filename) {
         if (!that.fs.existsSync(filename)) {
@@ -142,8 +204,27 @@ var processRentalJSON = (function () {
             var img = obj.images.img[0];
             var dirName = "./public/images/" + obj.uniqueID;
             var thatFunc = this;
+            console.log('addImageDirectory started');
             return this.addImageDirectory(that, dirName).then(function () {
-                return thatFunc.downloadImages(that, obj, img, dirName, 0);
+                console.log('addImageDirectory done');
+                console.log('downloadImages started');
+                var index = 0;
+                return promiseWhile(function () { return obj.images.img.length > index; }, function () {
+                    img = obj.images.img[index];
+                    thatFunc.downloadImages(that, obj, img, dirName, index).then(function () {
+                        console.log('downloadImage done ' + index);
+                    });
+                    index++;
+                    //return Promise.delay(500); // arbitrary async
+                }).then(function () {
+                    console.log('all image done');
+                    return Promise.when([]);
+                }).done(function () {
+                    console.log('all image done');
+                    return Promise.when([]);
+                });
+                ;
+                //return thatFunc.downloadImages(that, obj, img, dirName, 0);
             });
         }
     };
@@ -158,17 +239,23 @@ var processRentalJSON = (function () {
             var fileNameWithPath = dirName + "/" + that.path.basename(img.url);
             var thatFunc = this;
             return this.downloadImage(that, img.url, fileNameWithPath).then(function () {
+                console.log('downloadImage done' + fileNameWithPath);
                 img.url = fileNameWithPath.replace("./", "/");
+                img.index = index;
                 if (index == 0) {
                     obj.imageUrl = img.url;
                 }
-                if (obj.images.img.length > ++index) {
-                    img = obj.images.img[index];
-                    thatFunc.downloadImages(that, obj, img, dirName, index).then(function () {
-                        return Promise.when([]);
-                    });
-                }
+                //if (obj.images.img.length > ++index) {
+                //    img = <IImage>obj.images.img[index];
+                //    return thatFunc.downloadImages(that, obj, img, dirName, index).then(function () {
+                //        console.log('downloadImage done' + index);
+                //        return Promise.when([]);
+                //    });
+                //}
             });
+        }
+        else {
+            return Promise.when([]);
         }
     };
     processRentalJSON.prototype.addImages = function (that, obj) {
@@ -231,10 +318,44 @@ exports.init = function (data, fs, request, path, xmlPath) {
     p.request = request;
     p.path = path;
     p.xmlPath = xmlPath;
-    return p.process().then(function()
-    {
-        return true;
-    });
+    return p.process();
 };
+function promiseWhile(condition, body) {
+    var done = Promise.defer();
+    function loop() {
+        // When the result of calling `condition` is no longer true, we are
+        // done.
+        if (!condition())
+            return done.resolve();
+        // Use `when`, in case `body` does not return a promise.
+        // When it completes loop again otherwise, if it fails, reject the
+        // done promise
+        Promise.when(body(), loop, done.reject);
+    }
+    // Start running the loop in the next tick so that this function is
+    // completely async. It would be unexpected if `body` was called
+    // synchronously the first time.
+    Promise.nextTick(loop);
+    // The promise
+    return done.promise;
+}
 //} 
+function waitfor(test, expectedValue, msec, count, source, callback) {
+    // Check if condition met. If not, re-check later (msec).
+    while (test() !== expectedValue) {
+        count++;
+        setTimeout(function () {
+            waitfor(test, expectedValue, msec, count, source, callback);
+        }, msec);
+        return;
+    }
+    // Condition finally met. callback() can be executed.
+    console.log(source + ': ' + test() + ', expected: ' + expectedValue + ', ' + count + ' loops.');
+    callback();
+}
+var _TIMEOUT = 50; // waitfor test rate [msec]
+var bBusy = true; // Busy flag (will be changed somewhere else in the code)
+function _isBusy() {
+    return processGoingOn;
+}
 //# sourceMappingURL=processRentalJSONModule.js.map

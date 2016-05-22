@@ -1,0 +1,30 @@
+﻿<div>
+    <div class="agentContainer">
+        <a href="https://www.realestate.com.au/agent/atul-bhanushali-1215239&#13;">
+            <div class="agentPhoto">
+                <img class="agentPhotoImage" src="{{agent.agentImageUrl}}"
+                     width="250" height="300" alt="{{agent.name}}" title="{{agent.name}}">
+            </div>
+        </a>
+        <div class="agentContactInfo">
+            <p class="agentName"><strong>{{agent.name}}</strong></p>
+            <ul class="linkList contactDetails">
+                <li>
+                    <span class="agent designation"></span>{{agent.designation}}
+                </li>
+                <li>
+                    <a href="#" rel="showContact">
+                        <span class="fa fa-phone spacing-icon"></span>{{agent.workphone}}
+                    </a>
+                </li>
+                <li>
+                    <a href="{{agent.facebook}}" target="_blank"><span class="fa fa-facebook spacing-icon"></span>Facebook</a>
+                </li>
+            </ul>
+        </div>
+        <div>
+            <span ng-bind-html="agent.agentDescription"></span>
+
+        </div>
+    </div>
+</div>

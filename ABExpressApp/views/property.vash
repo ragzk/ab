@@ -1,0 +1,19 @@
+﻿
+
+@html.extend('layout', function(model){
+
+    @html.block('content', function(model){
+			<script>
+				//APP.value('buyDetails', JSON.parse(JSON.stringify({type : @model.uniqueId})))
+			</script>
+			<div class="propertydetailscontainer">
+				<div class="" ng-controller="propertyController as ctrl" ng-init="ctrl.init({uniqueId : '@model.uniqueId'})" >
+					<div ng-if="ctrl.property">
+					<property-details ng-show="ctrl.property" property="ctrl.property"></property-details>
+					</div>
+				</div>
+			</div>
+		    
+    })
+	
+})

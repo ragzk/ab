@@ -40,6 +40,7 @@
         status: string;
         imageUrl: string;
         fileName: string; //debuging purpose
+        lastUpdateFileNumber: number;
     }
 
     interface IImg {
