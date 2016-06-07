@@ -32,7 +32,12 @@ gulp.task('bowerComponentsCSS', function () {
 
 
 gulp.task('localScripts', function () {
-    return gulp.src(['./public/javascripts/app/app.js', './public/javascripts/app/controllers/*.js', './public/javascripts/app/directives/*.js', './public/javascripts/custom/postalAngularWrapper.js'])
+    return gulp.src([
+        './public/javascripts/app/app.js', 
+        './public/javascripts/app/controllers/*.js', 
+        './public/javascripts/app/directives/*.js', 
+        './public/javascripts/custom/postalAngularWrapper.js',
+        './public/javascripts/custom/cut.js'])
     .pipe(concat('all.js'))
     .pipe(gulp.dest('./public/javascripts/app'));
 });

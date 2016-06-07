@@ -12,6 +12,14 @@
 					</div>
 				</div>
 				<div>
+					<div class= "rightSideSliderParent">
+						<div class="rightSideSliderContent">
+						<h3>Don't miss these properties</h3>
+						<div class="un-sold-properties">
+							<bx-slider url="api/getUnSoldProperties" showdetails="true"/>							
+						</div>
+						</div>
+					</div>
 					<div class="rightSideWrittenContent">
 						<h1>AB Properties</h1>
 						<div>
@@ -28,14 +36,7 @@
 							</ul>
 						</div>
 					</div>
-					<div class= "rightSideSliderParent">
-						<div class="rightSideSliderContent">
-						<h3>Don't miss these properties</h3>
-						<div class="un-sold-properties">
-							<bx-slider url="api/getUnSoldProperties" showdetails="true"/>							
-						</div>
-						</div>
-					</div>
+
 				</div>
 			</div>
 
