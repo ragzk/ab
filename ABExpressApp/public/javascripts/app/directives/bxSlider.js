@@ -1,4 +1,4 @@
-﻿APP.directive('bxSlider', function ($http, $compile) {
+﻿APP.directive('bxSlider', function ($http, $compile, $timeout) {
     return {
         scope: {},
         //template: '<ul class="bxslider">' +
@@ -42,9 +42,9 @@
                 var element = elem;
                 //scope.$$phase || scope.$apply();
                 //$compile(elem);
-                scope.$$postDigest(function () {
+                $timeout(function () {
                     
-                    $(element.find('.bxslider1')).bxSlider({
+                    $(element.children('.bxslider1')).bxSlider({
                         slideWidth: 5000,
                         minSlides: 1,
                         maxSlides: 1,
@@ -58,7 +58,7 @@
                     //    maxSlides: 1
                     //});
 
-                });
+                }, 0, false);
             }
             scope.showdetails = attrs.showdetails;
             

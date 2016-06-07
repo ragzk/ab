@@ -18,23 +18,33 @@ export class propertyagentRepo {
 
     getpropertyagents(id: number, mydesktopAgentId: number) {
         var findOptions = <sequelize.FindOptions>{};
+        var transaction = <sequelize.Transaction>{};
+        transaction.ISOLATION_LEVELS = <sequelize.TransactionIsolationLevels>{ READ_UNCOMMITTED: 'READ_UNCOMMITTED' };
+        transaction.LOCK = <sequelize.TransactionLocks>{ UPDATE: 'UPDATE'}
         findOptions.where = { propertyId: id, mydesktopAgentId: mydesktopAgentId };
         findOptions.include = [{ model: models.agent, required: false }];
-        var r = models.propertyagent.find(findOptions);
+        var queryOptions = <sequelize.QueryOptions>{};
+        queryOptions.transaction = transaction;
+        var r = models.propertyagent.find(findOptions, queryOptions);
         return r;
     }
 
     getagent(mydesktopAgentId: number) {
         var findOptions = <sequelize.FindOptions>{};
         findOptions.where = { mydesktopAgentId: mydesktopAgentId };
-        var r = models.agent.find(findOptions);
+        var transaction = <sequelize.Transaction>{};
+        transaction.ISOLATION_LEVELS = <sequelize.TransactionIsolationLevels>{ READ_UNCOMMITTED: 'READ_UNCOMMITTED' };
+        transaction.LOCK = <sequelize.TransactionLocks>{ UPDATE: 'UPDATE' }
+        var queryOptions = <sequelize.QueryOptions>{};
+        queryOptions.transaction = transaction;
+        var r = models.agent.find(findOptions, queryOptions);
         return r;
     }
 
     savepropertyagent(agent: IListingAgent, propertyId: number) {
         try {
             var that = this;
-            return this.getpropertyagents(propertyId, agent.agentid).then(function (e) {
+                this.getpropertyagents(propertyId, agent.agentid).then(function (e) {
                 var propertyAgent = e;
                 if (propertyAgent) {
                     //if (propertyAgent. != img.url || image.imageIndex != img.index) {
@@ -47,7 +57,6 @@ export class propertyagentRepo {
                 else {
                     return that.getagent(agent.agentid).then(function (abAgent) {
                         if (abAgent) {
-
                             propertyAgent = models.propertyagent.build({
                                 propertyId: <any>propertyId,
                                 agentId: abAgent.agentId,
@@ -82,6 +91,7 @@ export class propertyagentRepo {
         catch (ex) {
             throw ex;
         }
+
     }
     //models.locations.create();
 }

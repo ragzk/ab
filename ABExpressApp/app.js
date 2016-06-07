@@ -4,7 +4,6 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var tsrequire = require('typescript-require');
 var request = require('request');
 
 var index = require('./routes/index');
@@ -19,7 +18,7 @@ var property = require('./routes/property');
 var _ = require('lodash');
 
 var app = express();
-
+var Promise = require('q');
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'vash');
@@ -96,41 +95,128 @@ var watcher = chokidar.watch('./public/xmlfiles/', {
     persistent: true
 });
 
+var filesToProcess = [];
 
 watcher
   .on('add', function (filePath) 
       {
         //console.log(event, path.extname(filePath));
-        if (path.extname(filePath) == ".xml") {
-            addFileCheck(filePath);
-        }
+    if (path.extname(filePath) == ".xml") {
+        setTimeout(function () {
+            addFileToProcess(filePath);
+            counter--;
+        }, (counter++ * interval));
+            
+    }
 });
+var promise = null;
+var interval = 8000;
+var counter = 0;
 
-var addFileCheck = function (xmlPath) {
-    var fs = require('fs'),
-        xml2js = require('xml2js');
+var addFileToProcess = function (xmlPath) {
+    filesToProcess.push(xmlPath)
+    var that = this;
+    //return promiseWhile(function () { return filesToProcess.length > 0 }, function () {
+    //    var xmlPath = filesToProcess.pop();
+    //    if (xmlPath) {
+    //        console.log("------------" + xmlPath + "-----------------");
+    //        filesToProcess.splice(xmlPath, 1);
+            
+
+    //        return addFileCheck(xmlPath).then(function () {
+    //            console.log("DONE" + xmlPath + "DONE");
+    //            return Promise.when([]);
+    //        });
+    //    }
+    //});
+    //_.forEach(filesToProcess, function (xPath) {
+    //    //if (promise) {
+    //    //    filesToProcess.splice(xPath, 1);
+    //    //    interval = interval - 15000;
+    //    //    promise.then(function () {
+    //    //        setTimeout(function () {
+    //    //            that.promise = addFileCheck(xPath);
+    //    //        }, counter * interval);  });
+    //    //}
+    //    //else {
+    //    filesToProcess.splice(xPath, 1);
+    //    counter++;
+    //        setTimeout(function () {
+    //            that.promise = addFileCheck(xPath);
+    //        }, (counter * interval));
+            
+    //    //}
+    //})
     
-    
-    var parser = new xml2js.Parser({ explicitArray : false, mergeAttrs: true });
-    fs.readFile(xmlPath, function (err, data) {
-        parser.parseString(data, function (err, result) {
-            if (result && result.propertyList) {
-                var propertyList = toCamelCase(result.propertyList);
-                var processed = false
-                var processed = processProperty(propertyList, fs, request, path, xmlPath);
-                var fileName = path.basename(xmlPath)
-                //fs.renameSync(xmlPath, "./public/processedXmlFiles/" + fileName);
-                //fs.createReadStream(xmlPath).pipe(fs.createWriteStream("./public/processedXmlFiles/" + fileName));
-         //       fs.createReadStream(xmlPath).pipe(fs.createWriteStream("./pubic/processedXmlFiles"));
-            }
-        });
-    });
+    that.promise = addFileCheck(xmlPath);
+    promise = null;
+    //counter = 0;
+    //_.forEach(filesToProcess, function (xPath) {
+    //    addFileCheck(xPath).then(function () { 
+    //        return
+    //    });
+    //})
 }
 
-var processProperty = function (propertyJSON, fs, request, path, xmlPath) {  
+var addFileCheck = function (xmlPath) {
+    var fs = require('fs');
+
+    var data = fs.readFileSync(xmlPath)
+    return parseXmlFile(data).then(function (result) {
+        if (result && result.propertyList) {
+            var propertyList = toCamelCase(result.propertyList);
+            var processed = false;
+            return processProperty(propertyList, fs, request, path, xmlPath);
+        }
+        else {
+            return Promise.when([]);
+        }
+    
+    });
+
+
+}
+
+var parseXmlFile = function (data) {
+    var deferred = Promise.defer();
+    var xml2js = require('xml2js')
+    var parser = new xml2js.Parser({ explicitArray : false, mergeAttrs: true });    
+    var result = parser.parseString(data, function (err, stdout, stderr) {
+            if (err) {
+                return deferred.reject(err);
+            }
+            return deferred.resolve(stdout);
+        });
+    return deferred.promise;
+}
+
+var processProperty = function (propertyJSON, fs, request, path, xmlPath) {
     var processRentalJSONModule = require('./processRentalJSONModule.js');
+    console.log("processRentalJSONModule.init called");
     return processRentalJSONModule.init(propertyJSON, fs, request, path, xmlPath);
 }   
+
+function promiseWhile(condition, body) {
+    var done = Promise.defer();
+    
+    function loop() {
+        // When the result of calling `condition` is no longer true, we are
+        // done.
+        if (!condition()) return done.resolve();
+        // Use `when`, in case `body` does not return a promise.
+        // When it completes loop again otherwise, if it fails, reject the
+        // done promise
+        Promise.when(body(), loop, done.reject);
+    }
+    
+    // Start running the loop in the next tick so that this function is
+    // completely async. It would be unexpected if `body` was called
+    // synchronously the first time.
+    Promise.nextTick(loop);
+    
+    // The promise
+    return done.promise;
+}
 
 
 //watcher
