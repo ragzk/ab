@@ -187,39 +187,7 @@
         </div>-->
         <!--<a href="" class="btn b*tn-primary sharp">Search</a>-->
     </script>
-<!--<script src="/bower_components/jquery/dist/jquery.js"></script>
-<script src="/bower_components/lodash/lodash.js"></script>
-<script src="/bower_components/bootstrap/dist/js/bootstrap.js"></script>
-<script src="/bower_components/angular/angular.js"></script>
-<script src="/bower_components/angular-sanitize/angular-sanitize.js"></script>
-<script src="/bower_components/bxslider-4/dist/jquery.bxslider.min.js"></script>
-<script src="/bower_components/postal.js/lib/postal.js"></script>
-<script src="/bower_components/ngprogress/build/ngprogress.js"></script>
-<script src="/bower_components/matchMedia/matchMedia.js"></script>
-<script src="/bower_components/matchMedia-ng/matchMedia-ng.js"></script>
-<script src="/bower_components/slick-carousel/slick/slick.min.js"></script>-->
-<script src="./bower_components/vendor.js"></script>
-<!--<script src="/public/javascripts/app/app.js"></script>
-<script src="/public/javascripts/custom/postalAngularWrapper.js"></script>
-<script src="/public/javascripts/app/controllers/mainController.js"></script>
-<script src="/public/javascripts/app/controllers/sidebarController.js"></script>
-<script src="/public/javascripts/app/controllers/SearchController.js"></script>
-<script src="/public/javascripts/app/controllers/buyController.js"></script>
-<script src="/public/javascripts/app/controllers/agentController.js"></script>
-<script src="/public/javascripts/app/controllers/propertyController.js"></script>
-<script src="/public/javascripts/app/directives/agentDetailsSummary.js"></script>
-<script src="/public/javascripts/app/directives/propertyDetails.js"></script>
-<script src="/public/javascripts/app/directives/shortPropertyDetails.js"></script>
-<script src="/public/javascripts/app/directives/agentDetails.js"></script>
-<script src="/public/javascripts/app/directives/showSelected.js"></script>
-<script src="/public/javascripts/app/directives/bxslider.js"></script>
-<script src="/public/javascripts/custom/slider.js"></script>
-<script src="/public/javascripts/custom/cut.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/select2/3.4.8/select2.min.js"></script>-->
-<script src="./public/javascripts/app/all.js"></script>
+<script src="/public/javascripts/vendor.js"></script>
+<script src="/public/javascripts/app/all.js"></script>
 
 </html>
-
-
-
-

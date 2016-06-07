@@ -21,6 +21,8 @@ router.get('/getUnSoldProperties', function (req, res) {
 });
 
 router.get('/', function (req, res) {
+    if (!res.getHeader('Cache-Control'))
+        res.setHeader('Cache-Control', 'public, max-age=' + (120000 / 1000));    
     res.render('index', {
         title: 'Property',
         scripts: ['javascripts/custom/slider.js'],
