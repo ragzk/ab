@@ -13,10 +13,12 @@ gulp.task('bowerComponentsJS', function () {
     var jsFiles = './bower_components/bxslider-4/dist/jquery.bxslider.js';
     bower()
         .pipe(jsFilter)
+        .pipe(uglify())
         .pipe(concat('vendor.js'))
         .pipe(gulp.dest('./public/javascripts/'));
 
     gulp.src(jsFiles)
+        .pipe(uglify())
         .pipe(concat('vendor.js'))
         .pipe(gulp.dest('./public/javascripts/'));
 });

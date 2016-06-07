@@ -7,14 +7,10 @@
 		<!-- Latest compiled and minified CSS -->
 		<link href="/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
 		<link rel="shortcut icon" href="/public/images/favicon.png">
-		<link href="http://cdnjs.cloudflare.com/ajax/libs/select2/3.4.8/select2.css" rel="stylesheet" />
-		<link href="http://cdnjs.cloudflare.com/ajax/libs/select2/3.4.8/select2-bootstrap.css" />
 		<link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
 		<link rel="stylesheet" href="/stylesheets/fontawesome.css" type="text/css" media="screen" charset="utf-8">
 		<title>@model.title</title>
 		<link rel="stylesheet" href="/stylesheets/custom.min.css" type="text/css" media="screen" charset="utf-8">
-		<link href="/bower_components/slick-carousel/slick/slick.css" rel="stylesheet" />
-		<link href="/bower_components/slick-carousel/slick/slick-theme.css" rel="stylesheet" />
 		<link href="/bower_components/bxslider-4/dist/jquery.bxslider.min.css" rel="stylesheet" />
 	</head>
 	<body>		
@@ -72,7 +68,7 @@
                     </a>
                 </div>
                 <div>
-                    <span style="font-size:45px">AB Properties</span>
+                    <span style="font-size:45px">AB Property</span>
                 </div>
                 <div>
                     Real estate property sales, rental and management <span class="sep">·</span> Northmead, New South Wales

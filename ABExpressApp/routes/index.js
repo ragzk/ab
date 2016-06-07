@@ -15,8 +15,6 @@ fs.readdir(sliderUnSoldDir , function (err, files) {
     _.each(files, function (file) { unSoldProp.push(sliderUnSoldDir + "/" + file); })
 })
 
-
-
 /* GET home page. */
 router.get('/getUnSoldProperties', function (req, res) {
     return ["sdfdsf", "sdfsdfsdf"];
@@ -24,13 +22,12 @@ router.get('/getUnSoldProperties', function (req, res) {
 
 router.get('/', function (req, res) {
     res.render('index', {
-        title: 'Express',
+        title: 'Property',
         scripts: ['javascripts/custom/slider.js'],
         soldProp: soldProp,
         unSoldProp: unSoldProp
     });
     
 });
-
 
 module.exports = router;
