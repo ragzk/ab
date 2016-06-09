@@ -4,6 +4,7 @@ var rename = require('gulp-rename');
 var uglify = require('gulp-uglify');
 var bower = require('gulp-bower-files');
 var gulpFilter = require('gulp-filter');
+var ngAnnotate = require('gulp-ng-annotate');
 
 var bowerSrc = {
     bower: ['bower.json', '.bowerrc']
@@ -30,6 +31,15 @@ gulp.task('bowerComponentsCSS', function () {
         .pipe(cssFilter)
         .pipe(concat('vendor.css'))
         .pipe(gulp.dest('./public/javascripts/'));
+
+    gulp.src([
+        './bower_components/bootstrap/dist/css/bootstrap.min.css',
+        './public/stylesheets/fontawesome.css',
+        './public/stylesheets/custom.min.css',
+        './bower_components/bxslider-4/dist/jquery.bxslider.min.css'])
+        .pipe(concat('all.css'))
+        .pipe(gulp.dest('./public/stylesheets/'));
+
 });
 
 
@@ -41,6 +51,8 @@ gulp.task('localScripts', function () {
         './public/javascripts/custom/postalAngularWrapper.js',
         './public/javascripts/custom/cut.js'])
     .pipe(concat('all.js'))
+    .pipe(ngAnnotate())
+    .pipe(uglify())
     .pipe(gulp.dest('./public/javascripts/app'));
 });
 

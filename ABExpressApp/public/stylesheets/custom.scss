@@ -67,33 +67,34 @@ ul.dropdown-menu a{
 //	background-color:#F8F005;
 //}
 .propertydetailscontainer { 
-    width: auto;
+    margin-left:320px;
     overflow: hidden;
     line-height:1.6;
+    .imgLink {
+        color: #000; 
+        text-decoration: none;
+    }
     .property-details {
         width: 100%;
         float: left;
         border-bottom:dotted 1px black;
-
-        .property-sub-details {
-            width:70%;
-            margin: 10px;
+        .property-image {
             float:left;
-            .property-image {
-                float:left;
-                margin: 10px;
-                width:120px;
-            }
-            .property-description {
-                padding-left: 5px;
-                overflow: hidden;
-            }        
+            margin: 5px;
+            width:120px;
         }
+        .property-description {
+            float:left;
+            padding-left: 5px;
+            overflow: hidden;
+            width:52%;
+        }        
         .property-features {
             word-wrap:break-word;
-            margin: 10px;
+            margin: 5px;
             overflow:hidden;
-            width: 25%;
+            width:24%;
+            float:left;
             .inspection {
 
             }
@@ -668,10 +669,6 @@ ul.footer_nav.primary li {
 
  /* Portrait phones and smaller */
 @media (max-width: 480px) {
-    .sidebar
-    {
-        display:none;
-    }
     .sliderParent {
         .rightSideContent
         {
@@ -697,15 +694,41 @@ ul.footer_nav.primary li {
             width:auto;
         }
     }
+    .agentContainer {
+        float: none;
+        width:auto;
+         .agentPhoto img {
+            height: 250px;
+            width:auto;
+        }
+    }
+    .propertydetailscontainer { 
+        .shortpropertydetailscontainer {
+        .property-details {
+            .property-image {
+                float:left;
+                width:28%;
+            }
+            .property-description {
+                float:right;
+                width:69%;
+            }        
+            .property-features {
+                float:left;
+            }
+
+        }
+        }
+        }
 }
 
 /* Landscape phones and portrait tablets */
 @media (max-width: 767px) {
-    .sidebar
-    {
-        display:none;
+    .sidebar{
+
     }
-    .sliderParent {
+
+       .sliderParent {
         .rightSideContent
         {
                 float: none;
@@ -747,5 +770,33 @@ ul.footer_nav.primary li {
     .property-sub-details {
         margin: 10px;
         float: left;
+    }
+    .agentContainer {
+        float: none;
+        width:auto;
+         .agentPhoto img {
+            height: 250px;
+            width:auto;
+        }
+    }
+
+    .propertydetailscontainer { 
+        .shortpropertydetailscontainer {
+        .property-details {
+            .property-image {
+                float:left;
+                width:28%;
+            }
+            .property-description {
+                float:right;
+                width:69%;
+            }        
+            .property-features {
+                float:left;
+            }
+
+        }
+        }
+
     }
 }

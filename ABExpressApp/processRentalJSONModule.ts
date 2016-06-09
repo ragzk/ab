@@ -75,7 +75,7 @@ class processRentalJSON {
         if (Object.prototype.toString.call(obj) === '[object Array]') {
             var i = 0;
             return promiseWhile(function () { return (<any>obj).length > i; }, function () {
-                that.addImagesAndDB(that, obj[0]);
+                that.addImagesAndDB(that, obj[i]);
                 i++;
             }).then(function () {
                 console.log('multiple properties processed');
@@ -127,72 +127,70 @@ class processRentalJSON {
         console.log("save property info started");
         var fileNameWithoutExtension = that.xmlPath.slice(0, -4);
         obj.lastUpdateFileNumber = +fileNameWithoutExtension.substring(fileNameWithoutExtension.lastIndexOf('_') + 1);
+        var prop = null;
         var chain = repo.saveProperty(obj)
             .then(function (prop) {
                 console.log("save property info done");
                 console.log("save property address started");
                 obj.propertyId = <any>prop.propertyId;
-                addressRepo.savePropertyAddress(obj)
-            })
-            .then(function () {
-                    console.log("save property address done");
-                    console.log("save property feature started");
-                    if (obj.features) {
-                        featureRepo.savePropertyFeature(obj);
-                    }
-                    else {
-                        Promise.when([]);
-                    }
-                })
-            .then(function () {
-                    console.log("save property feature done");
-                    console.log("save property description started");
-                    descriptionRepo.savePropertyDescription(obj);
-                })
-            .then(function () {
-                    console.log("save property description done");
-                    console.log("save property agent info started");
-                    if (obj.listingAgent.length) {
-                        var i = 0;
-                        return promiseWhile(function () { return obj.listingAgent.length > i; }, function () {
-                            var agent = <IListingAgent>obj.listingAgent[i];
-                            agentRepo.savepropertyagent(agent, obj.propertyId);
-                            i++;
-                        }).then(function () {
-                            console.log('all image saved in DB');
-                            Promise.when([]);
+                if (obj.lastUpdateFileNumber == prop.lastUpdateFileNumber) {
+                    addressRepo.savePropertyAddress(obj)
+                        .then(function () {
+                            console.log("save property address done");
+                            console.log("save property feature started");
+                            if (obj.features) {
+                                featureRepo.savePropertyFeature(obj);
+                            }
+                            else {
+                                Promise.when([]);
+                            }
                         })
-                        //for (var i = 0; i < obj.listingAgent.length; i++) {
-                        //    var agent = <IListingAgent>obj.listingAgent[i];
-                        //    return agentRepo.savepropertyagent(agent, obj.propertyId);
-                        //}
-                    }
-                    else {
-                        var agent1 = <any>obj.listingAgent;
-                        agentRepo.savepropertyagent(agent1, obj.propertyId);
-                    }
-                })
-            .then(function () {
-                    console.log("save property agent info done");
-                    console.log("save property image info started");
-                    if (obj && obj.images && obj.images.img) {
-                        var img = <IImage>obj.images.img[0];
-                        thatFunc.savePropertyImagesInDb(img, obj, imageRepo, 0).then(function () {
-                            console.log('savePropertyImagesInDb ** done');
+                        .then(function () {
+                            console.log("save property feature done");
+                            console.log("save property description started");
+                            descriptionRepo.savePropertyDescription(obj);
+                        })
+                        .then(function () {
+                            console.log("save property description done");
+                            console.log("save property agent info started");
+                            if (obj.listingAgent.length) {
+                                var i = 0;
+                                return promiseWhile(function () { return obj.listingAgent.length > i; }, function () {
+                                    var agent = <IListingAgent>obj.listingAgent[i];
+                                    agentRepo.savepropertyagent(agent, obj.propertyId);
+                                    i++;
+                                }).then(function () {
+                                    console.log('all image saved in DB');
+                                    Promise.when([]);
+                                })
+                                //for (var i = 0; i < obj.listingAgent.length; i++) {
+                                //    var agent = <IListingAgent>obj.listingAgent[i];
+                                //    return agentRepo.savepropertyagent(agent, obj.propertyId);
+                                //}
+                            }
+                            else {
+                                var agent1 = <any>obj.listingAgent;
+                                agentRepo.savepropertyagent(agent1, obj.propertyId);
+                            }
+                        })
+                        .then(function () {
+                            console.log("save property agent info done");
+                            console.log("save property image info started");
+                            if (obj && obj.images && obj.images.img) {
+                                var img = <IImage>obj.images.img[0];
+                                thatFunc.savePropertyImagesInDb(img, obj, imageRepo, 0).then(function () {
+                                    console.log('savePropertyImagesInDb ** done');
+                                    return Promise.when([]);
+                                });
+                        
+
+                            }
+                        }).done(function () {
                             return Promise.when([]);
                         });
-                        
-                        //for (var i = 0; i < obj.images.img.length; i++) {
-                        //    var img = <IImage>obj.images.img[i];
-                        //    if (img && img.url) {
-                        //        imageRepo.savePropertyImage(img, obj.propertyId);
-                        //    }
-                        //}
+                }
 
-                    }
-            }).done(function () {
-                    return Promise.when([]);
-            });
+            })
         return Promise.all([chain]).then(function () { return Promise.when([]);});
 
         //        }
@@ -200,12 +198,6 @@ class processRentalJSON {
     }
     public savePropertyImagesInDb(img: IImage, obj: IRental, imageRepo: propertyImageReport.propertyImageRepo, index: number) {
         var that = this;
-        //return imageRepo.savePropertyImage(img, obj.propertyId).then(function (savedImage) {
-        //    if (++index < obj.images.img.length) {
-        //        img = <IImage>obj.images.img[index];
-        //        that.savePropertyImagesInDb(img, obj, imageRepo, index);
-        //    }
-        //})
 
         return promiseWhile(function () { return obj.images.img.length > index; }, function () {
             img = <IImage>obj.images.img[index];
@@ -288,13 +280,6 @@ class processRentalJSON {
                 if (index == 0) {
                     obj.imageUrl = img.url;
                 }
-                //if (obj.images.img.length > ++index) {
-                //    img = <IImage>obj.images.img[index];
-                //    return thatFunc.downloadImages(that, obj, img, dirName, index).then(function () {
-                //        console.log('downloadImage done' + index);
-                //        return Promise.when([]);
-                //    });
-                //}
                 
             });
         }
