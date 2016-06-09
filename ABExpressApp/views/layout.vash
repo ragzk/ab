@@ -15,6 +15,7 @@
             <div ng-include src="'Header.html'"></div>
          </div>
          <div id="body-container">
+			@html.block('content')
             <div class="sidebar">
                <div id="MainMenu" class="sideMenu" ng-controller="sidebarController">
                   <div id="container">
@@ -41,9 +42,6 @@
                   </div>
                </div>
             </div>
-			<div class="content">
-				@html.block('content')
-			</div>
          </div>
          <footer>
             <div>

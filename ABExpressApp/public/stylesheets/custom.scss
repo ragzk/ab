@@ -66,10 +66,21 @@ ul.dropdown-menu a{
 //ul.dropdown-menu a:hover{ 
 //	background-color:#F8F005;
 //}
-.propertydetailscontainer { 
-    margin-left:320px;
+.propertydetailscontainer,
+.agentscontainer,
+.agentsdetailscontainer
+ { 
+    float:right;
+    width:calc(100% - 310px);
     overflow: hidden;
     line-height:1.6;
+}
+
+.propertydetailscontainer { 
+    /*float:right;
+    width:calc(100% - 310px);
+    overflow: hidden;
+    line-height:1.6;*/
     .imgLink {
         color: #000; 
         text-decoration: none;
@@ -103,12 +114,11 @@ ul.dropdown-menu a{
     }
 
 }
-.agentContainer {
-    display:inline-block;
-    float:left;
-    line-height:1.4;
-    width:50%;
-
+.agentscontainer {
+    /*float:right;
+    width:calc(100% - 310px);
+    overflow: hidden;
+    line-height:1.6;*/
     .agentPhoto
     {
         width:250px;
@@ -133,6 +143,14 @@ ul.dropdown-menu a{
         }
     }
     
+}
+
+.agentsdetailscontainer{
+    /*float:right;
+    width:calc(100% - 310px);
+    overflow: hidden;
+    line-height:1.6;*/
+
 }
 
 .agentDetailsSummaryContainer {
@@ -171,8 +189,10 @@ ul.dropdown-menu a{
         
         .bottom{
             position:relative;
-            bottom:50px;
+            bottom:35px;
             color:white;
+            left:10px;
+            display:table;
             /*text-align:center;*/
         }
     }
@@ -522,7 +542,7 @@ div#slider {
     //display:inline-block;
     width:310px;
     padding-right:10px;
-    float:left;
+    //float:left;
 }
 .sideMenu {
     /*float:left;*/
@@ -703,6 +723,7 @@ ul.footer_nav.primary li {
         }
     }
     .propertydetailscontainer { 
+        margin-left: 0px;
         .shortpropertydetailscontainer {
         .property-details {
             .property-image {
@@ -725,6 +746,8 @@ ul.footer_nav.primary li {
 /* Landscape phones and portrait tablets */
 @media (max-width: 767px) {
     .sidebar{
+        float:right;
+        width:100%;
 
     }
 
@@ -771,6 +794,7 @@ ul.footer_nav.primary li {
         margin: 10px;
         float: left;
     }
+
     .agentContainer {
         float: none;
         width:auto;
@@ -779,8 +803,14 @@ ul.footer_nav.primary li {
             width:auto;
         }
     }
-
-    .propertydetailscontainer { 
+    //short property details
+    .agentsdetailscontainer,
+    .agentscontainer,
+    .propertydetailscontainer {
+        float:none;
+        width:100%;
+         
+        margin-left:0px;
         .shortpropertydetailscontainer {
         .property-details {
             .property-image {
@@ -799,4 +829,22 @@ ul.footer_nav.primary li {
         }
 
     }
+
+    .agentscontainer
+    {
+
+    }
+
+    //detailed property details
+    .propertydetailscontainer { 
+        margin-left: 0px;
+        .property-details {
+            .property-description {
+                width:100%;
+            }        
+
+        }
+        }
+
+
 }
