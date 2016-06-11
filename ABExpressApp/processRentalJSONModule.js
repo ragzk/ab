@@ -12,6 +12,7 @@ var propertyAgentReport = require("./repository/propertyAgentRepo");
 //import enumTypes = require('enumTypes');
 var Promise = require('q');
 var request = require('request');
+var _ = require('lodash');
 var processGoingOn = false;
 var currentProcessing = null;
 var CategoryEnum;
@@ -55,9 +56,33 @@ var processRentalJSON = (function () {
     processRentalJSON.prototype.addToDBAndImages = function () {
         //console.log(this.data);
         // add pipe or make it chain
-        var obj = this.data.rental || this.data.residential || this.data.land;
+        var obj = [];
+        if (this.data.rental) {
+            if (_.isArray(this.data.rental)) {
+                obj = obj.concat(this.data.rental);
+            }
+            else {
+                obj.push(this.data.rental);
+            }
+        }
+        if (this.data.residential) {
+            if (_.isArray(this.data.residential)) {
+                obj = obj.concat(this.data.residential);
+            }
+            else {
+                obj.push(this.data.residential);
+            }
+        }
+        if (this.data.land) {
+            if (_.isArray(this.data.land)) {
+                obj = obj.concat(this.data.land);
+            }
+            else {
+                obj.push(this.data.land);
+            }
+        }
         var that = this;
-        console.log(obj.status);
+        //console.log(obj.status);
         //      var func = function (that) {
         console.log("addImagesAndDB started");
         if (Object.prototype.toString.call(obj) === '[object Array]') {
@@ -70,9 +95,9 @@ var processRentalJSON = (function () {
                 return Promise.when([]);
             });
         }
-        else {
-            return that.addImagesAndDB(that, obj);
-        }
+        //else {
+        //    return that.addImagesAndDB(that, obj);
+        //}
         //        }
         //        return func(this);
     };
@@ -99,15 +124,39 @@ var processRentalJSON = (function () {
         var agentRepo = new propertyAgentReport.propertyagentRepo();
         var fileName = that.path.basename(that.xmlPath);
         obj.fileName = fileName;
-        if (that.data.rental) {
+        var getObject = function (arr) {
+            var arr1 = [];
+            if (!_.isArray(arr)) {
+                arr1.push(arr);
+            }
+            else {
+                arr1 = arr;
+            }
+            var o = _.find(arr1, function (o) {
+                return o.uniqueID == obj.uniqueID;
+            });
+            return o;
+        };
+        if (getObject(this.data.rental)) {
             obj.type = "rental";
         }
-        if (that.data.residential) {
-            obj.type = "residential";
+        else {
+            if (getObject(this.data.residential)) {
+                obj.type = "residential";
+            }
+            else {
+                obj.type = "land";
+            }
         }
-        if (that.data.land) {
-            obj.type = "land";
-        }
+        //if (that.data.rental) {
+        //    obj.type = "rental";
+        //}
+        //if (that.data.residential) {
+        //    obj.type = "residential";
+        //}
+        //if (that.data.land) {
+        //    obj.type = "land";
+        //}
         console.log("save property info started");
         var fileNameWithoutExtension = that.xmlPath.slice(0, -4);
         obj.lastUpdateFileNumber = +fileNameWithoutExtension.substring(fileNameWithoutExtension.lastIndexOf('_') + 1);

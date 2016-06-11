@@ -13,7 +13,7 @@
         //          '</div>',
         template: '<div class="bxslider1">' +
                    '<div class="slide" ng-repeat="image in images track by $index">' +
-                     '<img class="sliderimg" ng-src="{{image.imageUrl}}" alt="" />' +
+                     '<img class="lazy" data-src="{{image.imageUrl}}" alt="" />' +
                      '<div class="bxslider-property-details">' +  
                         '<div class="bxslider-property-features">' +
                             '<span ng-show="image.propertyFeature.bedroom">{{ image.propertyFeature.bedroom }}<span class="fa fa-bed spacing-icon"></span></span>' + 
@@ -43,7 +43,8 @@
                 //scope.$$phase || scope.$apply();
                 //$compile(elem);
                 $timeout(function () {
-                    
+                    var page = 0;
+                    var maxSlides = 5;
                     $(element.children('.bxslider1')).bxSlider({
                         slideWidth: 5000,
                         minSlides: 1,
@@ -51,6 +52,31 @@
                         auto: true,
                         pager: false,
                         slideMargin: 10
+                        //,
+                        //onSliderLoad: function () {
+                        //    var $sliderImgs = $(".bxslider1 img");
+                        //    var start = page * maxSlides + maxSlides;
+                        //    var stop = start + maxSlides;
+                        //    for (var i = start; i < stop; i++) {
+                        //        var selecter = '[data-src="' + $sliderImgs.eq(i).data('src') + '"]';
+                        //        $(selecter).attr('src', $(selecter).data('src')).one('load', function () {
+                        //            $(this).removeClass('lazy');
+                        //        });
+                        //    }
+                        //},
+                        //onSlideBefore: function () {
+                        //    page = slider.getCurrentSlide();
+                        //    var $sliderImgs = $(".slider img");
+                        //    var start = page * maxSlides + maxSlides;
+                        //    var stop = start + maxSlides;
+                        //    for (var i = start; i < stop; i++) {
+                        //        var selecter = '[data-src="' + $sliderImgs.eq(i).data('src') + '"]';
+                        //        $(selecter).attr('src', $(selecter).data('src')).one('load', function () {
+                        //            $(this).removeClass('lazy');
+                        //        });
+                        //    }
+                        //}
+
                     });                    
                     //$('.bxslider1').bxSlider({
                     //    mode: 'fade',

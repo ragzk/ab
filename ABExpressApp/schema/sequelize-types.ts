@@ -16,6 +16,7 @@ import types = require('./sequelize-types'); // important so we can use same ful
 export interface AgentId { AgentId:number; }
 export interface PropertyId { PropertyId:number; }
 export interface PropertyAgentId { PropertyAgentId:number; }
+export interface PropertyappraisalId { PropertyappraisalId:number; }
 export interface PropertyImageId { PropertyImageId:number; }
 
 
@@ -46,6 +47,7 @@ export interface agentPojo
     agentImageUrl?:string;
     agentDescription?:string;
     rateMyAgentTestimonialUrl?:string;
+    designation?:string;
     propertyagent?:propertyagentPojo[];
 }
 
@@ -86,6 +88,7 @@ export function assertValidagent(pojo:agentPojo, allowUndefined?:boolean):void {
             case 'agentImageUrl': assertValidFieldType('agent', 'agentImageUrl', pojo, 'string'); break;
             case 'agentDescription': assertValidFieldType('agent', 'agentDescription', pojo, 'string'); break;
             case 'rateMyAgentTestimonialUrl': assertValidFieldType('agent', 'rateMyAgentTestimonialUrl', pojo, 'string'); break;
+            case 'designation': assertValidFieldType('agent', 'designation', pojo, 'string'); break;
             case 'propertyagent': assertValidFieldType('agent', 'propertyagent', pojo, 'propertyagentPojo[]'); break;
             default:
                 throw new Error('Invalid agent provided. Field \'' + fieldNames[i] + '\' is not supported.')
@@ -312,6 +315,75 @@ export function assertValidpropertyagent(pojo:propertyagentPojo, allowUndefined?
     }
 }
 asserters['propertyagent'] = assertValidpropertyagent;
+
+
+
+
+
+//////////////////////////////////////////////////////////////////////////////
+//
+//
+//               propertyappraisal
+//
+//
+//////////////////////////////////////////////////////////////////////////////
+
+
+export interface propertyappraisalPojo
+{
+    propertyappraisalId?:PropertyappraisalId;
+    fullName?:string;
+    email?:string;
+    phoneNumber?:string;
+    streetName?:string;
+    suburbPostcode?:string;
+    bedroom?:number;
+    bathroom?:number;
+    garage?:number;
+    additionalDetails?:string;
+    message?:string;
+}
+
+export interface propertyappraisalInstance extends sequelize.Instance<propertyappraisalInstance, propertyappraisalPojo>, propertyappraisalPojo { }
+
+export interface propertyappraisalModel extends sequelize.Model<propertyappraisalInstance, propertyappraisalPojo> {
+    getpropertyappraisal(propertyappraisalId:PropertyappraisalId):sequelize.PromiseT<propertyappraisalInstance>;
+    getpropertyappraisal(propertyappraisal:propertyappraisalPojo):sequelize.PromiseT<propertyappraisalInstance>;
+}
+
+export function assertValidpropertyappraisal(pojo:propertyappraisalPojo, allowUndefined?:boolean):void {
+
+    if (pojo === undefined || pojo === null) {
+        if (allowUndefined) {
+            return;
+        }
+        throw new Error('Invalid propertyappraisal provided. It is \'' + (typeof pojo) + '\'.');
+    }
+    var fieldNames:string[] = Object.keys(pojo);
+    if (fieldNames.length === 0) {
+        throw new Error('Invalid propertyappraisal provided. It is an empty object.');
+    }
+
+    var i:number = fieldNames.length;
+    while(i-- > 0) {
+        switch(fieldNames[i]) {
+            case 'propertyappraisalId': assertValidFieldType('propertyappraisal', 'propertyappraisalId', pojo, 'number'); break;
+            case 'fullName': assertValidFieldType('propertyappraisal', 'fullName', pojo, 'string'); break;
+            case 'email': assertValidFieldType('propertyappraisal', 'email', pojo, 'string'); break;
+            case 'phoneNumber': assertValidFieldType('propertyappraisal', 'phoneNumber', pojo, 'string'); break;
+            case 'streetName': assertValidFieldType('propertyappraisal', 'streetName', pojo, 'string'); break;
+            case 'suburbPostcode': assertValidFieldType('propertyappraisal', 'suburbPostcode', pojo, 'string'); break;
+            case 'bedroom': assertValidFieldType('propertyappraisal', 'bedroom', pojo, 'number'); break;
+            case 'bathroom': assertValidFieldType('propertyappraisal', 'bathroom', pojo, 'number'); break;
+            case 'garage': assertValidFieldType('propertyappraisal', 'garage', pojo, 'number'); break;
+            case 'additionalDetails': assertValidFieldType('propertyappraisal', 'additionalDetails', pojo, 'string'); break;
+            case 'message': assertValidFieldType('propertyappraisal', 'message', pojo, 'string'); break;
+            default:
+                throw new Error('Invalid propertyappraisal provided. Field \'' + fieldNames[i] + '\' is not supported.')
+        }
+    }
+}
+asserters['propertyappraisal'] = assertValidpropertyappraisal;
 
 
 

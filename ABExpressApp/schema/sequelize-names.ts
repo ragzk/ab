@@ -20,6 +20,7 @@ export interface SequelizeNames {
     propertyFields:propertyFields;
     propertyaddressFields:propertyaddressFields;
     propertyagentFields:propertyagentFields;
+    propertyappraisalFields:propertyappraisalFields;
     propertydescriptionFields:propertydescriptionFields;
     propertyfeatureFields:propertyfeatureFields;
     propertyimageFields:propertyimageFields;
@@ -30,6 +31,7 @@ export class TableNames {
     property:string = 'property';
     propertyaddress:string = 'propertyaddress';
     propertyagent:string = 'propertyagent';
+    propertyappraisal:string = 'propertyappraisal';
     propertydescription:string = 'propertydescription';
     propertyfeature:string = 'propertyfeature';
     propertyimage:string = 'propertyimage';
@@ -51,6 +53,7 @@ export class agentFields {
     agentImageUrl:string = 'agentImageUrl';
     agentDescription:string = 'agentDescription';
     rateMyAgentTestimonialUrl:string = 'rateMyAgentTestimonialUrl';
+    designation:string = 'designation';
     propertyagent:string = 'propertyagent';
 }
 export var agentFields:agentFields = new agentFields();
@@ -108,6 +111,22 @@ export class propertyagentFields {
     property:string = 'property';
 }
 export var propertyagentFields:propertyagentFields = new propertyagentFields();
+
+
+export class propertyappraisalFields {
+    propertyappraisalId:string = 'propertyappraisalId';
+    fullName:string = 'fullName';
+    email:string = 'email';
+    phoneNumber:string = 'phoneNumber';
+    streetName:string = 'streetName';
+    suburbPostcode:string = 'suburbPostcode';
+    bedroom:string = 'bedroom';
+    bathroom:string = 'bathroom';
+    garage:string = 'garage';
+    additionalDetails:string = 'additionalDetails';
+    message:string = 'message';
+}
+export var propertyappraisalFields:propertyappraisalFields = new propertyappraisalFields();
 
 
 export class propertydescriptionFields {
