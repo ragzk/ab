@@ -125,6 +125,7 @@ export class propertyappraisalFields {
     garage:string = 'garage';
     additionalDetails:string = 'additionalDetails';
     message:string = 'message';
+    propertyAddress:string = 'propertyAddress';
 }
 export var propertyappraisalFields:propertyappraisalFields = new propertyappraisalFields();
 

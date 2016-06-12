@@ -28,7 +28,8 @@ function initialize(database, username, password, options) {
         'rateMyAgentUrl': Sequelize.STRING,
         'agentImageUrl': Sequelize.STRING,
         'agentDescription': Sequelize.STRING,
-        'rateMyAgentTestimonialUrl': Sequelize.STRING
+        'rateMyAgentTestimonialUrl': Sequelize.STRING,
+        'designation': Sequelize.STRING
     }, {
         timestamps: false,
         classMethods: {
@@ -77,6 +78,9 @@ function initialize(database, username, password, options) {
                     }
                     if (agent['rateMyAgentTestimonialUrl'] !== undefined) {
                         where['rateMyAgentTestimonialUrl'] = agent['rateMyAgentTestimonialUrl'];
+                    }
+                    if (agent['designation'] !== undefined) {
+                        where['designation'] = agent['designation'];
                     }
                 }
                 else {
@@ -255,6 +259,70 @@ function initialize(database, username, password, options) {
                     where['propertyAgentId'] = id;
                 }
                 return propertyagent.find({ where: where });
+            }
+        }
+    });
+    exports.propertyappraisal = exports.SEQUELIZE.define('propertyappraisal', {
+        'propertyappraisalId': { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
+        'fullName': Sequelize.STRING,
+        'email': Sequelize.STRING,
+        'phoneNumber': Sequelize.STRING,
+        'streetName': Sequelize.STRING,
+        'suburbPostcode': Sequelize.STRING,
+        'bedroom': Sequelize.INTEGER,
+        'bathroom': Sequelize.INTEGER,
+        'garage': Sequelize.INTEGER,
+        'additionalDetails': Sequelize.STRING,
+        'message': Sequelize.STRING,
+        'propertyAddress': Sequelize.STRING
+    }, {
+        timestamps: false,
+        classMethods: {
+            getpropertyappraisal: function (propertyappraisal) {
+                var where = {};
+                var id = parseInt(propertyappraisal);
+                if (isNaN(id)) {
+                    if (propertyappraisal['propertyappraisalId'] !== undefined) {
+                        where['propertyappraisalId'] = propertyappraisal['propertyappraisalId'];
+                    }
+                    if (propertyappraisal['fullName'] !== undefined) {
+                        where['fullName'] = propertyappraisal['fullName'];
+                    }
+                    if (propertyappraisal['email'] !== undefined) {
+                        where['email'] = propertyappraisal['email'];
+                    }
+                    if (propertyappraisal['phoneNumber'] !== undefined) {
+                        where['phoneNumber'] = propertyappraisal['phoneNumber'];
+                    }
+                    if (propertyappraisal['streetName'] !== undefined) {
+                        where['streetName'] = propertyappraisal['streetName'];
+                    }
+                    if (propertyappraisal['suburbPostcode'] !== undefined) {
+                        where['suburbPostcode'] = propertyappraisal['suburbPostcode'];
+                    }
+                    if (propertyappraisal['bedroom'] !== undefined) {
+                        where['bedroom'] = propertyappraisal['bedroom'];
+                    }
+                    if (propertyappraisal['bathroom'] !== undefined) {
+                        where['bathroom'] = propertyappraisal['bathroom'];
+                    }
+                    if (propertyappraisal['garage'] !== undefined) {
+                        where['garage'] = propertyappraisal['garage'];
+                    }
+                    if (propertyappraisal['additionalDetails'] !== undefined) {
+                        where['additionalDetails'] = propertyappraisal['additionalDetails'];
+                    }
+                    if (propertyappraisal['message'] !== undefined) {
+                        where['message'] = propertyappraisal['message'];
+                    }
+                    if (propertyappraisal['propertyAddress'] !== undefined) {
+                        where['propertyAddress'] = propertyappraisal['propertyAddress'];
+                    }
+                }
+                else {
+                    where['propertyappraisalId'] = id;
+                }
+                return propertyappraisal.find({ where: where });
             }
         }
     });

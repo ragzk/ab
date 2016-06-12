@@ -48,6 +48,7 @@
     <Compile Include="public\javascripts\app\directives\agentDetails.js" />
     <Compile Include="public\javascripts\app\directives\agentDetailsSummary.js" />
     <Compile Include="public\javascripts\app\directives\bxSlider.js" />
+    <Compile Include="public\javascripts\app\directives\propertyAppraisal.js" />
     <Compile Include="public\javascripts\app\directives\propertyDetails.js" />
     <Compile Include="public\javascripts\app\directives\shortPropertyDetails.js" />
     <Compile Include="public\javascripts\app\directives\showSelected.js" />
@@ -62,6 +63,7 @@
     <Compile Include="routes\buy.js" />
     <Compile Include="routes\index.js" />
     <Compile Include="routes\property.js" />
+    <Compile Include="routes\propertyAppraisal.js" />
     <Compile Include="routes\rent.js" />
     <Compile Include="routes\sold.js" />
     <Compile Include="routes\users.js" />
@@ -77,6 +79,7 @@
     <Content Include="public\stylesheets\style.styl" />
     <Content Include="public\templates\agentDetails.html" />
     <Content Include="public\templates\agentDetailsSummary.html" />
+    <Content Include="public\templates\propertyAppraisal.html" />
     <Content Include="public\templates\propertyDetails.html" />
     <Content Include="public\templates\shortPropertyDetails.html" />
     <Content Include="README.md" />
@@ -91,6 +94,7 @@
     <Content Include="views\error.jade" />
     <Content Include="views\layout.vash" />
     <Content Include="views\property.vash" />
+    <Content Include="views\propertyAppraisal.vash" />
     <Content Include="views\rent.vash" />
     <Content Include="views\sold.vash" />
   </ItemGroup>
@@ -123,6 +127,7 @@
     <TypeScriptCompile Include="repository\agentRepo.ts" />
     <TypeScriptCompile Include="repository\propertyAddressRepo.ts" />
     <TypeScriptCompile Include="repository\propertyAgentRepo.ts" />
+    <TypeScriptCompile Include="repository\propertyAppraisalRepo.ts" />
     <TypeScriptCompile Include="repository\propertyDescriptionRepo.ts" />
     <TypeScriptCompile Include="repository\propertyFeatureRepo.ts" />
     <TypeScriptCompile Include="repository\propertyImageRepo.ts" />

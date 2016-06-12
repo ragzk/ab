@@ -64,6 +64,9 @@ function assertValidagent(pojo, allowUndefined) {
             case 'rateMyAgentTestimonialUrl':
                 assertValidFieldType('agent', 'rateMyAgentTestimonialUrl', pojo, 'string');
                 break;
+            case 'designation':
+                assertValidFieldType('agent', 'designation', pojo, 'string');
+                break;
             case 'propertyagent':
                 assertValidFieldType('agent', 'propertyagent', pojo, 'propertyagentPojo[]');
                 break;
@@ -254,6 +257,63 @@ function assertValidpropertyagent(pojo, allowUndefined) {
 }
 exports.assertValidpropertyagent = assertValidpropertyagent;
 asserters['propertyagent'] = assertValidpropertyagent;
+function assertValidpropertyappraisal(pojo, allowUndefined) {
+    if (pojo === undefined || pojo === null) {
+        if (allowUndefined) {
+            return;
+        }
+        throw new Error('Invalid propertyappraisal provided. It is \'' + (typeof pojo) + '\'.');
+    }
+    var fieldNames = Object.keys(pojo);
+    if (fieldNames.length === 0) {
+        throw new Error('Invalid propertyappraisal provided. It is an empty object.');
+    }
+    var i = fieldNames.length;
+    while (i-- > 0) {
+        switch (fieldNames[i]) {
+            case 'propertyappraisalId':
+                assertValidFieldType('propertyappraisal', 'propertyappraisalId', pojo, 'number');
+                break;
+            case 'fullName':
+                assertValidFieldType('propertyappraisal', 'fullName', pojo, 'string');
+                break;
+            case 'email':
+                assertValidFieldType('propertyappraisal', 'email', pojo, 'string');
+                break;
+            case 'phoneNumber':
+                assertValidFieldType('propertyappraisal', 'phoneNumber', pojo, 'string');
+                break;
+            case 'streetName':
+                assertValidFieldType('propertyappraisal', 'streetName', pojo, 'string');
+                break;
+            case 'suburbPostcode':
+                assertValidFieldType('propertyappraisal', 'suburbPostcode', pojo, 'string');
+                break;
+            case 'bedroom':
+                assertValidFieldType('propertyappraisal', 'bedroom', pojo, 'number');
+                break;
+            case 'bathroom':
+                assertValidFieldType('propertyappraisal', 'bathroom', pojo, 'number');
+                break;
+            case 'garage':
+                assertValidFieldType('propertyappraisal', 'garage', pojo, 'number');
+                break;
+            case 'additionalDetails':
+                assertValidFieldType('propertyappraisal', 'additionalDetails', pojo, 'string');
+                break;
+            case 'message':
+                assertValidFieldType('propertyappraisal', 'message', pojo, 'string');
+                break;
+            case 'propertyAddress':
+                assertValidFieldType('propertyappraisal', 'propertyAddress', pojo, 'string');
+                break;
+            default:
+                throw new Error('Invalid propertyappraisal provided. Field \'' + fieldNames[i] + '\' is not supported.');
+        }
+    }
+}
+exports.assertValidpropertyappraisal = assertValidpropertyappraisal;
+asserters['propertyappraisal'] = assertValidpropertyappraisal;
 function assertValidpropertydescription(pojo, allowUndefined) {
     if (pojo === undefined || pojo === null) {
         if (allowUndefined) {

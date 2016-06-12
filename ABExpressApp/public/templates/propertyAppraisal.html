@@ -1,0 +1,32 @@
+﻿<form class="form-horizontal" role="form" name="propertyApprisalForm">
+    <div class="form-group required">
+        <label class="control-label col-sm-2" for="fullname">Full Name:</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="fullname" ng-model="data.fullname" placeholder="Enter fullname" required>
+        </div>
+    </div>    
+    <div class="form-group required">
+        <label class="control-label col-sm-2" for="email">Email:</label>
+        <div class="col-sm-10">
+            <input type="email" class="form-control" id="email" ng-model="data.email" placeholder="Enter email" required>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-2" for="email">Phone number:</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="phoneNumber" ng-model="data.phoneNumber"  pattern="^\({0,1}((0|\+61)(2|4|3|7|8)){0,1}\){0,1}(\ |-){0,1}[0-9]{2}(\ |-){0,1}[0-9]{2}(\ |-){0,1}[0-9]{1}(\ |-){0,1}[0-9]{3}$" value="" name="phones_pattern1" id="phones_pattern1" list="phones_pattern1_datalist" placeholder="Enter phone number">
+        </div>
+    </div>
+
+    <div class="form-group required">
+        <label class="control-label col-sm-2" for="propertyAddress">Property Address:</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="propertyAddress" ng-model="data.propertyAddress" placeholder="Enter property address" required>
+        </div>
+    </div>    
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-info" ng-disabled="data.buttonDisabled" ng-click="submitForm()">Submit</button>
+        </div>
+    </div>
+</form>

@@ -92,8 +92,8 @@
                   <!-- Collect the nav links, forms, and other content for toggling -->
                   <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                       <ul class="nav navbar-nav">
-                          <li class="active"><a href="#">Home<span class="sr-only">(current)</span></a></li>
-                          <li><a href="#">Property Apprisal</a></li>
+                          <li class="active"><a href="/">Home<span class="sr-only">(current)</span></a></li>
+                          <li><a href="/propertyAppraisal">Property Appraisal</a></li>
                           <li><a href="/agents">Agents</a></li>
                           <li><a href="#">Contact</a></li>
                       </ul>
@@ -105,24 +105,6 @@
    <!-- menu end-->
    <!--content-->
    <script type="text/ng-template" id="Content.html">
-      <div class="wrapper">
-          <div class="text">
-              <div><h1>AB Property Consultants</h1> 
-              AB is a revolution in real estate focused on customer service whether you are a tenant, property owner or landlord via innovative technology . AB offers a fresh perspective and a level of energy rarely seen with a genuine interest in meeting new people and achieving best possible outcome for his clients. </div>
-          </div>
-          <!-- https://codepen.io/dudleystorey/pen/ehKpi-->
-          <div style="display:inline-block" class="imageSlider" >
-              <div id="slider">
-                  <figure>
-                      <img src="http://demosthenes.info/assets/images/austin-fireworks.jpg" alt="">
-                      <img src="http://demosthenes.info/assets/images/taj-mahal.jpg" alt="">
-                      <img src="http://demosthenes.info/assets/images/ibiza.jpg" alt="">
-                      <img src="http://demosthenes.info/assets/images/ankor-wat.jpg" alt="">
-                      <img src="http://demosthenes.info/assets/images/austin-fireworks.jpg" alt="">
-                  </figure>
-              </div>
-          </div>
-      </div>
       <div>
           <div id="office-contact-details" class="vcard">
               <div class="fn org">

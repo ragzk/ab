@@ -342,6 +342,7 @@ export interface propertyappraisalPojo
     garage?:number;
     additionalDetails?:string;
     message?:string;
+    propertyAddress?:string;
 }
 
 export interface propertyappraisalInstance extends sequelize.Instance<propertyappraisalInstance, propertyappraisalPojo>, propertyappraisalPojo { }
@@ -378,6 +379,7 @@ export function assertValidpropertyappraisal(pojo:propertyappraisalPojo, allowUn
             case 'garage': assertValidFieldType('propertyappraisal', 'garage', pojo, 'number'); break;
             case 'additionalDetails': assertValidFieldType('propertyappraisal', 'additionalDetails', pojo, 'string'); break;
             case 'message': assertValidFieldType('propertyappraisal', 'message', pojo, 'string'); break;
+            case 'propertyAddress': assertValidFieldType('propertyappraisal', 'propertyAddress', pojo, 'string'); break;
             default:
                 throw new Error('Invalid propertyappraisal provided. Field \'' + fieldNames[i] + '\' is not supported.')
         }

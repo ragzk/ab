@@ -15,6 +15,7 @@ var transSold = require('./routes/sold');
 var transAgent = require('./routes/agent');
 var transAgents = require('./routes/agents');
 var property = require('./routes/property');
+var propertyAppraisal = require('./routes/propertyAppraisal.js');
 var _ = require('lodash');
 
 var app = express();
@@ -29,7 +30,6 @@ app.set('view engine', 'vash');
 //app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 var compression = require('compression');
@@ -65,6 +65,8 @@ app.get('/agentDetails/:agentId', transAgent.agentDetails);
 app.get('/agents', transAgents.agents);
 app.get('/agents/getAgents', transAgents.getAgents);
 
+app.get('/propertyAppraisal', propertyAppraisal.propertyAppraisal);
+
 app.get('/property/:suburb/:street/:streetNumber/:uniqueId', property.details);
 app.get('/property/:suburb/:street/:streetNumber/:streetNumber2/:uniqueId', property.details);
 
@@ -72,6 +74,14 @@ app.get('/property/getProperty/:uniqueId', property.details.getProperty);
 
 app.get('/api/getUnSoldProperties', api.getUnSoldProperties);
 app.get('/api/getSoldProperties', api.getSoldProperties);
+
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+
+app.post('/propertyAppraisal/save', function (req, res) {
+    return propertyAppraisal.save(req, res);
+});
 
 
 // catch 404 and forward to error handler

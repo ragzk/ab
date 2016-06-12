@@ -208,7 +208,8 @@ export function initialize(database:string, username:string, password:string, op
         'bathroom':Sequelize.INTEGER,
         'garage':Sequelize.INTEGER,
         'additionalDetails':Sequelize.STRING,
-        'message':Sequelize.STRING
+        'message':Sequelize.STRING,
+        'propertyAddress':Sequelize.STRING
         },
         {
             timestamps: false,
@@ -228,6 +229,7 @@ export function initialize(database:string, username:string, password:string, op
                         if (propertyappraisal['garage'] !== undefined) { where['garage'] = propertyappraisal['garage']}
                         if (propertyappraisal['additionalDetails'] !== undefined) { where['additionalDetails'] = propertyappraisal['additionalDetails']}
                         if (propertyappraisal['message'] !== undefined) { where['message'] = propertyappraisal['message']}
+                        if (propertyappraisal['propertyAddress'] !== undefined) { where['propertyAddress'] = propertyappraisal['propertyAddress']}
                     } else {
                         where['propertyappraisalId'] = id;
                     }
