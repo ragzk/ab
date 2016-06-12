@@ -24,6 +24,7 @@ export class propertyAppraisalRepo {
             var propertyAppraisal = models.propertyappraisal.build({
                 fullName: obj.fullname,
                 email: obj.email,
+                phoneNumber: obj.phoneNumber,
                 propertyAddress: obj.propertyAddress
             });
             var r = propertyAppraisal.save().then(function (e) {

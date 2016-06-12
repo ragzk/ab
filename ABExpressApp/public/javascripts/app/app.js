@@ -1,4 +1,4 @@
-﻿var APP = angular.module('APP', ['matchmedia-ng', 'ngProgress', 'ngSanitize']);
+﻿var APP = angular.module('APP', ['matchmedia-ng', 'ngProgress', 'ngSanitize', 'ui.bootstrap']);
 //APP.config(function ($locationProvider) {
 //    $locationProvider.html5Mode({
 //        enabled: true,

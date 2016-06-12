@@ -11,11 +11,13 @@ exports.save = function (req, res) {
     var email = req.body.email;
     var fullname = req.body.fullname;
     var propertyAddress = req.body.propertyAddress;
+    var phoneNumber = req.body.phoneNumber;
     var that = this;
     
     var propertyAppraisalObject = {
         email: email,
         fullname: fullname,
+        phoneNumber: phoneNumber,
         propertyAddress: propertyAddress
     }    
     
@@ -57,7 +59,7 @@ exports.save = function (req, res) {
             from: '<microappjs@gmail.com>', // sender address
             to: 'kamrag@gmail.com', // list of receivers
             subject: 'Property Appraisal requested', // Subject line
-            text: 'Property Appraisal requested by ' + data.fullName + ' for property ' + data.propertyAddress + ' (email address: ' + data.email + ')', // plaintext body
+            text: 'Property Appraisal requested by ' + data.fullName + ' for property ' + data.propertyAddress + ' ( email address: ' + data.email + ' phone number ' + data.phoneNumber + ' )', // plaintext body
         };
         
         // send mail with defined transport object
