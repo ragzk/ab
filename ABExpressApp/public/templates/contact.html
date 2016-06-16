@@ -1,0 +1,39 @@
+﻿<form class="form-horizontal" role="form" name="contactForm" novalidate ng-class="{true: 'error'}[submitted && contactForm.email.$invalid]">
+    <h3>Contact</h3>
+    <div class="form-group" ng-class="{'has-error': submitted && contactForm.name.$invalid}">
+        <label class="control-label col-sm-2" for="fullname">Name:</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" name="name" ng-model="name" placeholder="Enter name" required>
+            <span class="help-inline" ng-show="submitted && contactForm.name.$error.required">Name is required</span>
+        </div>
+    </div>
+    <div class="form-group" ng-class="{'has-error': submitted && contactForm.email.$invalid}">
+        <label class="control-label col-sm-2" for="email">Email:</label>
+        <div class="col-sm-10">
+            <input type="email" class="form-control" name="email" ng-model="email" placeholder="Enter email" required data-error="Bruh, that email address is invalid">
+            <span class="help-inline" ng-show="submitted && contactForm.email.$error.required">Email is required</span>
+            <span class="help-inline" ng-show="submitted && contactForm.email.$error.email">Invalid email</span>
+        </div>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': submitted && contactForm.subject.$invalid}">
+        <label class="control-label col-sm-2" for="subject">Subject:</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" name="subject" ng-model="subject" placeholder="Enter subject" required>
+            <span class="help-inline" ng-show="submitted && contactForm.subject.$error.required">Subject is required</span>
+        </div>
+    </div>
+    <div class="form-group" ng-class="{'has-error': submitted && contactForm.message.$invalid}">
+        <label class="control-label col-sm-2" for="message">Message:</label>
+        <div class="col-sm-10">
+            <!--<input type="text" class="form-control" name="message" ng-model="message" placeholder="Enter message" required>-->
+            <textarea class="form-control" name="message" rows="8" ng-model="message" placeholder="Enter message" required></textarea>
+            <span class="help-inline" ng-show="submitted && contactForm.message.$error.required">Message is required</span>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="button" class="btn btn-info" ng-disabled="buttonDisabled" ng-click="submitForm()">Submit</button>
+        </div>
+    </div>
+</form>

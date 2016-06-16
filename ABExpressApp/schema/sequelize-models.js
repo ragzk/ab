@@ -90,6 +90,42 @@ function initialize(database, username, password, options) {
             }
         }
     });
+    exports.contact = exports.SEQUELIZE.define('contact', {
+        'contactId': { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
+        'name': Sequelize.STRING,
+        'email': Sequelize.STRING,
+        'subject': Sequelize.STRING,
+        'message': Sequelize.STRING
+    }, {
+        timestamps: false,
+        classMethods: {
+            getcontact: function (contact) {
+                var where = {};
+                var id = parseInt(contact);
+                if (isNaN(id)) {
+                    if (contact['contactId'] !== undefined) {
+                        where['contactId'] = contact['contactId'];
+                    }
+                    if (contact['name'] !== undefined) {
+                        where['name'] = contact['name'];
+                    }
+                    if (contact['email'] !== undefined) {
+                        where['email'] = contact['email'];
+                    }
+                    if (contact['subject'] !== undefined) {
+                        where['subject'] = contact['subject'];
+                    }
+                    if (contact['message'] !== undefined) {
+                        where['message'] = contact['message'];
+                    }
+                }
+                else {
+                    where['contactId'] = id;
+                }
+                return contact.find({ where: where });
+            }
+        }
+    });
     exports.property = exports.SEQUELIZE.define('property', {
         'propertyId': { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
         'name': Sequelize.STRING,
@@ -439,6 +475,50 @@ function initialize(database, username, password, options) {
                     where['propertyImageId'] = id;
                 }
                 return propertyimage.find({ where: where });
+            }
+        }
+    });
+    exports.statslogging = exports.SEQUELIZE.define('statslogging', {
+        'statsloggingId': { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
+        'route': Sequelize.STRING,
+        'propertyId': Sequelize.STRING,
+        'ipAddress': Sequelize.STRING,
+        'dateTime': Sequelize.DATE,
+        'isMobile': Sequelize.INTEGER,
+        'userAgent': Sequelize.STRING
+    }, {
+        timestamps: false,
+        classMethods: {
+            getstatslogging: function (statslogging) {
+                var where = {};
+                var id = parseInt(statslogging);
+                if (isNaN(id)) {
+                    if (statslogging['statsloggingId'] !== undefined) {
+                        where['statsloggingId'] = statslogging['statsloggingId'];
+                    }
+                    if (statslogging['route'] !== undefined) {
+                        where['route'] = statslogging['route'];
+                    }
+                    if (statslogging['propertyId'] !== undefined) {
+                        where['propertyId'] = statslogging['propertyId'];
+                    }
+                    if (statslogging['ipAddress'] !== undefined) {
+                        where['ipAddress'] = statslogging['ipAddress'];
+                    }
+                    if (statslogging['dateTime'] !== undefined) {
+                        where['dateTime'] = statslogging['dateTime'];
+                    }
+                    if (statslogging['isMobile'] !== undefined) {
+                        where['isMobile'] = statslogging['isMobile'];
+                    }
+                    if (statslogging['userAgent'] !== undefined) {
+                        where['userAgent'] = statslogging['userAgent'];
+                    }
+                }
+                else {
+                    where['statsloggingId'] = id;
+                }
+                return statslogging.find({ where: where });
             }
         }
     });

@@ -68,6 +68,7 @@ ul.dropdown-menu a{
 //}
 .propertydetailscontainer,
 .agentscontainer,
+.contactcontainer,
 .propertyappraisalcontainer,
 .agentsdetailscontainer
  { 
@@ -218,6 +219,11 @@ ul.dropdown-menu a{
 .spacing-icon {
     padding-left: 5px;
 }
+
+.paddingRight {
+    padding-right: 5px;
+}
+
 
 .extra-spacing-icon {
     padding-left: 15px;
@@ -738,7 +744,7 @@ ul.footer_nav.primary li {
             }
             .property-description {
                 float:right;
-                width:69%;
+                width:70%;
             }        
             .property-features {
                 float:left;
@@ -812,6 +818,7 @@ ul.footer_nav.primary li {
     //short property details
     .agentsdetailscontainer,
     .agentscontainer,
+    .contactcontainer,
     .propertyappraisalcontainer,
     .propertydetailscontainer {
         float:none;
@@ -826,7 +833,7 @@ ul.footer_nav.primary li {
             }
             .property-description {
                 float:right;
-                width:69%;
+                width:70%;
             }        
             .property-features {
                 float:left;

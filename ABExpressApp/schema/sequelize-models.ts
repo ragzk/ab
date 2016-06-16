@@ -19,6 +19,7 @@ export var initialized:boolean = false;
 export var SEQUELIZE:sequelize.Sequelize;
 
 export var agent:types.agentModel;
+export var contact:types.contactModel;
 export var property:types.propertyModel;
 export var propertyaddress:types.propertyaddressModel;
 export var propertyagent:types.propertyagentModel;
@@ -26,6 +27,7 @@ export var propertyappraisal:types.propertyappraisalModel;
 export var propertydescription:types.propertydescriptionModel;
 export var propertyfeature:types.propertyfeatureModel;
 export var propertyimage:types.propertyimageModel;
+export var statslogging:types.statsloggingModel;
 
 
 export function initialize(database:string, username:string, password:string, options:sequelize.Options):any
@@ -80,6 +82,33 @@ export function initialize(database:string, username:string, password:string, op
                         where['agentId'] = id;
                     }
                     return agent.find({where: where});
+                }
+            }
+        });
+    
+    contact = <types.contactModel> SEQUELIZE.define<types.contactInstance, types.contactPojo>('contact', {
+        'contactId':{type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true},
+        'name':Sequelize.STRING,
+        'email':Sequelize.STRING,
+        'subject':Sequelize.STRING,
+        'message':Sequelize.STRING
+        },
+        {
+            timestamps: false,
+            classMethods: {
+                getcontact:(contact:any) => {
+                    var where:{[key:string]:any} = {};
+                    var id:number = parseInt(contact);
+                    if (isNaN(id)) {
+                        if (contact['contactId'] !== undefined) { where['contactId'] = contact['contactId']}
+                        if (contact['name'] !== undefined) { where['name'] = contact['name']}
+                        if (contact['email'] !== undefined) { where['email'] = contact['email']}
+                        if (contact['subject'] !== undefined) { where['subject'] = contact['subject']}
+                        if (contact['message'] !== undefined) { where['message'] = contact['message']}
+                    } else {
+                        where['contactId'] = id;
+                    }
+                    return contact.find({where: where});
                 }
             }
         });
@@ -319,6 +348,37 @@ export function initialize(database:string, username:string, password:string, op
                         where['propertyImageId'] = id;
                     }
                     return propertyimage.find({where: where});
+                }
+            }
+        });
+    
+    statslogging = <types.statsloggingModel> SEQUELIZE.define<types.statsloggingInstance, types.statsloggingPojo>('statslogging', {
+        'statsloggingId':{type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true},
+        'route':Sequelize.STRING,
+        'propertyId':Sequelize.STRING,
+        'ipAddress':Sequelize.STRING,
+        'dateTime':Sequelize.DATE,
+        'isMobile':Sequelize.INTEGER,
+        'userAgent':Sequelize.STRING
+        },
+        {
+            timestamps: false,
+            classMethods: {
+                getstatslogging:(statslogging:any) => {
+                    var where:{[key:string]:any} = {};
+                    var id:number = parseInt(statslogging);
+                    if (isNaN(id)) {
+                        if (statslogging['statsloggingId'] !== undefined) { where['statsloggingId'] = statslogging['statsloggingId']}
+                        if (statslogging['route'] !== undefined) { where['route'] = statslogging['route']}
+                        if (statslogging['propertyId'] !== undefined) { where['propertyId'] = statslogging['propertyId']}
+                        if (statslogging['ipAddress'] !== undefined) { where['ipAddress'] = statslogging['ipAddress']}
+                        if (statslogging['dateTime'] !== undefined) { where['dateTime'] = statslogging['dateTime']}
+                        if (statslogging['isMobile'] !== undefined) { where['isMobile'] = statslogging['isMobile']}
+                        if (statslogging['userAgent'] !== undefined) { where['userAgent'] = statslogging['userAgent']}
+                    } else {
+                        where['statsloggingId'] = id;
+                    }
+                    return statslogging.find({where: where});
                 }
             }
         });

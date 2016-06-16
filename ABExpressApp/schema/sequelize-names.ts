@@ -17,6 +17,7 @@ export interface SequelizeNames {
     calculatedFields:CalculatedFields;
     references:References;
     agentFields:agentFields;
+    contactFields:contactFields;
     propertyFields:propertyFields;
     propertyaddressFields:propertyaddressFields;
     propertyagentFields:propertyagentFields;
@@ -24,10 +25,12 @@ export interface SequelizeNames {
     propertydescriptionFields:propertydescriptionFields;
     propertyfeatureFields:propertyfeatureFields;
     propertyimageFields:propertyimageFields;
+    statsloggingFields:statsloggingFields;
 }
 
 export class TableNames {
     agent:string = 'agent';
+    contact:string = 'contact';
     property:string = 'property';
     propertyaddress:string = 'propertyaddress';
     propertyagent:string = 'propertyagent';
@@ -35,6 +38,7 @@ export class TableNames {
     propertydescription:string = 'propertydescription';
     propertyfeature:string = 'propertyfeature';
     propertyimage:string = 'propertyimage';
+    statslogging:string = 'statslogging';
 }
 export var tableNames:TableNames = new TableNames();
 
@@ -57,6 +61,16 @@ export class agentFields {
     propertyagent:string = 'propertyagent';
 }
 export var agentFields:agentFields = new agentFields();
+
+
+export class contactFields {
+    contactId:string = 'contactId';
+    name:string = 'name';
+    email:string = 'email';
+    subject:string = 'subject';
+    message:string = 'message';
+}
+export var contactFields:contactFields = new contactFields();
 
 
 export class propertyFields {
@@ -163,6 +177,18 @@ export class propertyimageFields {
     property:string = 'property';
 }
 export var propertyimageFields:propertyimageFields = new propertyimageFields();
+
+
+export class statsloggingFields {
+    statsloggingId:string = 'statsloggingId';
+    route:string = 'route';
+    propertyId:string = 'propertyId';
+    ipAddress:string = 'ipAddress';
+    dateTime:string = 'dateTime';
+    isMobile:string = 'isMobile';
+    userAgent:string = 'userAgent';
+}
+export var statsloggingFields:statsloggingFields = new statsloggingFields();
 
 
 export class CalculatedFields {}

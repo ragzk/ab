@@ -16,8 +16,12 @@
         $window.location.href = '/buy'
     }
     
-    var query = $location.absUrl().split(/[\s/]+/).pop()
-    
+    var query = null;
+    var routeInfo = $location.absUrl().split(/[\s/]+/);
+    if (routeInfo && routeInfo.length>=3) {
+        query = routeInfo[2];
+    }
+
     if (query) {
         // expand that segment.. may be no change is required
         _.each($('.title.parent'), function (element) {
@@ -34,14 +38,14 @@
         //collapse all child menu
         $('.list-group-item.child').slideToggle("fast");
     }
-    $('#buy').click(function (event) {
-        var target = $(event.target);
-        if (target.is('span')) {
-            // do ajax request
-            event.stopPropagation();
-            event.preventDefault();
-        }
-    });
+    //$('#buy').click(function (event) {
+    //    var target = $(event.target);
+    //    if (target.is('span')) {
+    //        // do ajax request
+    //        event.stopPropagation();
+    //        event.preventDefault();
+    //    }
+    //});
     
     
     $scope.toggleMenu = function (event) {

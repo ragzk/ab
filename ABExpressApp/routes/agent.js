@@ -1,7 +1,7 @@
 ﻿var express = require('express');
 var fs = require('fs');
 var _ = require('lodash')
-
+var statsLogging = require("../routes/statsLogging.js");
 //exports.agent = function (req, res) {
 //    var name = req.params.name || "All";
 //    res.render('agent', {
@@ -19,6 +19,7 @@ var _ = require('lodash')
 exports.agent = function (req, res) {
     var agentId = req.params.agentId;
     var name = req.params.name;
+    statsLogging.addLogging('agent/' + name, null, req);
     res.render('agent', {
         agentId: agentId
     });

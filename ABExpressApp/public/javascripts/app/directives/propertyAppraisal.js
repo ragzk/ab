@@ -5,12 +5,19 @@
         scope: {},
         templateUrl: '/public/templates/propertyAppraisal.html',
         link: function (scope, elem, attrs) {
-            scope.data = {};
-            scope.data.buttonDisabled = false;
+            scope.buttonDisabled = false;
+            scope.submitted = false;
             scope.submitForm = function () {
+                scope.submitted = true;
                 if (scope.propertyApprisalForm.$valid) {
-                    scope.data.buttonDisabled = true;
-                    $http.post('/propertyAppraisal/save', JSON.stringify(scope.data)).success(function () {
+                    scope.buttonDisabled = true;
+                    var data = {
+                        fullname: scope.fullname,
+                        email: scope.email,
+                        phoneNumber: scope.phoneNumber,
+                        propertyAddress: scope.propertyAddress
+                    }
+                    $http.post('/propertyAppraisal/save', JSON.stringify(data)).success(function () {
                         /*success callback*/
                         var modalInstance = $uibModal.open({
                             template: '<div class="modal-header">' +

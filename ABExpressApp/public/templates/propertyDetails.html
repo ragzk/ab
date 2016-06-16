@@ -23,7 +23,7 @@
             <div class="agentContainerShort" ng-repeat="agent in property.propertyagents">
                 <a href="/agent/{{agent.agent.name}}/{{agent.agent.agentId}}">
                     <div class="agentPhoto">
-                        <img src="{{agent.agent.agentImageUrl}}"
+                        <img ng-src="{{agent.agent.agentImageUrl}}"
                              width="78" height="104" alt="{{agent.agent.name}}" title="{{agent.agent.name}}">
                     </div>
                 </a>

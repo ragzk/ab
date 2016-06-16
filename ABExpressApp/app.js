@@ -16,6 +16,7 @@ var transAgent = require('./routes/agent');
 var transAgents = require('./routes/agents');
 var property = require('./routes/property');
 var propertyAppraisal = require('./routes/propertyAppraisal.js');
+var transContact = require('./routes/contact.js');
 var _ = require('lodash');
 
 var app = express();
@@ -66,6 +67,8 @@ app.get('/agents', transAgents.agents);
 app.get('/agents/getAgents', transAgents.getAgents);
 
 app.get('/propertyAppraisal', propertyAppraisal.propertyAppraisal);
+app.get('/contact', transContact.contact);
+
 
 app.get('/property/:suburb/:street/:streetNumber/:uniqueId', property.details);
 app.get('/property/:suburb/:street/:streetNumber/:streetNumber2/:uniqueId', property.details);
@@ -83,6 +86,9 @@ app.post('/propertyAppraisal/save', function (req, res) {
     return propertyAppraisal.save(req, res);
 });
 
+app.post('/contact/save', function (req, res) {
+    return transContact.save(req, res);
+});
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

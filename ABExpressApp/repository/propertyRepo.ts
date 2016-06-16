@@ -63,7 +63,6 @@ export class propertyRepo {
             { model: models.propertyimage, required: false },
             { model: models.propertyagent, required: false, include: [{ model: models.agent}] }
         ];
-        
         //var r = models.property.findAll({ where: { isRental: false, status: 'current' } });
         var r = models.property.find(findOptions);
         return r;

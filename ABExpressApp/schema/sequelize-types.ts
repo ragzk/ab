@@ -14,10 +14,12 @@
 import types = require('./sequelize-types'); // important so we can use same fully qualified names in all generated files
 
 export interface AgentId { AgentId:number; }
+export interface ContactId { ContactId:number; }
 export interface PropertyId { PropertyId:number; }
 export interface PropertyAgentId { PropertyAgentId:number; }
 export interface PropertyappraisalId { PropertyappraisalId:number; }
 export interface PropertyImageId { PropertyImageId:number; }
+export interface StatsloggingId { StatsloggingId:number; }
 
 
 var asserters:{[typeName:string]:(pojo:any, allowUndefined?:boolean) => void} = {};
@@ -96,6 +98,63 @@ export function assertValidagent(pojo:agentPojo, allowUndefined?:boolean):void {
     }
 }
 asserters['agent'] = assertValidagent;
+
+
+
+
+
+//////////////////////////////////////////////////////////////////////////////
+//
+//
+//               contact
+//
+//
+//////////////////////////////////////////////////////////////////////////////
+
+
+export interface contactPojo
+{
+    contactId?:ContactId;
+    name?:string;
+    email?:string;
+    subject?:string;
+    message?:string;
+}
+
+export interface contactInstance extends sequelize.Instance<contactInstance, contactPojo>, contactPojo { }
+
+export interface contactModel extends sequelize.Model<contactInstance, contactPojo> {
+    getcontact(contactId:ContactId):sequelize.PromiseT<contactInstance>;
+    getcontact(contact:contactPojo):sequelize.PromiseT<contactInstance>;
+}
+
+export function assertValidcontact(pojo:contactPojo, allowUndefined?:boolean):void {
+
+    if (pojo === undefined || pojo === null) {
+        if (allowUndefined) {
+            return;
+        }
+        throw new Error('Invalid contact provided. It is \'' + (typeof pojo) + '\'.');
+    }
+    var fieldNames:string[] = Object.keys(pojo);
+    if (fieldNames.length === 0) {
+        throw new Error('Invalid contact provided. It is an empty object.');
+    }
+
+    var i:number = fieldNames.length;
+    while(i-- > 0) {
+        switch(fieldNames[i]) {
+            case 'contactId': assertValidFieldType('contact', 'contactId', pojo, 'number'); break;
+            case 'name': assertValidFieldType('contact', 'name', pojo, 'string'); break;
+            case 'email': assertValidFieldType('contact', 'email', pojo, 'string'); break;
+            case 'subject': assertValidFieldType('contact', 'subject', pojo, 'string'); break;
+            case 'message': assertValidFieldType('contact', 'message', pojo, 'string'); break;
+            default:
+                throw new Error('Invalid contact provided. Field \'' + fieldNames[i] + '\' is not supported.')
+        }
+    }
+}
+asserters['contact'] = assertValidcontact;
 
 
 
@@ -567,6 +626,67 @@ export function assertValidpropertyimage(pojo:propertyimagePojo, allowUndefined?
     }
 }
 asserters['propertyimage'] = assertValidpropertyimage;
+
+
+
+
+
+//////////////////////////////////////////////////////////////////////////////
+//
+//
+//               statslogging
+//
+//
+//////////////////////////////////////////////////////////////////////////////
+
+
+export interface statsloggingPojo
+{
+    statsloggingId?:StatsloggingId;
+    route?:string;
+    propertyId?:PropertyId;
+    ipAddress?:string;
+    dateTime?:Date;
+    isMobile?:boolean;
+    userAgent?:string;
+}
+
+export interface statsloggingInstance extends sequelize.Instance<statsloggingInstance, statsloggingPojo>, statsloggingPojo { }
+
+export interface statsloggingModel extends sequelize.Model<statsloggingInstance, statsloggingPojo> {
+    getstatslogging(statsloggingId:StatsloggingId):sequelize.PromiseT<statsloggingInstance>;
+    getstatslogging(statslogging:statsloggingPojo):sequelize.PromiseT<statsloggingInstance>;
+}
+
+export function assertValidstatslogging(pojo:statsloggingPojo, allowUndefined?:boolean):void {
+
+    if (pojo === undefined || pojo === null) {
+        if (allowUndefined) {
+            return;
+        }
+        throw new Error('Invalid statslogging provided. It is \'' + (typeof pojo) + '\'.');
+    }
+    var fieldNames:string[] = Object.keys(pojo);
+    if (fieldNames.length === 0) {
+        throw new Error('Invalid statslogging provided. It is an empty object.');
+    }
+
+    var i:number = fieldNames.length;
+    while(i-- > 0) {
+        switch(fieldNames[i]) {
+            case 'statsloggingId': assertValidFieldType('statslogging', 'statsloggingId', pojo, 'number'); break;
+            case 'route': assertValidFieldType('statslogging', 'route', pojo, 'string'); break;
+            case 'propertyId': assertValidFieldType('statslogging', 'propertyId', pojo, 'string'); break;
+            case 'ipAddress': assertValidFieldType('statslogging', 'ipAddress', pojo, 'string'); break;
+            case 'dateTime': assertValidFieldType('statslogging', 'dateTime', pojo, 'Date'); break;
+            case 'isMobile': assertValidFieldType('statslogging', 'isMobile', pojo, 'boolean'); break;
+            case 'userAgent': assertValidFieldType('statslogging', 'userAgent', pojo, 'string'); break;
+            default:
+                throw new Error('Invalid statslogging provided. Field \'' + fieldNames[i] + '\' is not supported.')
+        }
+    }
+}
+asserters['statslogging'] = assertValidstatslogging;
 
 
 

@@ -48,6 +48,7 @@
     <Compile Include="public\javascripts\app\directives\agentDetails.js" />
     <Compile Include="public\javascripts\app\directives\agentDetailsSummary.js" />
     <Compile Include="public\javascripts\app\directives\bxSlider.js" />
+    <Compile Include="public\javascripts\app\directives\contact.js" />
     <Compile Include="public\javascripts\app\directives\propertyAppraisal.js" />
     <Compile Include="public\javascripts\app\directives\propertyDetails.js" />
     <Compile Include="public\javascripts\app\directives\shortPropertyDetails.js" />
@@ -61,11 +62,13 @@
     <Compile Include="routes\api.js" />
     <Compile Include="routes\assets.js" />
     <Compile Include="routes\buy.js" />
+    <Compile Include="routes\contact.js" />
     <Compile Include="routes\index.js" />
     <Compile Include="routes\property.js" />
     <Compile Include="routes\propertyAppraisal.js" />
     <Compile Include="routes\rent.js" />
     <Compile Include="routes\sold.js" />
+    <Compile Include="routes\statsLogging.js" />
     <Compile Include="routes\users.js" />
     <Compile Include="bin\www" />
     <Content Include="package.json" />
@@ -79,6 +82,7 @@
     <Content Include="public\stylesheets\style.styl" />
     <Content Include="public\templates\agentDetails.html" />
     <Content Include="public\templates\agentDetailsSummary.html" />
+    <Content Include="public\templates\contact.html" />
     <Content Include="public\templates\propertyAppraisal.html" />
     <Content Include="public\templates\propertyDetails.html" />
     <Content Include="public\templates\shortPropertyDetails.html" />
@@ -86,6 +90,7 @@
     <Content Include="views\agent.vash" />
     <Content Include="views\agents.vash" />
     <Content Include="views\buy.vash" />
+    <Content Include="views\contact.vash" />
     <Content Include="views\error.vash" />
     <Content Include="views\HTML1.html" />
     <Content Include="views\index.jade" />
@@ -125,6 +130,7 @@
     <TypeScriptCompile Include="processRentalJSONModule.ts" />
     <TypeScriptCompile Include="rentalInterface.d.ts" />
     <TypeScriptCompile Include="repository\agentRepo.ts" />
+    <TypeScriptCompile Include="repository\contactRepo.ts" />
     <TypeScriptCompile Include="repository\propertyAddressRepo.ts" />
     <TypeScriptCompile Include="repository\propertyAgentRepo.ts" />
     <TypeScriptCompile Include="repository\propertyAppraisalRepo.ts" />
@@ -132,6 +138,7 @@
     <TypeScriptCompile Include="repository\propertyFeatureRepo.ts" />
     <TypeScriptCompile Include="repository\propertyImageRepo.ts" />
     <TypeScriptCompile Include="repository\propertyRepo.ts" />
+    <TypeScriptCompile Include="repository\statsLoggingRepo.ts" />
   </ItemGroup>
   <!-- Do not delete the following Import Project.  While this appears to do nothing it is a marker for setting TypeScript properties before our import that depends on them. -->
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="False" />

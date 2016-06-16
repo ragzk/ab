@@ -1,8 +1,10 @@
 ﻿var express = require('express');
 var fs = require('fs');
 var _ = require('lodash')
+var statsLogging = require("../routes/statsLogging.js");
 
 exports.agents = function (req, res) {
+    statsLogging.addLogging('agents', null, req);    
     res.render('agents');
 };
 

@@ -1,0 +1,15 @@
+﻿
+
+@html.extend('layout', function(model){
+
+    @html.block('content', function(model){
+			<script>
+				//APP.value('buyDetails', JSON.parse(JSON.stringify({type : @model.type})))
+			</script>
+			<div class="contactcontainer">
+					<contact></contact>
+			</div>
+		    
+    })
+	
+})

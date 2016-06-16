@@ -77,6 +77,42 @@ function assertValidagent(pojo, allowUndefined) {
 }
 exports.assertValidagent = assertValidagent;
 asserters['agent'] = assertValidagent;
+function assertValidcontact(pojo, allowUndefined) {
+    if (pojo === undefined || pojo === null) {
+        if (allowUndefined) {
+            return;
+        }
+        throw new Error('Invalid contact provided. It is \'' + (typeof pojo) + '\'.');
+    }
+    var fieldNames = Object.keys(pojo);
+    if (fieldNames.length === 0) {
+        throw new Error('Invalid contact provided. It is an empty object.');
+    }
+    var i = fieldNames.length;
+    while (i-- > 0) {
+        switch (fieldNames[i]) {
+            case 'contactId':
+                assertValidFieldType('contact', 'contactId', pojo, 'number');
+                break;
+            case 'name':
+                assertValidFieldType('contact', 'name', pojo, 'string');
+                break;
+            case 'email':
+                assertValidFieldType('contact', 'email', pojo, 'string');
+                break;
+            case 'subject':
+                assertValidFieldType('contact', 'subject', pojo, 'string');
+                break;
+            case 'message':
+                assertValidFieldType('contact', 'message', pojo, 'string');
+                break;
+            default:
+                throw new Error('Invalid contact provided. Field \'' + fieldNames[i] + '\' is not supported.');
+        }
+    }
+}
+exports.assertValidcontact = assertValidcontact;
+asserters['contact'] = assertValidcontact;
 function assertValidproperty(pojo, allowUndefined) {
     if (pojo === undefined || pojo === null) {
         if (allowUndefined) {
@@ -437,6 +473,48 @@ function assertValidpropertyimage(pojo, allowUndefined) {
 }
 exports.assertValidpropertyimage = assertValidpropertyimage;
 asserters['propertyimage'] = assertValidpropertyimage;
+function assertValidstatslogging(pojo, allowUndefined) {
+    if (pojo === undefined || pojo === null) {
+        if (allowUndefined) {
+            return;
+        }
+        throw new Error('Invalid statslogging provided. It is \'' + (typeof pojo) + '\'.');
+    }
+    var fieldNames = Object.keys(pojo);
+    if (fieldNames.length === 0) {
+        throw new Error('Invalid statslogging provided. It is an empty object.');
+    }
+    var i = fieldNames.length;
+    while (i-- > 0) {
+        switch (fieldNames[i]) {
+            case 'statsloggingId':
+                assertValidFieldType('statslogging', 'statsloggingId', pojo, 'number');
+                break;
+            case 'route':
+                assertValidFieldType('statslogging', 'route', pojo, 'string');
+                break;
+            case 'propertyId':
+                assertValidFieldType('statslogging', 'propertyId', pojo, 'string');
+                break;
+            case 'ipAddress':
+                assertValidFieldType('statslogging', 'ipAddress', pojo, 'string');
+                break;
+            case 'dateTime':
+                assertValidFieldType('statslogging', 'dateTime', pojo, 'Date');
+                break;
+            case 'isMobile':
+                assertValidFieldType('statslogging', 'isMobile', pojo, 'boolean');
+                break;
+            case 'userAgent':
+                assertValidFieldType('statslogging', 'userAgent', pojo, 'string');
+                break;
+            default:
+                throw new Error('Invalid statslogging provided. Field \'' + fieldNames[i] + '\' is not supported.');
+        }
+    }
+}
+exports.assertValidstatslogging = assertValidstatslogging;
+asserters['statslogging'] = assertValidstatslogging;
 var BOOLEAN_TYPE = typeof (true);
 var NUMBER_TYPE = typeof (1);
 var STRING_TYPE = typeof ('');

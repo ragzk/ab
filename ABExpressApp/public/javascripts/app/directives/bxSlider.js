@@ -13,7 +13,7 @@
         //          '</div>',
         template: '<div class="bxslider1">' +
                    '<div class="slide" ng-repeat="image in images track by $index">' +
-                     '<img class="lazy" data-src="{{image.imageUrl}}" alt="" />' +
+                     '<img class="sliderimg" ng-src="{{image.imageUrl}}" alt="" />' +
                      '<div class="bxslider-property-details">' +  
                         '<div class="bxslider-property-features">' +
                             '<span ng-show="image.propertyFeature.bedroom">{{ image.propertyFeature.bedroom }}<span class="fa fa-bed spacing-icon"></span></span>' + 
