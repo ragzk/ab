@@ -9,7 +9,7 @@ var Promise = require('q');
 var statsLoggingRepo = (function () {
     function statsLoggingRepo() {
         this._dbConfig = new dbConfig.dbConfig();
-        models.initialize(this._dbConfig.database, this._dbConfig.user, this._dbConfig.password, { define: { freezeTableName: true } });
+        models.initialize(this._dbConfig.database, this._dbConfig.user, this._dbConfig.password, { host: this._dbConfig.host, define: { freezeTableName: true } });
     }
     statsLoggingRepo.prototype.save = function (obj) {
         try {

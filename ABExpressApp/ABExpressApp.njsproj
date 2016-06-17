@@ -56,6 +56,7 @@
     <Compile Include="public\javascripts\custom\cut.js" />
     <Compile Include="public\javascripts\custom\postalAngularWrapper.js" />
     <Compile Include="public\javascripts\custom\slider.js" />
+    <Compile Include="routes\about.js" />
     <Compile Include="routes\agent.js" />
     <Compile Include="routes\agentDetails.js" />
     <Compile Include="routes\agents.js" />
@@ -72,6 +73,7 @@
     <Compile Include="routes\users.js" />
     <Compile Include="bin\www" />
     <Content Include="package.json" />
+    <Content Include="public\applicationForm\ABApplicationForm.pdf" />
     <Content Include="public\images\properties\prop1.jpg" />
     <Content Include="public\images\properties\prop2.jpg" />
     <Content Include="public\images\properties\prop3.jpg" />
@@ -87,6 +89,7 @@
     <Content Include="public\templates\propertyDetails.html" />
     <Content Include="public\templates\shortPropertyDetails.html" />
     <Content Include="README.md" />
+    <Content Include="views\About.vash" />
     <Content Include="views\agent.vash" />
     <Content Include="views\agents.vash" />
     <Content Include="views\buy.vash" />
@@ -106,6 +109,7 @@
   <ItemGroup>
     <Folder Include="bin\" />
     <Folder Include="dbConnection\" />
+    <Folder Include="public\applicationForm\" />
     <Folder Include="public\fonts\" />
     <Folder Include="public\templates\" />
     <Folder Include="public\processedXmlFiles\" />

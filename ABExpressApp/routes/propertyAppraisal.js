@@ -26,36 +26,36 @@ exports.save = function (req, res) {
     var propertyAppraisalReport = require("../repository/propertyAppraisalRepo");
     var repo = new propertyAppraisalReport.propertyAppraisalRepo();
     repo.save(propertyAppraisalObject).then(function (data) {
-        //var nodemailer = require('nodemailer');
+        var nodemailer = require('nodemailer');
         
         
-        //var smtpTransport = nodemailer.createTransport("SMTP", {
-        //    service: "Gmail",
-        //    auth: {
-        //        XOAuth2: {
-        //            user: "microappjs@gmail.com", // Your gmail address.
-        //            clientId: "1096973232812-b901igt0jb3to3ptj614tu2759l3uqr9.apps.googleusercontent.com",
-        //            clientSecret: "tEkIy6xS47FYKu0-1RhP9GAv",
-        //            refreshToken: "1/95bFZVj1070dYff1xIN2iFlPYHz5wrLipGAW142inpc"
-        //        }
-        //    }
-        //});
+        var smtpTransport = nodemailer.createTransport("SMTP", {
+            service: "Gmail",
+            auth: {
+                XOAuth2: {
+                    user: "microappjs@gmail.com", // Your gmail address.
+                    clientId: "1096973232812-b901igt0jb3to3ptj614tu2759l3uqr9.apps.googleusercontent.com",
+                    clientSecret: "tEkIy6xS47FYKu0-1RhP9GAv",
+                    refreshToken: "1/95bFZVj1070dYff1xIN2iFlPYHz5wrLipGAW142inpc"
+                }
+            }
+        });
         
-        //// setup e-mail data with unicode symbols
-        //var mailOptions = {
-        //    from: '<microappjs@gmail.com>', // sender address
-        //    to: 'kamrag@gmail.com', // list of receivers
-        //    subject: 'Property Appraisal requested', // Subject line
-        //    text: 'Property Appraisal requested by ' + data.fullName + ' for property ' + data.propertyAddress + ' ( email address: ' + data.email + ' phone number ' + data.phoneNumber + ' )', // plaintext body
-        //};
+        // setup e-mail data with unicode symbols
+        var mailOptions = {
+            from: '<microappjs@gmail.com>', // sender address
+            to: 'kamrag@gmail.com', // list of receivers
+            subject: 'Property Appraisal requested', // Subject line
+            text: 'Property Appraisal requested by ' + data.fullName + ' for property ' + data.propertyAddress + ' ( email address: ' + data.email + ' phone number ' + data.phoneNumber + ' )', // plaintext body
+        };
         
-        //// send mail with defined transport object
-        //return smtpTransport.sendMail(mailOptions, function (error, info) {
-        //    if (error) {
-        //        res.json(error);
-        //    }
-        //    return res.json(info.response);
-        //});
+        // send mail with defined transport object
+        smtpTransport.sendMail(mailOptions, function (error, info) {
+            if (error) {
+                res.json(error);
+            }
+            res.json(info.response);
+        });
 
 
          //MAILGUN

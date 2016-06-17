@@ -34,7 +34,7 @@
                            <div>
                               <a class="list-group-item child route" href="/rent/residential">Residential</a>
                               <a class="list-group-item child route" href="/rent/inspection">Open for Inspection</a>
-                              <a class="list-group-item child route" href="/rent/Auction">Auction</a>
+                              <a class="list-group-item child route" href="/ABApplicationForm.pdf">Application Form</a>
                            </div>
                         </div>
                         <div class="title parent"><a class="list-group-item parent route" href="/sold">Sold</a>
@@ -97,6 +97,7 @@
                           <li><a href="/propertyAppraisal">Property Appraisal</a></li>
                           <li><a href="/agents">Agents</a></li>
                           <li><a href="/contact">Contact</a></li>
+						  <li><a href="/about">About Us</a></li>
                       </ul>
                   </div><!-- /.navbar-collapse -->
               </div><!-- /.container-fluid -->
@@ -118,7 +119,57 @@
    <!--Footer-->
    <script type="text/ng-template" id="Footer.html">
       <div>
-      
+		<footer class="footer-distributed">
+
+			<div class="footer-left">
+
+				<h3>AB Property Consultants Pty Ltd</h3>
+
+				<p class="footer-links">
+					<a href="/">Home</a>
+					·
+					<a href="/about">About Us</a>
+					·
+					<a href="/Contact">Contact</a>
+				</p>
+
+				<p class="footer-company-name">AB Property Consultants  Pty Ltd &copy; 2016</p>
+			</div>
+
+			<div class="footer-center">
+
+				<div>
+					<i class="fa fa-map-marker"></i>
+					<p><span>PO Box 243 Northmead 2152.</span> NSW, Australia</p>
+				</div>
+
+				<div>
+					<i class="fa fa-phone"></i>
+					<p>+61 402 961 515</p>
+				</div>
+
+				<div>
+					<i class="fa fa-envelope"></i>
+					<p><a href="mailto:ab@abproperties.com.au">ab@abproperties.com.au</a></p>
+				</div>
+
+			</div>
+
+			<div class="footer-right">
+
+				<!--<p class="footer-company-about">
+					<span>About the company</span>
+					Lorem ipsum dolor sit amet, consectateur adispicing elit. Fusce euismod convallis velit, eu auctor lacus vehicula sit amet.
+				</p>-->
+
+				<div class="footer-icons">
+					<a href="https://www.facebook.com/AB-Property-Consultants-Pty-Ltd-699911836789158"><i class="fa fa-facebook"></i></a>
+					<a href="https://www.linkedin.com/company/ab-property-consultants"><i class="fa fa-linkedin"></i></a>
+				</div>
+
+			</div>
+
+		</footer>      
       </div>
    </script>
    <!-- Search -->

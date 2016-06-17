@@ -10,7 +10,7 @@
     var logObj = {
         route: route,
         propertyId: propertyId,
-        ipAddress: req.ip,
+        ipAddress: req.header('x-forwarded-for') || req.connection.remoteAddress,
         isMobile: isMobile,
         userAgent: ua
     };

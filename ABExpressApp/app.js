@@ -17,6 +17,7 @@ var transAgents = require('./routes/agents');
 var property = require('./routes/property');
 var propertyAppraisal = require('./routes/propertyAppraisal.js');
 var transContact = require('./routes/contact.js');
+var transAbout = require('./routes/about');
 var _ = require('lodash');
 
 var app = express();
@@ -69,6 +70,8 @@ app.get('/agents/getAgents', transAgents.getAgents);
 app.get('/propertyAppraisal', propertyAppraisal.propertyAppraisal);
 app.get('/contact', transContact.contact);
 
+app.get('/about', transAbout);
+
 
 app.get('/property/:suburb/:street/:streetNumber/:uniqueId', property.details);
 app.get('/property/:suburb/:street/:streetNumber/:streetNumber2/:uniqueId', property.details);
@@ -88,6 +91,31 @@ app.post('/propertyAppraisal/save', function (req, res) {
 
 app.post('/contact/save', function (req, res) {
     return transContact.save(req, res);
+});
+
+app.get('/:file(*)', function (req, res, next) {
+    var file = req.params.file
+    , path = __dirname + '/public/applicationForm/' + file;
+    var fs = require('fs');
+
+    fs.readFile(path, function (err, content) {
+        if (err) {
+            res.writeHead(400, { 'Content-type': 'text/html' })
+            console.log(err);
+            res.end("No such file");
+        } else {
+            //specify Content will be an attachment
+            res.setHeader('Content-disposition', 'attachment; filename=' + file);
+            res.end(content);
+        }
+    });
+    //res.download(path);
+});
+
+
+//The 404 Route (ALWAYS Keep this as the last route)
+app.get('*', function (req, res) {
+    res.send('OOPS!. Something went wrong. This link does not exists.', 404);
 });
 
 // catch 404 and forward to error handler

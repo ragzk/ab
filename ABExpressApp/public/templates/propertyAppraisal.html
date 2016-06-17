@@ -26,7 +26,12 @@
     <div class="form-group" ng-class="{'has-error': submitted && propertyApprisalForm.propertyAddress.$invalid}">
         <label class="control-label col-sm-2" for="propertyAddress">Property Address:</label>
         <div class="col-sm-10">
-            <input type="text" class="form-control" name="propertyAddress" ng-model="propertyAddress" placeholder="Enter property address" required>
+            <!--<input type="text" class="form-control input-sm-10" name="unitNumber" ng-model="unitNumber" placeholder="Enter unit no" required />
+            <input type="text" class="form-control input-sm" name="street" ng-model="street" placeholder="Enter street" required />
+            <input type="text" class="form-control" name="suburb" ng-model="suburb" placeholder="Enter suburb" required />
+            <input type="text" class="form-control input-sm" name="postcode" ng-model="postcode" placeholder="Enter postcode" required />
+            <input type="text" class="form-control input-sm" name="state" ng-model="state" placeholder="Enter state" required />-->
+            <input type="text" class="form-control" name="propertyAddress" ng-model="propertyAddress" placeholder="Enter property address" required />
             <span class="help-inline" ng-show="submitted && propertyApprisalForm.propertyAddress.$error.required">Property address is required</span>
         </div>
     </div>    
