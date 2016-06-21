@@ -13,9 +13,11 @@
         //          '</div>',
         template: '<div class="bxslider1">' +
                    '<div class="slide" ng-repeat="image in images track by $index">' +
-                     '<img class="sliderimg" ng-src="{{image.imageUrl}}" alt="" />' +
+                     
+                     '<img ng-if="$index === 0" class="sliderimg" ng-src="{{image.imageUrl}}" alt="" />' +
+                     '<img ng-if="$index > 0" class="sliderimg" data-src="{{image.imageUrl}}"  alt="" />' +
                      '<div class="bxslider-property-details">' +  
-                        '<div class="bxslider-property-features">' +
+                        '<div class="bxslider-property-features">{{$index}}' +
                             '<span ng-show="image.propertyFeature.bedroom">{{ image.propertyFeature.bedroom }}<span class="fa fa-bed spacing-icon"></span></span>' + 
                             '<span class="extra-spacing-icon" ng-show="image.propertyFeature.bathroom">{{ image.propertyFeature.bathroom }}<img class="bath-icon spacing-icon" src="/public/images/icons/bath.png" /></span>' +
                             '<span class="extra-spacing-icon" ng-show="image.propertyFeature.garages">{{image.propertyFeature.garages}}<span class="fa fa-car spacing-icon"></span></span>' +
@@ -52,7 +54,15 @@
                         auto: true,
                         pager: false,
                         slideMargin: 10
-                        //,
+                        ,
+                        onSlideBefore: function (e, oldIndex, newIndex) {
+                            console.log(e);
+                            var element = $(e.children()[0]);
+                            var src = element.data().src;
+                            if (src) {
+                                element.attr("src", src).removeAttr("data-src");
+                            }
+                        }
                         //onSliderLoad: function () {
                         //    var $sliderImgs = $(".bxslider1 img");
                         //    var start = page * maxSlides + maxSlides;

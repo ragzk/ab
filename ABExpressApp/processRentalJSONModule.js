@@ -133,7 +133,7 @@ var processRentalJSON = (function () {
                 arr1 = arr;
             }
             var o = _.find(arr1, function (o) {
-                return o.uniqueID == obj.uniqueID;
+                return o && o.uniqueID == obj.uniqueID;
             });
             return o;
         };

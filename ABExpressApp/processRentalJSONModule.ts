@@ -95,7 +95,7 @@ class processRentalJSON {
             }
         }
 
-        
+
         var that = this;
         //console.log(obj.status);
         //      var func = function (that) {
@@ -153,11 +153,11 @@ class processRentalJSON {
                 arr1 = arr;
             }
             var o = _.find(arr1, function (o) {
-                return o.uniqueID == obj.uniqueID;
+                return o && o.uniqueID == obj.uniqueID;
             });
             return o;
         }
-        
+
         if (getObject(this.data.rental)) {
             obj.type = "rental";
         }
@@ -237,7 +237,7 @@ class processRentalJSON {
                                     console.log('savePropertyImagesInDb ** done');
                                     return Promise.when([]);
                                 });
-                        
+
 
                             }
                         }).done(function () {
@@ -246,7 +246,7 @@ class processRentalJSON {
                 }
 
             })
-        return Promise.all([chain]).then(function () { return Promise.when([]);});
+        return Promise.all([chain]).then(function () { return Promise.when([]); });
 
         //        }
         //        return func();
@@ -335,7 +335,7 @@ class processRentalJSON {
                 if (index == 0) {
                     obj.imageUrl = img.url;
                 }
-                
+
             });
         }
         else {

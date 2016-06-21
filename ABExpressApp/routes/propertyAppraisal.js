@@ -27,8 +27,6 @@ exports.save = function (req, res) {
     var repo = new propertyAppraisalReport.propertyAppraisalRepo();
     repo.save(propertyAppraisalObject).then(function (data) {
         var nodemailer = require('nodemailer');
-        
-        
         var smtpTransport = nodemailer.createTransport("SMTP", {
             service: "Gmail",
             auth: {
@@ -44,7 +42,7 @@ exports.save = function (req, res) {
         // setup e-mail data with unicode symbols
         var mailOptions = {
             from: '<microappjs@gmail.com>', // sender address
-            to: 'kamrag@gmail.com', // list of receivers
+            to: 'kamrag@gmail.com, ab@abproperties.com.au', // list of receivers
             subject: 'Property Appraisal requested', // Subject line
             text: 'Property Appraisal requested by ' + data.fullName + ' for property ' + data.propertyAddress + ' ( email address: ' + data.email + ' phone number ' + data.phoneNumber + ' )', // plaintext body
         };

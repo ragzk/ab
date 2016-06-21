@@ -5,7 +5,7 @@ var router = express.Router();
 var statsLogging = require("../routes/statsLogging.js");
 
 router.get('/about', function (req, res) {
-    statsLogging.addLogging('index', null, req);
+    statsLogging.addLogging('about', null, req);
     res.render('about');
 });
 

@@ -89,7 +89,7 @@
     <Content Include="public\templates\propertyDetails.html" />
     <Content Include="public\templates\shortPropertyDetails.html" />
     <Content Include="README.md" />
-    <Content Include="views\About.vash" />
+    <Content Include="views\about.vash" />
     <Content Include="views\agent.vash" />
     <Content Include="views\agents.vash" />
     <Content Include="views\buy.vash" />

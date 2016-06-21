@@ -866,12 +866,112 @@ ul.footer_nav.primary li {
 
 }
 
-
-
  /* end footer*/
+
+
+ /* start accordion new menu */
+ * {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+ul { list-style-type: none; }
+
+a {
+  color: #000;
+  text-decoration: none;
+}
+
+.accordion {
+  width: 310px;
+  max-width: 310px;
+  //margin: 30px auto 20px;
+  background: #FFF;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+}
+
+.accordion .link {
+  cursor: pointer;
+  display: block;
+  padding: 15px 15px 15px 15px;
+  color: #4D4D4D;
+  font-size: 14px;
+  font-weight: 700;
+  border-bottom: 1px solid #CCC;
+  position: relative;
+  -webkit-transition: all 0.4s ease;
+  -o-transition: all 0.4s ease;
+  transition: all 0.4s ease;
+}
+
+.accordion li:last-child .link { border-bottom: 0; }
+
+.accordion li i {
+  position: absolute;
+  top: 16px;
+  left: 12px;
+  font-size: 18px;
+  color: #595959;
+  -webkit-transition: all 0.4s ease;
+  -o-transition: all 0.4s ease;
+  transition: all 0.4s ease;
+}
+
+.accordion li i.fa-chevron-down {
+  right: 12px;
+  left: auto;
+  font-size: 16px;
+}
+
+.accordion li.open .link { color: #000; }
+
+.accordion li.open i { color: #000; }
+
+.accordion li.open i.fa-chevron-down {
+  -webkit-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  -o-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+
+.submenu {
+  display: none;
+  background: #686868;
+  font-size: 14px;
+}
+
+.submenu li { border-bottom: 1px solid #4b4a5e; }
+
+.submenu a {
+  display: block;
+  text-decoration: none;
+  color: #d9d9d9;
+  padding: 12px;
+  padding-left: 42px;
+  -webkit-transition: all 0.25s ease;
+  -o-transition: all 0.25s ease;
+  transition: all 0.25s ease;
+}
+
+.submenu a:hover {
+  background: #191919;
+  color: #FFF;
+}
+
+ /* end accordion new menu*/
+
 
  /* Portrait phones and smaller */
 @media (max-width: 480px) {
+    .accordion {
+      width: auto;
+      max-width: auto;
+    }
     .sliderParent {
         .rightSideContent
         {
@@ -928,6 +1028,10 @@ ul.footer_nav.primary li {
 
 /* Landscape phones and portrait tablets */
 @media (max-width: 767px) {
+    .accordion {
+      width: auto;
+      max-width: none;
+    }
     .sidebar{
         float:right;
         width:100%;
