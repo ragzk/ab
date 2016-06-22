@@ -17,7 +17,7 @@
                      '<img ng-if="$index === 0" class="sliderimg" ng-src="{{image.imageUrl}}" alt="" />' +
                      '<img ng-if="$index > 0" class="sliderimg" data-src="{{image.imageUrl}}"  alt="" />' +
                      '<div class="bxslider-property-details">' +  
-                        '<div class="bxslider-property-features">{{$index}}' +
+                        '<div class="bxslider-property-features">' +
                             '<span ng-show="image.propertyFeature.bedroom">{{ image.propertyFeature.bedroom }}<span class="fa fa-bed spacing-icon"></span></span>' + 
                             '<span class="extra-spacing-icon" ng-show="image.propertyFeature.bathroom">{{ image.propertyFeature.bathroom }}<img class="bath-icon spacing-icon" src="/public/images/icons/bath.png" /></span>' +
                             '<span class="extra-spacing-icon" ng-show="image.propertyFeature.garages">{{image.propertyFeature.garages}}<span class="fa fa-car spacing-icon"></span></span>' +
