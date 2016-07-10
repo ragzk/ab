@@ -114,6 +114,7 @@
     <Folder Include="public\templates\" />
     <Folder Include="public\processedXmlFiles\" />
     <Folder Include="public\sfdf\" />
+    <Folder Include="public\xmlfiles\" />
     <Folder Include="repository\" />
     <Folder Include="schema\" />
     <Folder Include="public\" />

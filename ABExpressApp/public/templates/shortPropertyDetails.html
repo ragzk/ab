@@ -12,7 +12,7 @@
             <div class="property-features">
                 <span ng-show="propertyFeature.bedroom">{{propertyFeature.bedroom}}  <span class="fa fa-bed"></span></span>
                 <span ng-show="propertyFeature.bathroom">{{propertyFeature.bathroom}}  <img class="bath-icon" src="/public/images/icons/bath.png" /></span>
-                <span ng-show="propertyFeature.garages">{{propertyFeature.garages}}  <span class="fa fa-car"></span></span>
+                <span ng-show="propertyFeature.garages || propertyFeature.carports">{{propertyFeature.garages + propertyFeature.carports}}  <span class="fa fa-car"></span></span>
                 <div class="price">{{property.price}}</div>
                 <div ng-show="property.status != 'sold' && property.inspectionTimes != null">
                     <strong>Next inspection</strong>

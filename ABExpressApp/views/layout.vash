@@ -131,7 +131,7 @@
                             <li><a href="/propertyAppraisal">Property Appraisal</a></li>
                             <li><a href="/agents">Agents</a></li>
                             <li><a href="/contact">Contact</a></li>
-          <li><a href="/about">About Us</a></li>
+          <li><a href="/about">About us</a></li>
                         </ul>
                     </div><!-- /.navbar-collapse -->
                 </div><!-- /.container-fluid -->
@@ -162,7 +162,7 @@
         <p class="footer-links">
         <a href="/">Home</a>
         ·
-        <a href="/about">About Us</a>
+        <a href="/about">About us</a>
         ·
         <a href="/Contact">Contact</a>
         </p>
