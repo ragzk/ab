@@ -134,7 +134,8 @@ export function initialize(database:string, username:string, password:string, op
         'modifiedTime':Sequelize.STRING,
         'status':Sequelize.STRING,
         'imageUrl':Sequelize.STRING,
-        'lastUpdateFileNumber':Sequelize.INTEGER
+        'lastUpdateFileNumber':Sequelize.INTEGER,
+        'underOffer':Sequelize.INTEGER
         },
         {
             timestamps: false,
@@ -164,6 +165,7 @@ export function initialize(database:string, username:string, password:string, op
                         if (property['status'] !== undefined) { where['status'] = property['status']}
                         if (property['imageUrl'] !== undefined) { where['imageUrl'] = property['imageUrl']}
                         if (property['lastUpdateFileNumber'] !== undefined) { where['lastUpdateFileNumber'] = property['lastUpdateFileNumber']}
+                        if (property['underOffer'] !== undefined) { where['underOffer'] = property['underOffer']}
                     } else {
                         where['propertyId'] = id;
                     }

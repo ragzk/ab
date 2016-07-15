@@ -41,6 +41,7 @@
         imageUrl: string;
         fileName: string; //debuging purpose
         lastUpdateFileNumber: number;
+        underOffer: IValue;
     }
 
     interface IImg {

@@ -147,7 +147,8 @@ function initialize(database, username, password, options) {
         'modifiedTime': Sequelize.STRING,
         'status': Sequelize.STRING,
         'imageUrl': Sequelize.STRING,
-        'lastUpdateFileNumber': Sequelize.INTEGER
+        'lastUpdateFileNumber': Sequelize.INTEGER,
+        'underOffer': Sequelize.INTEGER
     }, {
         timestamps: false,
         classMethods: {
@@ -217,6 +218,9 @@ function initialize(database, username, password, options) {
                     }
                     if (property['lastUpdateFileNumber'] !== undefined) {
                         where['lastUpdateFileNumber'] = property['lastUpdateFileNumber'];
+                    }
+                    if (property['underOffer'] !== undefined) {
+                        where['underOffer'] = property['underOffer'];
                     }
                 }
                 else {

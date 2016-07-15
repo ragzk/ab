@@ -13,7 +13,6 @@
         //          '</div>',
         template: '<div class="bxslider1">' +
                    '<div class="slide" ng-repeat="image in images track by $index">' +
-                     
                      '<img ng-if="$index === 0" class="sliderimg" ng-src="{{image.imageUrl}}" alt="" />' +
                      '<img ng-if="$index > 0" class="sliderimg" data-src="{{image.imageUrl}}"  alt="" />' +
                      '<div class="bxslider-property-details">' +  

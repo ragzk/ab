@@ -190,6 +190,9 @@ function assertValidproperty(pojo, allowUndefined) {
             case 'lastUpdateFileNumber':
                 assertValidFieldType('property', 'lastUpdateFileNumber', pojo, 'number');
                 break;
+            case 'underOffer':
+                assertValidFieldType('property', 'underOffer', pojo, 'boolean');
+                break;
             case 'propertyaddress':
                 assertValidFieldType('property', 'propertyaddress', pojo, 'propertyaddressPojo[]');
                 break;

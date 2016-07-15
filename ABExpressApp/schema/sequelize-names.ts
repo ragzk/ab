@@ -95,6 +95,7 @@ export class propertyFields {
     status:string = 'status';
     imageUrl:string = 'imageUrl';
     lastUpdateFileNumber:string = 'lastUpdateFileNumber';
+    underOffer:string = 'underOffer';
     propertyaddress:string = 'propertyaddress';
     propertyagent:string = 'propertyagent';
     propertydescription:string = 'propertydescription';

@@ -192,6 +192,7 @@ export interface propertyPojo
     status?:string;
     imageUrl?:string;
     lastUpdateFileNumber?:number;
+    underOffer?:boolean;
     propertyaddress?:propertyaddressPojo[];
     propertyagent?:propertyagentPojo[];
     propertydescription?:propertydescriptionPojo[];
@@ -243,6 +244,7 @@ export function assertValidproperty(pojo:propertyPojo, allowUndefined?:boolean):
             case 'status': assertValidFieldType('property', 'status', pojo, 'string'); break;
             case 'imageUrl': assertValidFieldType('property', 'imageUrl', pojo, 'string'); break;
             case 'lastUpdateFileNumber': assertValidFieldType('property', 'lastUpdateFileNumber', pojo, 'number'); break;
+            case 'underOffer': assertValidFieldType('property', 'underOffer', pojo, 'boolean'); break;
             case 'propertyaddress': assertValidFieldType('property', 'propertyaddress', pojo, 'propertyaddressPojo[]'); break;
             case 'propertyagent': assertValidFieldType('property', 'propertyagent', pojo, 'propertyagentPojo[]'); break;
             case 'propertydescription': assertValidFieldType('property', 'propertydescription', pojo, 'propertydescriptionPojo[]'); break;

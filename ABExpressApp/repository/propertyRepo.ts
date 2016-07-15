@@ -94,6 +94,7 @@ export class propertyRepo {
                         loc.imageUrl = rentalObj.imageUrl;
                         loc.status = rentalObj.status.toString();
                         loc.lastUpdateFileNumber = rentalObj.lastUpdateFileNumber; 
+                        loc.underOffer = rentalObj.underOffer ? rentalObj.underOffer.value == "yes" ? true : false : false;
                         return loc.save();
                     }
                     else {
@@ -120,7 +121,8 @@ export class propertyRepo {
                         modifiedTime: rentalObj.modTime,
                         imageUrl: rentalObj.imageUrl,
                         status: rentalObj.status.toString(),
-                        lastUpdateFileNumber: rentalObj.lastUpdateFileNumber 
+                        lastUpdateFileNumber: rentalObj.lastUpdateFileNumber,
+                        underOffer: rentalObj.underOffer ? rentalObj.underOffer.value == "yes" ? true : false : false
                     });
                     return loc.save();
                 }

@@ -9,6 +9,10 @@
                 <span ng-show="propertyFeature.garages || propertyFeature.carports">{{propertyFeature.garages + propertyFeature.carports}}  <span class="fa fa-car"></span></span>
             </div>
         </div>
+        <div ng-show="property.underOffer">
+            <span><strong>Under contract</strong></span>
+        </div>
+
         <div ng-show="property.status == 'sold'">
             <span ng-show="property.soldDate">Sold Date : {{property.soldDate}} </span>
             <span ng-show="property.soldPrice">Sold Price : {{property.soldPrice}} </span>
