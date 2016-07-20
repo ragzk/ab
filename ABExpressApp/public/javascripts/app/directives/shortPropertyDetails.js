@@ -20,13 +20,22 @@
                 scope.propertyAddressAsText = scope.propertyAddress.streetNumber + " " + scope.propertyAddress.street + ", " + scope.propertyAddress.suburb;
             }
             if (scope.property.inspectionTimes) {
-                var nextInspectionTimes = _.last(scope.property.inspectionTimes.split(','));
-                if (nextInspectionTimes && _.first(nextInspectionTimes.split(' to')) && moment(Date(_.first(nextInspectionTimes.split(' to')))).isAfter(Date.now())) {
-                    scope.property.inspectionTimes = nextInspectionTimes;
-                }
-                else {
-                    scope.property.inspectionTimes = null;
-                }
+                var inspectionTimes = null;
+                
+                _.each(scope.property.inspectionTimes.split(','), function (current) {
+                    var nextInspectionTimes = current;
+                    
+                    if (nextInspectionTimes && _.first(nextInspectionTimes.split(' to')) && moment(_.first(nextInspectionTimes.split(' to')), "DD/MMM/YYYY").toDate() > moment(Date.now()).toDate()) {
+                        inspectionTimes = inspectionTimes ? inspectionTimes + ", " + nextInspectionTimes:nextInspectionTimes;
+                    }
+                    else {
+                        scope.property.inspectionTimes = null;
+                    }
+                });
+
+
+                scope.property.inspectionTimes = inspectionTimes;
+
             }
 
         }

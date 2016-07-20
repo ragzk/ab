@@ -7,10 +7,24 @@
         <link rel="shortcut icon" href="/public/images/favicon.png">
         <link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
         <title>@model.title</title>
-        <link href="/bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
-        <link href="/public/stylesheets/all.css" rel="stylesheet" />
     </head>
     <body>
+	<noscript id="deferred-styles">
+      <link rel="stylesheet" type="text/css" href="/public/stylesheets/all.css"/>
+    </noscript>
+    <script>
+      var loadDeferredStyles = function() {
+        var addStylesNode = document.getElementById("deferred-styles");
+        var replacement = document.createElement("div");
+        replacement.innerHTML = addStylesNode.textContent;
+        document.body.appendChild(replacement)
+        addStylesNode.parentElement.removeChild(addStylesNode);
+      };
+      var raf = requestAnimationFrame || mozRequestAnimationFrame ||
+          webkitRequestAnimationFrame || msRequestAnimationFrame;
+      if (raf) raf(function() { window.setTimeout(loadDeferredStyles, 0); });
+      else window.addEventListener('load', loadDeferredStyles);
+    </script>
         <div id="main-container" class="container" ng-controller="mainController">
             <div id="header-container">
                 <div ng-include src="'Header.html'"></div>
@@ -239,8 +253,26 @@
             </div>-->
         <!--<a href="" class="btn b*tn-primary sharp">Search</a>-->
     </script>
-    <script src="/public/javascripts/vendor.js"></script>
-    <script src="/public/javascripts/app/all.js"></script>
+	<script type="text/javascript">
+
+	// Add a script element as a child of the body
+	 function downloadJSAtOnload() {
+	 var element1 = document.createElement("script");
+	 element1.src = "/public/javascripts/app/all.js";
+	 document.body.appendChild(element1);
+	 }
+	 
+
+	 // Check for browser support of event handling capability
+	 if (window.addEventListener)
+	 window.addEventListener("load", downloadJSAtOnload, false);
+	 else if (window.attachEvent)
+	 window.attachEvent("onload", downloadJSAtOnload);
+	 else window.onload = downloadJSAtOnload;
+
+	</script>
+    <!--<script src="/public/javascripts/vendor.js"></script>
+    <script src="/public/javascripts/app/all.js"></script>-->
     <!--<script src="/bower_components/jquery/dist/jquery.js"></script>
         <script src="/bower_components/lodash/lodash.js"></script>
         <script src="/bower_components/bootstrap/dist/js/bootstrap.js"></script>
