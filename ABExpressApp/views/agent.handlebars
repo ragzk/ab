@@ -1,0 +1,7 @@
+﻿<div class="agentsdetailscontainer">
+    <div class="" ng-controller="agentController as ctrl" ng-init="ctrl.init({{{data.agentId}}})">
+        <div ng-if="ctrl.agent">
+            <agent-details ng-show="ctrl.agent" agent="ctrl.agent"></agent-details>
+        </div>
+    </div>
+</div>

@@ -8,10 +8,20 @@ exports.rent = function (req, res) {
     var route = req.params.type ? 'rent/' + req.params.type  : 'rent';
     statsLogging.addLogging(route , null, req);
     var getPropertiesUrl = '/rent/' + type + '/getProperties';
-    res.render('rent', {
+    var data = {
         type: type,
         getPropertiesUrl: getPropertiesUrl
-    });
+    };
+    if (req.xhr) {
+        res.render('rent', { layout: false, data: data });
+    }
+    else {
+        res.render('rent', {
+            type: type,
+            getPropertiesUrl: getPropertiesUrl
+        });
+    }    
+
 };
 
 

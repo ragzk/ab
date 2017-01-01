@@ -20,6 +20,7 @@
     "matchmedia-ng": "1.0.5",
     "ngprogress": "1.1.2",
     "postal.js": "1.0.8",
-    "moment": "*"
+    "moment": "*",
+    "angular-route": "1.5.5"
   }
 }

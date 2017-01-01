@@ -1,0 +1,7 @@
+﻿<div class="propertydetailscontainer">
+    <div class="" ng-controller="buyController as ctrl" ng-init="ctrl.init('{{{data.type}}}', '{{{data.getPropertiesUrl}}}')">
+        <div class="dashboard-item social-grid-item animated fadeInUp delay-\{{ctrl.properties.length - $index}}" ng-repeat="property in ctrl.properties">
+            <short-property-details class="shortpropertydetailscontainer" property="property"></short-property-details>
+        </div>
+    </div>
+</div>

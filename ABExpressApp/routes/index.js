@@ -23,14 +23,19 @@ router.get('/getUnSoldProperties', function (req, res) {
 
 router.get('/', function (req, res) {
     statsLogging.addLogging('index', null, req);
-    if (!res.getHeader('Cache-Control'))
-        res.setHeader('Cache-Control', 'public, max-age=' + (120000 / 1000));    
-    res.render('index', {
-        title: 'Property Consultants',
-        scripts: ['javascripts/custom/slider.js'],
-        soldProp: soldProp,
-        unSoldProp: unSoldProp
-    });
+    if (req.xhr) {
+        res.render('index', { layout: false });
+    }
+    else {
+        res.render('index');
+    }    
+    //res.render('index', {
+    //    layout: 'layout',
+    //    title: 'Property Consultants',
+    //    scripts: ['javascripts/custom/slider.js'],
+    //    soldProp: soldProp,
+    //    unSoldProp: unSoldProp
+    //});
     
 });
 

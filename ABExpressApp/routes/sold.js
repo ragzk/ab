@@ -8,10 +8,19 @@ exports.sold = function (req, res) {
     var route = req.params.type ? 'sold/' + req.params.type  : 'sold';
     statsLogging.addLogging(route , null, req);
     var getPropertiesUrl = '/sold/' + type + '/getProperties';
-    res.render('sold', {
+    var data = {
         type: type,
         getPropertiesUrl: getPropertiesUrl
-    });
+    };
+    if (req.xhr) {
+        res.render('sold', { layout: false, data: data });
+    }
+    else {
+        res.render('sold', {
+            type: type,
+            getPropertiesUrl: getPropertiesUrl
+        });
+    }    
 };
 
 

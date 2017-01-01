@@ -4,8 +4,13 @@ var _ = require('lodash')
 var statsLogging = require("../routes/statsLogging.js");
 
 exports.agents = function (req, res) {
-    statsLogging.addLogging('agents', null, req);    
-    res.render('agents');
+    statsLogging.addLogging('agents', null, req);
+    if (req.xhr) {
+        res.render('agents', { layout: false });
+    }
+    else {
+        res.render('agents');
+    }
 };
 
 module.exports.getAgents = function (req, res) {

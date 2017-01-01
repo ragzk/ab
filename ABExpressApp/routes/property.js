@@ -9,9 +9,21 @@ exports.details = function (req, res) {
     var street = req.params.street;
     var uniqueId = req.params.uniqueId;
     statsLogging.addLogging('property', uniqueId, req);
-    res.render('property', {
+    var data = {
         uniqueId: uniqueId
-    });
+    };
+    if (req.xhr) {
+        res.render('property', {
+            layout: false, 
+            data: data
+        });
+    }
+    else {
+        res.render('property', {
+            uniqueId: uniqueId
+        });
+
+    } 
 };
 
 exports.details = function (req, res) {
@@ -22,9 +34,21 @@ exports.details = function (req, res) {
     var street = req.params.street;
     var uniqueId = req.params.uniqueId;
     statsLogging.addLogging('property', uniqueId, req);
-    res.render('property', {
+    var data = {
         uniqueId: uniqueId
-    });
+    };    
+    if (req.xhr) {
+        res.render('property', {
+            layout: false, 
+            data: data
+        });
+    }
+    else {
+        res.render('property', {
+            uniqueId: uniqueId
+        });
+
+    } 
 };
 
 

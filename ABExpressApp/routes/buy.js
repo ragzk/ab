@@ -7,11 +7,17 @@ exports.buy = function (req, res) {
     var type = req.params.type || "All";
     var getPropertiesUrl = '/buy/' + type + '/getProperties';
     var route = req.params.type ? 'buy/' + req.params.type  : 'buy';
-    statsLogging.addLogging(route , null, req);
-    res.render('buy', {
+    var data = {
         type: type,
         getPropertiesUrl: getPropertiesUrl
-    });
+    };
+    statsLogging.addLogging(route , null, req);
+    if (req.xhr) {
+        res.render('buy', { layout: false, data: data });
+    }
+    else {
+        res.render('buy', { data: data });
+    }    
 };
 
 //exports.buy.displayDetails = function (req, res) {

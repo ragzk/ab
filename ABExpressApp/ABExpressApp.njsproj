@@ -49,6 +49,7 @@
     <Compile Include="public\javascripts\app\directives\agentDetailsSummary.js" />
     <Compile Include="public\javascripts\app\directives\bxSlider.js" />
     <Compile Include="public\javascripts\app\directives\contact.js" />
+    <Compile Include="public\javascripts\app\directives\getHTML.js" />
     <Compile Include="public\javascripts\app\directives\propertyAppraisal.js" />
     <Compile Include="public\javascripts\app\directives\propertyDetails.js" />
     <Compile Include="public\javascripts\app\directives\shortPropertyDetails.js" />
@@ -79,6 +80,9 @@
     <Content Include="public\images\properties\prop3.jpg" />
     <Content Include="public\images\properties\prop4.jpg" />
     <Content Include="public\images\properties\prop5.jpg" />
+    <Content Include="public\routeHtml\agent.html" />
+    <Content Include="public\routeHtml\agents.html" />
+    <Content Include="public\routeHtml\index.html" />
     <Content Include="public\stylesheets\custom.scss" />
     <Content Include="public\stylesheets\fontawesome.css" />
     <Content Include="public\stylesheets\style.styl" />
@@ -89,20 +93,27 @@
     <Content Include="public\templates\propertyDetails.html" />
     <Content Include="public\templates\shortPropertyDetails.html" />
     <Content Include="README.md" />
+    <Content Include="views\about.handlebars" />
     <Content Include="views\about.vash" />
+    <Content Include="views\agent.handlebars" />
     <Content Include="views\agent.vash" />
+    <Content Include="views\agents.handlebars" />
     <Content Include="views\agents.vash" />
     <Content Include="views\buy.vash" />
     <Content Include="views\contact.vash" />
+    <Content Include="views\error.handlebars" />
     <Content Include="views\error.vash" />
     <Content Include="views\HTML1.html" />
+    <Content Include="views\index.handlebars" />
     <Content Include="views\index.jade" />
     <Content Include="views\index.vash" />
-    <Content Include="views\layout.jade" />
     <Content Include="views\error.jade" />
     <Content Include="views\layout.vash" />
+    <Content Include="views\layouts\main.handlebars" />
+    <Content Include="views\layouts\true.handlebars" />
     <Content Include="views\property.vash" />
     <Content Include="views\propertyAppraisal.vash" />
+    <Content Include="views\rent.handlebars" />
     <Content Include="views\rent.vash" />
     <Content Include="views\sold.vash" />
   </ItemGroup>
@@ -111,6 +122,7 @@
     <Folder Include="dbConnection\" />
     <Folder Include="public\applicationForm\" />
     <Folder Include="public\fonts\" />
+    <Folder Include="public\routeHtml\" />
     <Folder Include="public\templates\" />
     <Folder Include="public\processedXmlFiles\" />
     <Folder Include="public\sfdf\" />
@@ -128,6 +140,7 @@
     <Folder Include="public\stylesheets\" />
     <Folder Include="routes\" />
     <Folder Include="views\" />
+    <Folder Include="views\layouts\" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="dbConfig.ts" />

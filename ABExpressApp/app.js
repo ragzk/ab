@@ -5,6 +5,8 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var request = require('request');
+//var partials = require('express-partials');
+var exphbs = require('express-handlebars');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
@@ -23,9 +25,15 @@ var _ = require('lodash');
 var app = express();
 var Promise = require('q');
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'vash');
+//app.set('views', path.join(__dirname, 'views'));
+//app.set('view engine', 'vash');
+//app.set('view options', { layout: false });   
 app.set('trust proxy', 'loopback');
+//app.use(partials());
+
+app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
+app.set('view engine', 'handlebars');
+
 
 
 // uncomment after placing your favicon in /public
@@ -85,6 +93,14 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 
+app.use(bodyParser.json());                                     // parse application/json
+app.use(bodyParser.json({ type: 'application/vnd.api+json' })); // parse application/vnd.api+json as json
+
+
+app.get('/agents', function (req, res) {
+    res.sendFile('/public/sfdf/agents.html');
+});
+
 app.post('/propertyAppraisal/save', function (req, res) {
     return propertyAppraisal.save(req, res);
 });
@@ -113,10 +129,19 @@ app.get('/:file(*)', function (req, res, next) {
 });
 
 
-//The 404 Route (ALWAYS Keep this as the last route)
+//app.use('/*', function (req, res) {
+//    res.sendfile(__dirname + '/public/routeHTML/index.html');
+//});
+
 app.get('*', function (req, res) {
-    res.send('OOPS!. Something went wrong. This link does not exists.', 404);
+    res.sendFile('/public/routeHTML/index.html');
 });
+
+
+//The 404 Route (ALWAYS Keep this as the last route)
+//app.get('*', function (req, res) {
+//    res.send('OOPS!. Something went wrong. This link does not exists.', 404);
+//});
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

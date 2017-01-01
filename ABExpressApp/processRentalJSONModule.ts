@@ -316,6 +316,9 @@ class processRentalJSON {
                 //return thatFunc.downloadImages(that, obj, img, dirName, 0);
             });
         }
+        else {
+            return Promise.when([]);
+        }
     }
 
     public addImageDirectory(that: processRentalJSON, dirName: string) {

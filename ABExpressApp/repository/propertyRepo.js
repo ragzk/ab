@@ -20,8 +20,23 @@ var propertyRepo = (function () {
     propertyRepo.prototype.getProperties = function (tran, type) {
         var findOptions = {};
         var where = {};
-        if (tran == "buy" || tran == "rent") {
-            _.extend(where, { status: 'current', type: 'residential' });
+        if (tran == "buy") {
+            _.extend(where, {
+                status: 'current',
+                $or: [
+                    {
+                        type: 'residential'
+                    },
+                    {
+                        type: 'land'
+                    }
+                ]
+            });
+        }
+        if (tran == "rent") {
+            _.extend(where, {
+                status: 'current'
+            });
         }
         if (tran == "sold") {
             _.extend(where, { status: 'sold' });
@@ -66,7 +81,7 @@ var propertyRepo = (function () {
                         loc.name = rentalObj.uniqueID.toString();
                         loc.dateAvailable = rentalObj.dateAvailable ? moment(rentalObj.dateAvailable).toDate() : null;
                         loc.rent = rentalObj.rent ? parseFloat(rentalObj.rent._) : null;
-                        loc.category = rentalObj.category ? rentalObj.category.name.toString() : "Land1";
+                        loc.category = rentalObj.category ? rentalObj.category.name.toString() : "Land";
                         loc.inspectionTimes = rentalObj.inspectionTimes ? Array.isArray(rentalObj.inspectionTimes.inspection) ? rentalObj.inspectionTimes.inspection.toString() : rentalObj.inspectionTimes.inspection : null;
                         loc.longitude = rentalObj.geocode.longitude || null;
                         loc.latitude = rentalObj.geocode.latitude || null;
@@ -94,7 +109,7 @@ var propertyRepo = (function () {
                         name: rentalObj.uniqueID.toString(),
                         dateAvailable: rentalObj.dateAvailable ? moment(rentalObj.dateAvailable).toDate() : null,
                         rent: rentalObj.rent ? parseFloat(rentalObj.rent._) : null,
-                        category: rentalObj.category ? rentalObj.category.name.toString() : "Land1",
+                        category: rentalObj.category ? rentalObj.category.name.toString() : "Land",
                         inspectionTimes: rentalObj.inspectionTimes ? Array.isArray(rentalObj.inspectionTimes.inspection) ? rentalObj.inspectionTimes.inspection.toString() : rentalObj.inspectionTimes.inspection : null,
                         longitude: rentalObj.geocode.longitude || null,
                         latitude: rentalObj.geocode.latitude || null,

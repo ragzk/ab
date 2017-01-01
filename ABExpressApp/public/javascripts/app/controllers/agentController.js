@@ -1,9 +1,9 @@
 ﻿APP.controller('agentController', function ($http) {
     this.agents = [];
     
-    this.init = function (data) {
+    this.init = function (agentId) {
         that = this;
-        this.agentId = data.agentId;
+        this.agentId = agentId;
         $http.get('/agentDetails/' + this.agentId, { params: { agentId: this.agentId } }).then(function (response) {
             that.agent = response.data;
         });
@@ -14,4 +14,5 @@
             that.agents = response.data;
         });
     }
+    this.initNew();
 });

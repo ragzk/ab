@@ -5,7 +5,12 @@ var statsLogging = require("../routes/statsLogging.js");
 
 exports.propertyAppraisal = function (req, res) {
     statsLogging.addLogging('propertyAppraisal', null, req);
-    res.render('propertyAppraisal');
+    if (req.xhr) {
+        res.render('propertyAppraisal', { layout: false});
+    }
+    else {
+        res.render('propertyAppraisal');
+    }    
 };
 
 
@@ -42,7 +47,7 @@ exports.save = function (req, res) {
         // setup e-mail data with unicode symbols
         var mailOptions = {
             from: '<microappjs@gmail.com>', // sender address
-            to: 'kamrag@gmail.com, ab@abproperties.com.au', // list of receivers
+            to: 'kamrag@gmail.com', // list of receivers , ab@abproperties.com.au
             subject: 'Property Appraisal requested', // Subject line
             text: 'Property Appraisal requested by ' + data.fullName + ' for property ' + data.propertyAddress + ' ( email address: ' + data.email + ' phone number ' + data.phoneNumber + ' )', // plaintext body
         };

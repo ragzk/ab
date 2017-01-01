@@ -280,6 +280,9 @@ var processRentalJSON = (function () {
                 //return thatFunc.downloadImages(that, obj, img, dirName, 0);
             });
         }
+        else {
+            return Promise.when([]);
+        }
     };
     processRentalJSON.prototype.addImageDirectory = function (that, dirName) {
         if (!that.fs.existsSync(dirName)) {

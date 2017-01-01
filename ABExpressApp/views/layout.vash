@@ -7,6 +7,7 @@
         <link rel="shortcut icon" href="/public/images/favicon.png">
         <link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
         <title>@model.title</title>
+		<base href="/">
     </head>
     <body>
 	<noscript id="deferred-styles">
@@ -30,7 +31,9 @@
                 <div ng-include src="'Header.html'"></div>
             </div>
             <div id="body-container">
-                @html.block('content')
+				<div id="content-container">
+					@html.block('content')
+				</div>
                 <div class="sidebar">
                     <div id="MainMenu" class="sideMenu" ng-controller="sidebarController">
                         <div id="container">
@@ -60,7 +63,7 @@
 							<ul id="accordion" class="accordion" ng-hide="loading">
 								<li>
 									<div class="link">
-										<a href="/buy" data-link="buy">
+										<a href="/#" data-link="buy" get-html="/buy">
 											<!--<i class="fa fa-database"></i>-->Buy
 											<i class="fa fa-chevron-down"></i>
 										</a>
@@ -143,9 +146,10 @@
                         <ul class="nav navbar-nav">
                             <li class="active"><a href="/">Home<span class="sr-only">(current)</span></a></li>
                             <li><a href="/propertyAppraisal">Property Appraisal</a></li>
-                            <li><a href="/agents">Agents</a></li>
-                            <li><a href="/contact">Contact</a></li>
-          <li><a href="/about">About us</a></li>
+                            <!--<li><a href="/agents">Agents</a></li>-->
+							<li><a get-html="/agents" href="/#">Agents</a></li>
+							<li><a href="#/agents">Agents</a></li>
+        					<li><a href="/about">About us</a></li>
                         </ul>
                     </div><!-- /.navbar-collapse -->
                 </div><!-- /.container-fluid -->
@@ -253,7 +257,7 @@
             </div>-->
         <!--<a href="" class="btn b*tn-primary sharp">Search</a>-->
     </script>
-	<script type="text/javascript">
+	<!--<script type="text/javascript">
 
 	// Add a script element as a child of the body
 	 function downloadJSAtOnload() {
@@ -270,14 +274,15 @@
 	 window.attachEvent("onload", downloadJSAtOnload);
 	 else window.onload = downloadJSAtOnload;
 
-	</script>
+	</script>-->
     <!--<script src="/public/javascripts/vendor.js"></script>
     <script src="/public/javascripts/app/all.js"></script>-->
-    <!--<script src="/bower_components/jquery/dist/jquery.js"></script>
+    <script src="/bower_components/jquery/dist/jquery.js"></script>
         <script src="/bower_components/lodash/lodash.js"></script>
         <script src="/bower_components/bootstrap/dist/js/bootstrap.js"></script>
         <script src="/bower_components/angular/angular.js"></script>
         <script src="/bower_components/angular-sanitize/angular-sanitize.js"></script>
+		<script src="/bower_components/angular-route/angular-route.js"></script>
         <script src="/bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
         <script src="/bower_components/moment/moment.js"></script>
         <script src="/bower_components/bxslider-4/dist/jquery.bxslider.min.js"></script>
@@ -289,7 +294,7 @@
         <script src="/public/javascripts/app/app.js"></script>
         <script src="/public/javascripts/custom/postalAngularWrapper.js"></script>
         <script src="/public/javascripts/app/controllers/mainController.js"></script>
-        <script src="/public/javascripts/app/controllers/sidebarController.js"></script>
+        <script src="/public/javascripts/app/controllers/	sidebarController.js"></script>
         <script src="/public/javascripts/app/controllers/SearchController.js"></script>
         <script src="/public/javascripts/app/controllers/buyController.js"></script>
         <script src="/public/javascripts/app/controllers/agentController.js"></script>
@@ -302,7 +307,8 @@
         <script src="/public/javascripts/app/directives/propertyAppraisal.js"></script>
         <script src="/public/javascripts/app/directives/contact.js"></script>
         <script src="/public/javascripts/app/directives/bxslider.js"></script>
+		 <script src="/public/javascripts/app/directives/getHTML.js"></script>
         <script src="/public/javascripts/custom/slider.js"></script>
         <script src="/public/javascripts/custom/cut.js"></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/select2/3.4.8/select2.min.js"></script>-->
+        <script src="//cdnjs.cloudflare.com/ajax/libs/select2/3.4.8/select2.min.js"></script>
 </html>
