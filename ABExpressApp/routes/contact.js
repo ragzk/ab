@@ -5,11 +5,12 @@ var statsLogging = require("../routes/statsLogging.js");
 
 exports.contact = function (req, res) {
     statsLogging.addLogging('contact', null, req);
+    var data = { title: "Contact" };
     if (req.xhr) {
-        res.render('contact', { layout: false });
+        res.render('contact', { layout: false, data: data });
     }
     else {
-        res.render('contact');
+        res.render('contact', { data: data});
     }        
     
 };

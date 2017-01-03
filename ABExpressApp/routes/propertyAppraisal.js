@@ -5,11 +5,12 @@ var statsLogging = require("../routes/statsLogging.js");
 
 exports.propertyAppraisal = function (req, res) {
     statsLogging.addLogging('propertyAppraisal', null, req);
+    var data = { title: "Property Appraisal" };
     if (req.xhr) {
-        res.render('propertyAppraisal', { layout: false});
+        res.render('propertyAppraisal', { layout: false, data: data});
     }
     else {
-        res.render('propertyAppraisal');
+        res.render('propertyAppraisal', { data: data});
     }    
 };
 

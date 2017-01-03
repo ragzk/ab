@@ -6,11 +6,12 @@ var statsLogging = require("../routes/statsLogging.js");
 
 router.get('/about', function (req, res) {
     statsLogging.addLogging('about', null, req);
+    var data = { title: "About us" };
     if (req.xhr) {
-        res.render('about', { layout: false });
+        res.render('about', { layout: false, data: data });
     }
     else {
-        res.render('about');
+        res.render('about', {data : data});
     }
     
 });

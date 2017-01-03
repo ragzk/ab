@@ -1,4 +1,4 @@
-﻿<div class="propertydetailscontainer">
+﻿<div class="propertydetailscontainer" data-title="{{data.title}}">
     <div class="" ng-controller="propertyController as ctrl" ng-init="ctrl.init({{{data.uniqueId}}})">
         <div ng-if="ctrl.property">
             <property-details ng-show="ctrl.property" property="ctrl.property"></property-details>

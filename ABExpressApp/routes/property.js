@@ -35,7 +35,8 @@ exports.details = function (req, res) {
     var uniqueId = req.params.uniqueId;
     statsLogging.addLogging('property', uniqueId, req);
     var data = {
-        uniqueId: uniqueId
+        uniqueId: uniqueId,
+        title: "Property " + streetNumber + " " + streetNumber2 + " " + street
     };    
     if (req.xhr) {
         res.render('property', {
@@ -45,7 +46,7 @@ exports.details = function (req, res) {
     }
     else {
         res.render('property', {
-            uniqueId: uniqueId
+            data: data
         });
 
     } 

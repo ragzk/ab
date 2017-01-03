@@ -1,4 +1,4 @@
-﻿<div class="agentscontainer">
+﻿<div class="agentscontainer" data-title="{{data.title}}">
     <div class="" ng-controller="agentController as ctrl">
         <div class="dashboard-item social-grid-item animated fadeInUp delay-\{{ctrl.agents.length - $index}}" ng-repeat="agent in ctrl.agents">
             <agent-details-summary agent="agent"></agent-details-summary>

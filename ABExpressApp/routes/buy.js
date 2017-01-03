@@ -9,7 +9,8 @@ exports.buy = function (req, res) {
     var route = req.params.type ? 'buy/' + req.params.type  : 'buy';
     var data = {
         type: type,
-        getPropertiesUrl: getPropertiesUrl
+        getPropertiesUrl: getPropertiesUrl,
+        title: "Buy properties" 
     };
     statsLogging.addLogging(route , null, req);
     if (req.xhr) {

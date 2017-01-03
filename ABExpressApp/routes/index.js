@@ -23,11 +23,12 @@ router.get('/getUnSoldProperties', function (req, res) {
 
 router.get('/', function (req, res) {
     statsLogging.addLogging('index', null, req);
+    var data = { title: "Home" };
     if (req.xhr) {
-        res.render('index', { layout: false });
+        res.render('index', { layout: false, data: data });
     }
     else {
-        res.render('index');
+        res.render('index', { data: data});
     }    
     //res.render('index', {
     //    layout: 'layout',

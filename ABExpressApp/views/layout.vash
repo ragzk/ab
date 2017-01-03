@@ -6,7 +6,7 @@
         <!-- Latest compiled and minified CSS -->
         <link rel="shortcut icon" href="/public/images/favicon.png">
         <link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
-        <title>@model.title</title>
+        <title>@model.data.title</title>
 		<base href="/">
     </head>
     <body>
@@ -31,7 +31,7 @@
                 <div ng-include src="'Header.html'"></div>
             </div>
             <div id="body-container">
-				<div id="content-container">
+				<div id="content-container" class="content-container">
 					@html.block('content')
 				</div>
                 <div class="sidebar">

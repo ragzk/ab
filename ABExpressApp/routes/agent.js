@@ -21,7 +21,8 @@ exports.agent = function (req, res) {
     var name = req.params.name;
     statsLogging.addLogging('agent/' + name, null, req);
     var data = {
-        agentId: agentId
+        agentId: agentId,
+        title: "Agent - " + name
     };
     if (req.xhr) {
         res.render('agent', { layout: false, data: data });

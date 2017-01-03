@@ -21,7 +21,7 @@
                             if (lastData != $rootScope.data) {
                                 //history.pushState({ urlPath: attrs.getHtml }, "", attrs.getHtml);
                                 
-
+                                document.title = $(raw_html).data().title;
                                 angular.element(document).injector().invoke(function ($compile) {
                                     var getUrl = window.location;
                                     var baseUrl = getUrl.protocol + "//" + getUrl.host;

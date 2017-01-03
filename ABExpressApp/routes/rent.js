@@ -10,15 +10,15 @@ exports.rent = function (req, res) {
     var getPropertiesUrl = '/rent/' + type + '/getProperties';
     var data = {
         type: type,
-        getPropertiesUrl: getPropertiesUrl
+        getPropertiesUrl: getPropertiesUrl,
+        title: "Rental Properties"
     };
     if (req.xhr) {
         res.render('rent', { layout: false, data: data });
     }
     else {
         res.render('rent', {
-            type: type,
-            getPropertiesUrl: getPropertiesUrl
+            data: data
         });
     }    
 

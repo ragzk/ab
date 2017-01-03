@@ -5,11 +5,12 @@ var statsLogging = require("../routes/statsLogging.js");
 
 exports.agents = function (req, res) {
     statsLogging.addLogging('agents', null, req);
+    var data = { title: "Agents" };
     if (req.xhr) {
-        res.render('agents', { layout: false });
+        res.render('agents', { layout: false, data: data });
     }
     else {
-        res.render('agents');
+        res.render('agents', { data: data});
     }
 };
 

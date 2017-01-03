@@ -9,7 +9,7 @@
 APP.config(['$routeProvider', '$locationProvider',
     function ($routeProvider, $locationProvider) {
         $routeProvider.
-      when('/', {
+      when('/ABApplicationForm.pdf', {
             templateUrl: 'public/routeHTML/index.html'
         }).
       when('/agents', {

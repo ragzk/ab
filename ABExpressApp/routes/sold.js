@@ -10,15 +10,15 @@ exports.sold = function (req, res) {
     var getPropertiesUrl = '/sold/' + type + '/getProperties';
     var data = {
         type: type,
-        getPropertiesUrl: getPropertiesUrl
+        getPropertiesUrl: getPropertiesUrl,
+        title: "Sold Properties"
     };
     if (req.xhr) {
         res.render('sold', { layout: false, data: data });
     }
     else {
         res.render('sold', {
-            type: type,
-            getPropertiesUrl: getPropertiesUrl
+            data: data
         });
     }    
 };
