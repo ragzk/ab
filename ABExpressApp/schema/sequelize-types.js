@@ -67,6 +67,12 @@ function assertValidagent(pojo, allowUndefined) {
             case 'designation':
                 assertValidFieldType('agent', 'designation', pojo, 'string');
                 break;
+            case 'twitterAddress':
+                assertValidFieldType('agent', 'twitterAddress', pojo, 'string');
+                break;
+            case 'instagramAddress':
+                assertValidFieldType('agent', 'instagramAddress', pojo, 'string');
+                break;
             case 'propertyagent':
                 assertValidFieldType('agent', 'propertyagent', pojo, 'propertyagentPojo[]');
                 break;

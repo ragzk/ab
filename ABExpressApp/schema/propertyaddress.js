@@ -2,26 +2,32 @@
 
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('propertyaddress', {
-    id: {
+    propertyId: {
       type: DataTypes.INTEGER(11),
-      allowNull: false,
-      primaryKey: true,
-      autoIncrement: true
+      allowNull: true,
+      references: {
+        model: 'property',
+        key: 'propertyId'
+      }
     },
-    name: {
+    streetNumber: {
       type: DataTypes.STRING,
       allowNull: true
     },
-    identifier: {
+    street: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    suburb: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    state: {
       type: DataTypes.STRING,
       allowNull: true
     },
     postcode: {
-      type: DataTypes.STRING,
-      allowNull: true
-    },
-    propertyId: {
-      type: DataTypes.INTEGER(11),
+      type: DataTypes.INTEGER(5),
       allowNull: true
     }
   }, {

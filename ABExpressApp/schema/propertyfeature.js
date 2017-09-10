@@ -2,15 +2,13 @@
 
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('propertyfeature', {
-    id: {
-      type: DataTypes.INTEGER(11),
-      allowNull: false,
-      primaryKey: true,
-      autoIncrement: true
-    },
     propertyId: {
       type: DataTypes.INTEGER(11),
-      allowNull: true
+      allowNull: true,
+      references: {
+        model: 'property',
+        key: 'propertyId'
+      }
     },
     bedroom: {
       type: DataTypes.INTEGER(2),
@@ -29,15 +27,15 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: true
     },
     airConditioning: {
-      type: 'BIT(1)',
+      type: DataTypes.INTEGER(2),
       allowNull: true
     },
     alarmSystem: {
-      type: 'BIT(1)',
+      type: DataTypes.INTEGER(2),
       allowNull: true
     },
     pool: {
-      type: 'BIT(1)',
+      type: DataTypes.INTEGER(2),
       allowNull: true
     },
     otherFeatures: {

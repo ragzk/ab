@@ -54,7 +54,9 @@ export function initialize(database:string, username:string, password:string, op
         'agentImageUrl':Sequelize.STRING,
         'agentDescription':Sequelize.STRING,
         'rateMyAgentTestimonialUrl':Sequelize.STRING,
-        'designation':Sequelize.STRING
+        'designation':Sequelize.STRING,
+        'twitterAddress':Sequelize.STRING,
+        'instagramAddress':Sequelize.STRING
         },
         {
             timestamps: false,
@@ -78,6 +80,8 @@ export function initialize(database:string, username:string, password:string, op
                         if (agent['agentDescription'] !== undefined) { where['agentDescription'] = agent['agentDescription']}
                         if (agent['rateMyAgentTestimonialUrl'] !== undefined) { where['rateMyAgentTestimonialUrl'] = agent['rateMyAgentTestimonialUrl']}
                         if (agent['designation'] !== undefined) { where['designation'] = agent['designation']}
+                        if (agent['twitterAddress'] !== undefined) { where['twitterAddress'] = agent['twitterAddress']}
+                        if (agent['instagramAddress'] !== undefined) { where['instagramAddress'] = agent['instagramAddress']}
                     } else {
                         where['agentId'] = id;
                     }

@@ -17,8 +17,14 @@
                         <span class="fa fa-phone spacing-icon paddingRight"></span>{{agent.workphone}}
                     </a>
                 </li>
-                <li>
+                <li ng-show="agent.facebook">
                     <a href="{{agent.facebook}}" target="_blank"><span class="fa fa-facebook spacing-icon paddingRight"></span>Facebook</a>
+                </li>
+                <li ng-show="agent.twitterAddress">
+                    <a href="{{agent.twitterAddress}}" target="_blank"><span class="fa fa-twitter spacing-icon paddingRight"></span>Twitter</a>
+                </li>
+                <li ng-show="agent.instagramAddress">
+                    <a href="{{agent.instagramAddress}}" target="_blank"><span class="fa fa-instagram spacing-icon paddingRight"></span>Instagram</a>
                 </li>
             </ul>
         </div>

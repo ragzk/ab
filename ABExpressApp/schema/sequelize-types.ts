@@ -50,6 +50,8 @@ export interface agentPojo
     agentDescription?:string;
     rateMyAgentTestimonialUrl?:string;
     designation?:string;
+    twitterAddress?:string;
+    instagramAddress?:string;
     propertyagent?:propertyagentPojo[];
 }
 
@@ -91,6 +93,8 @@ export function assertValidagent(pojo:agentPojo, allowUndefined?:boolean):void {
             case 'agentDescription': assertValidFieldType('agent', 'agentDescription', pojo, 'string'); break;
             case 'rateMyAgentTestimonialUrl': assertValidFieldType('agent', 'rateMyAgentTestimonialUrl', pojo, 'string'); break;
             case 'designation': assertValidFieldType('agent', 'designation', pojo, 'string'); break;
+            case 'twitterAddress': assertValidFieldType('agent', 'twitterAddress', pojo, 'string'); break;
+            case 'instagramAddress': assertValidFieldType('agent', 'instagramAddress', pojo, 'string'); break;
             case 'propertyagent': assertValidFieldType('agent', 'propertyagent', pojo, 'propertyagentPojo[]'); break;
             default:
                 throw new Error('Invalid agent provided. Field \'' + fieldNames[i] + '\' is not supported.')

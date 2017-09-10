@@ -58,6 +58,8 @@ export class agentFields {
     agentDescription:string = 'agentDescription';
     rateMyAgentTestimonialUrl:string = 'rateMyAgentTestimonialUrl';
     designation:string = 'designation';
+    twitterAddress:string = 'twitterAddress';
+    instagramAddress:string = 'instagramAddress';
     propertyagent:string = 'propertyagent';
 }
 export var agentFields:agentFields = new agentFields();

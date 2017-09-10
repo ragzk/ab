@@ -41,7 +41,7 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: true
     },
     type: {
-      type: DataTypes.BOOLEAN,
+      type: DataTypes.STRING,
       allowNull: true
     },
     priceView: {
@@ -58,6 +58,38 @@ module.exports = function(sequelize, DataTypes) {
     },
     headline: {
       type: DataTypes.STRING,
+      allowNull: true
+    },
+    isSold: {
+      type: DataTypes.BOOLEAN,
+      allowNull: true
+    },
+    soldPrice: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    soldDate: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    modifiedTime: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    status: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    imageUrl: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    lastUpdateFileNumber: {
+      type: DataTypes.INTEGER(11),
+      allowNull: true
+    },
+    underOffer: {
+      type: DataTypes.BOOLEAN,
       allowNull: true
     }
   }, {
