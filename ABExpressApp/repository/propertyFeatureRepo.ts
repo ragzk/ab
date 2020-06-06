@@ -26,6 +26,9 @@ export class propertyFeatureRepo {
     savePropertyFeature(rentalObj: IRental) {
         try {
             return this.getPropertyFeature(rentalObj.propertyId).then(function (e) {
+                rentalObj.features.airConditioningDB = rentalObj.features.airConditioning == "true" ? 1 : 0;
+                rentalObj.features.alarmSystemDB = rentalObj.features.alarmSystem == "true" ? 1 : 0;
+                 
                 var feature = e;
                 if (feature) {
                     feature.propertyId.PropertyId = rentalObj.propertyId;
@@ -33,8 +36,8 @@ export class propertyFeatureRepo {
                     feature.bathroom = rentalObj.features.bathrooms;
                     feature.garages = rentalObj.features.garages;
                     feature.carports = rentalObj.features.carports;
-                    feature.airConditioning = rentalObj.features.airConditioning;
-                    feature.alarmSystem = rentalObj.features.alarmSystem;   
+                    feature.airConditioning = rentalObj.features.airConditioningDB;
+                    feature.alarmSystem = rentalObj.features.alarmSystemDB;   
                     feature.pool = rentalObj.features.pool;   
                     feature.otherFeatures = rentalObj.features.otherFeatures;   
                 }
@@ -45,8 +48,8 @@ export class propertyFeatureRepo {
                         bathroom: rentalObj.features.bathrooms,
                         garages: rentalObj.features.garages,
                         carports: rentalObj.features.carports,
-                        airConditioning: rentalObj.features.airConditioning,
-                        alarmSystem: rentalObj.features.alarmSystem,
+                        airConditioning: rentalObj.features.airConditioningDB,
+                        alarmSystem: rentalObj.features.alarmSystemDB,
                         pool: rentalObj.features.pool,
                         otherFeatures: rentalObj.features.otherFeatures,
                     });

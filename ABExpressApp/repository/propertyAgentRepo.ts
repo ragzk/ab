@@ -29,6 +29,19 @@ export class propertyagentRepo {
         return r;
     }
 
+
+    getpropertyagentsByEmail(id: number, email: string) {
+        var findOptions = <sequelize.FindOptions>{};
+        var transaction = <sequelize.Transaction>{};
+        transaction.ISOLATION_LEVELS = <sequelize.TransactionIsolationLevels>{ READ_UNCOMMITTED: 'READ_UNCOMMITTED' };
+        transaction.LOCK = <sequelize.TransactionLocks>{ UPDATE: 'UPDATE' }
+        findOptions.where = { propertyId: id, email: email };
+        findOptions.include = [{ model: models.agent, required: false }];
+        var queryOptions = <sequelize.QueryOptions>{};
+        queryOptions.transaction = transaction;
+        var r = models.propertyagent.find(findOptions, queryOptions);
+        return r;
+    }
     getagent(mydesktopAgentId: number) {
         var findOptions = <sequelize.FindOptions>{};
         findOptions.where = { mydesktopAgentId: mydesktopAgentId };
@@ -41,51 +54,61 @@ export class propertyagentRepo {
         return r;
     }
 
+    getagentByEmail(email: string) {
+        var findOptions = <sequelize.FindOptions>{};
+        findOptions.where = { email: email};
+        var transaction = <sequelize.Transaction>{};
+        transaction.ISOLATION_LEVELS = <sequelize.TransactionIsolationLevels>{ READ_UNCOMMITTED: 'READ_UNCOMMITTED' };
+        transaction.LOCK = <sequelize.TransactionLocks>{ UPDATE: 'UPDATE' }
+        var queryOptions = <sequelize.QueryOptions>{};
+        queryOptions.transaction = transaction;
+        var r = models.agent.find(findOptions, queryOptions);
+        return r;
+    }
+
     savepropertyagent(agent: IListingAgent, propertyId: number) {
         try {
             var that = this;
-                this.getpropertyagents(propertyId, agent.agentid).then(function (e) {
-                var propertyAgent = e;
-                if (propertyAgent) {
-                    //if (propertyAgent. != img.url || image.imageIndex != img.index) {
-                    //image.imageId = img.id;
-                    //image.imageIndex = img.index;
-                    //image.imageUrl = img.url;
-                    //image.save();
-                    //}
-                }
-                else {
-                    return that.getagent(agent.agentid).then(function (abAgent) {
-                        if (abAgent) {
+            if (agent.email == undefined) {
+                return;
+            }
+            return that.getagentByEmail(agent.email).then(function (abAgent) {
+                if (abAgent) {
+
+                    that.getpropertyagents(propertyId, <any>abAgent.mydesktopAgentId).then(function (e) {
+                        var propertyAgent = e;
+                        if (propertyAgent) {
+
+                        }
+                        else {
                             propertyAgent = models.propertyagent.build({
                                 propertyId: <any>propertyId,
-                                agentId: abAgent.agentId,
-                                mydesktopAgentId: <any>agent.agentid
+                                agentId: <any>abAgent.agentId,
+                                mydesktopAgentId: <any>abAgent.mydesktopAgentId
                             });
                             return propertyAgent.save();
                         }
-                        else {
-                            abAgent = models.agent.build({
-                                name: agent.name,
-                                mobile: agent.telephone[0].text,
-                                email: agent.email,
-                                mydesktopAgentId: <any>agent.agentid
-                            });
-                            abAgent.save().then(function (dbAgent) {
-                                propertyAgent = models.propertyagent.build({
-                                    propertyId: <any>propertyId,
-                                    agentId: dbAgent.agentId,
-                                    mydesktopAgentId: <any>agent.agentid
-                                });
-
-                                return propertyAgent.save();
-                            });
-                        }
-                        
+                    }
+                    );
+                }
+                else {
+                    abAgent = models.agent.build({
+                        name: agent.name,
+                        mobile: agent.telephone[0].text,
+                        email: agent.email,
+                        mydesktopAgentId: <any>agent.agentid
+                    });
+                    abAgent.save().then(function (dbAgent) {
+                        var propertyAgent = models.propertyagent.build({
+                            propertyId: <any>propertyId,
+                            agentId: <any>dbAgent.agentId,
+                            mydesktopAgentId: <any>agent.agentid
+                        });
+                        return propertyAgent.save();
                     });
                 }
-                //this._instance = propertyAgent;
             });
+
             //return this._instance;
         }
         catch (ex) {

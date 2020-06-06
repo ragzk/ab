@@ -48,6 +48,7 @@ var propertyRepo = (function () {
             _.extend(where, { inspectionTimes: { ne: null } });
         }
         findOptions.where = where;
+        findOptions.order = [['propertyId', 'DESC']];
         findOptions.include = [{ model: models.propertyaddress, required: false },
             { model: models.propertyfeature, required: false },
             { model: models.propertydescription, required: false }
@@ -83,8 +84,8 @@ var propertyRepo = (function () {
                         loc.rent = rentalObj.rent ? parseFloat(rentalObj.rent._) : null;
                         loc.category = rentalObj.category ? rentalObj.category.name.toString() : "Land";
                         loc.inspectionTimes = rentalObj.inspectionTimes ? Array.isArray(rentalObj.inspectionTimes.inspection) ? rentalObj.inspectionTimes.inspection.toString() : rentalObj.inspectionTimes.inspection : null;
-                        loc.longitude = rentalObj.geocode.longitude || null;
-                        loc.latitude = rentalObj.geocode.latitude || null;
+                        loc.longitude = rentalObj.geocode && rentalObj.geocode.longitude || null;
+                        loc.latitude = rentalObj.geocode && rentalObj.geocode.latitude || null;
                         loc.type = rentalObj.type;
                         loc.priceView = rentalObj.priceView;
                         loc.bond = rentalObj.bond;
@@ -111,8 +112,8 @@ var propertyRepo = (function () {
                         rent: rentalObj.rent ? parseFloat(rentalObj.rent._) : null,
                         category: rentalObj.category ? rentalObj.category.name.toString() : "Land",
                         inspectionTimes: rentalObj.inspectionTimes ? Array.isArray(rentalObj.inspectionTimes.inspection) ? rentalObj.inspectionTimes.inspection.toString() : rentalObj.inspectionTimes.inspection : null,
-                        longitude: rentalObj.geocode.longitude || null,
-                        latitude: rentalObj.geocode.latitude || null,
+                        longitude: rentalObj.geocode && rentalObj.geocode.longitude || null,
+                        latitude: rentalObj.geocode && rentalObj.geocode.latitude || null,
                         type: rentalObj.type,
                         priceView: rentalObj.priceView,
                         bond: rentalObj.bond,
@@ -124,7 +125,12 @@ var propertyRepo = (function () {
                         lastUpdateFileNumber: rentalObj.lastUpdateFileNumber,
                         underOffer: rentalObj.underOffer ? rentalObj.underOffer.value == "yes" ? true : false : false
                     });
-                    return loc.save();
+                    try {
+                        return loc.save();
+                    }
+                    catch (ex) {
+                        throw ex;
+                    }
                 }
                 //rentalObj.propertyId = +loc.propertyId;
                 console.log(rentalObj.type + " " + rentalObj.fileName);

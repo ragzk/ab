@@ -525,8 +525,8 @@ export interface propertyfeaturePojo
     bathroom?:number;
     garages?:number;
     carports?:number;
-    airConditioning?:boolean;
-    alarmSystem?:boolean;
+    airConditioning?: number;
+    alarmSystem?:number;
     pool?:boolean;
     otherFeatures?:string;
     propertyfeaturecol?:string;

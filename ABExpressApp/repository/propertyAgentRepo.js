@@ -21,6 +21,18 @@ var propertyagentRepo = (function () {
         var r = models.propertyagent.find(findOptions, queryOptions);
         return r;
     };
+    propertyagentRepo.prototype.getpropertyagentsByEmail = function (id, email) {
+        var findOptions = {};
+        var transaction = {};
+        transaction.ISOLATION_LEVELS = { READ_UNCOMMITTED: 'READ_UNCOMMITTED' };
+        transaction.LOCK = { UPDATE: 'UPDATE' };
+        findOptions.where = { propertyId: id, email: email };
+        findOptions.include = [{ model: models.agent, required: false }];
+        var queryOptions = {};
+        queryOptions.transaction = transaction;
+        var r = models.propertyagent.find(findOptions, queryOptions);
+        return r;
+    };
     propertyagentRepo.prototype.getagent = function (mydesktopAgentId) {
         var findOptions = {};
         findOptions.where = { mydesktopAgentId: mydesktopAgentId };
@@ -32,42 +44,55 @@ var propertyagentRepo = (function () {
         var r = models.agent.find(findOptions, queryOptions);
         return r;
     };
+    propertyagentRepo.prototype.getagentByEmail = function (email) {
+        var findOptions = {};
+        findOptions.where = { email: email };
+        var transaction = {};
+        transaction.ISOLATION_LEVELS = { READ_UNCOMMITTED: 'READ_UNCOMMITTED' };
+        transaction.LOCK = { UPDATE: 'UPDATE' };
+        var queryOptions = {};
+        queryOptions.transaction = transaction;
+        var r = models.agent.find(findOptions, queryOptions);
+        return r;
+    };
     propertyagentRepo.prototype.savepropertyagent = function (agent, propertyId) {
         try {
             var that = this;
-            this.getpropertyagents(propertyId, agent.agentid).then(function (e) {
-                var propertyAgent = e;
-                if (propertyAgent) {
-                }
-                else {
-                    return that.getagent(agent.agentid).then(function (abAgent) {
-                        if (abAgent) {
+            if (agent.email == undefined) {
+                return;
+            }
+            return that.getagentByEmail(agent.email).then(function (abAgent) {
+                if (abAgent) {
+                    that.getpropertyagents(propertyId, abAgent.mydesktopAgentId).then(function (e) {
+                        var propertyAgent = e;
+                        if (propertyAgent) {
+                        }
+                        else {
                             propertyAgent = models.propertyagent.build({
                                 propertyId: propertyId,
                                 agentId: abAgent.agentId,
-                                mydesktopAgentId: agent.agentid
+                                mydesktopAgentId: abAgent.mydesktopAgentId
                             });
                             return propertyAgent.save();
                         }
-                        else {
-                            abAgent = models.agent.build({
-                                name: agent.name,
-                                mobile: agent.telephone[0].text,
-                                email: agent.email,
-                                mydesktopAgentId: agent.agentid
-                            });
-                            abAgent.save().then(function (dbAgent) {
-                                propertyAgent = models.propertyagent.build({
-                                    propertyId: propertyId,
-                                    agentId: dbAgent.agentId,
-                                    mydesktopAgentId: agent.agentid
-                                });
-                                return propertyAgent.save();
-                            });
-                        }
                     });
                 }
-                //this._instance = propertyAgent;
+                else {
+                    abAgent = models.agent.build({
+                        name: agent.name,
+                        mobile: agent.telephone[0].text,
+                        email: agent.email,
+                        mydesktopAgentId: agent.agentid
+                    });
+                    abAgent.save().then(function (dbAgent) {
+                        var propertyAgent = models.propertyagent.build({
+                            propertyId: propertyId,
+                            agentId: dbAgent.agentId,
+                            mydesktopAgentId: agent.agentid
+                        });
+                        return propertyAgent.save();
+                    });
+                }
             });
         }
         catch (ex) {

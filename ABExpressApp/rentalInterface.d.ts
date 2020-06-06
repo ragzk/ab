@@ -90,8 +90,10 @@
         bathrooms: number;
         garages: number;
         carports: number;
-        airConditioning: boolean;
-        alarmSystem: boolean;
+        airConditioning: string;
+        airConditioningDB: number;
+        alarmSystem: string;
+        alarmSystemDB: number;
         pool: boolean;
         otherFeatures: string;
     }
@@ -105,7 +107,7 @@
         display: string;
         streetNumber: string;
         street: string;
-        suburb: IKeyValue;
+        suburb: string;
         state: string;
         postcode: number;
     }

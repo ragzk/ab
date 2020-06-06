@@ -23,7 +23,7 @@ var propertyAddressRepo = (function () {
                     address.propertyId.PropertyId = rentalObj.propertyId;
                     address.streetNumber = rentalObj.address.streetNumber;
                     address.street = rentalObj.address.street;
-                    address.suburb = rentalObj.address.suburb._;
+                    address.suburb = rentalObj.address.suburb;
                     address.state = rentalObj.address.state;
                     address.postcode = rentalObj.address.postcode;
                 }
@@ -32,7 +32,7 @@ var propertyAddressRepo = (function () {
                         propertyId: rentalObj.propertyId,
                         streetNumber: rentalObj.address.streetNumber,
                         street: rentalObj.address.street,
-                        suburb: rentalObj.address.suburb._,
+                        suburb: rentalObj.address.suburb,
                         state: rentalObj.address.state,
                         postcode: rentalObj.address.postcode,
                     });

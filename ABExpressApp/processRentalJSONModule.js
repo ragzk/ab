@@ -159,7 +159,8 @@ var processRentalJSON = (function () {
         //}
         console.log("save property info started");
         var fileNameWithoutExtension = that.xmlPath.slice(0, -4);
-        obj.lastUpdateFileNumber = +fileNameWithoutExtension.substring(fileNameWithoutExtension.lastIndexOf('_') + 1);
+        //obj.lastUpdateFileNumber = +fileNameWithoutExtension.substring(fileNameWithoutExtension.lastIndexOf('_') + 1);
+        obj.lastUpdateFileNumber = +fileNameWithoutExtension.substring(fileNameWithoutExtension.indexOf('-') + 1).split('-').join('').split('_').join('').substring(3, 12);
         var prop = null;
         var chain = repo.saveProperty(obj)
             .then(function (prop) {
